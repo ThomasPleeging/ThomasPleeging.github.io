@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="ad.size" content="width=300,height=250">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMV banner</title>
+    <script type="text/javascript">
+        /* Config */
+        var activeLogo1 = 'autotrack.png'; //amv.png - autotrack.png - autowereld.png - gaspendaal.png
+        var activeText1 = '4mil.png'; //van-kijkers.png - 4mil.png - 26mil.png - 10mil.png
+        var activeText2 = 'de-serieuze.png'; //naar-kopers.png - de-serieuze.png - data-insight.png - deultieme-vergelijker.png
+        var clickTag = "https://www.automotive-mediaventions.nl/";
+        /* End Condig */
+    </script>
+    <link rel="prefetch" href="assets/amv.png">
+    <link rel="prefetch" href="assets/autotrack.png">
+    <link rel="prefetch" href="assets/autowereld.png">
+    <link rel="prefetch" href="assets/gaspendaal.png">
+    <link rel="prefetch" href="assets/4mil.png">
+    <link rel="prefetch" href="assets/26mil.png">
+    <link rel="prefetch" href="assets/data-insight.png">
+    <link rel="prefetch" href="assets/de-serieuze.png">
+    <link rel="prefetch" href="assets/naar-kopers.png">
+    <link rel="prefetch" href="assets/van-kijkers.png">
+    <link rel="prefetch" href="assets/10mil.png">
+    <link rel="prefetch" href="assets/deultieme-vergelijker.png">
+    <link rel="prefetch" href="assets/main-logo-small.png">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            width:   300px;
+            height:  250px;
+            margin:  0;
+            padding: 0;
+        }
+
+        .a {
+            width:            100%;
+            height:           100%;
+            background-color: #000;
+            position:         relative;
+            padding:          12px;
+            display:          block;
+            text-decoration:  none;
+        }
+
+        .b {
+            display:    flex;
+            height:     174px;
+            width:      276px;
+            background: transparent;
+            flex-wrap:  wrap;
+        }
+
+        .c {
+            position: absolute;
+            left:    12px;
+            bottom:   20px;
+            width:    184px;
+        }
+
+        .c img {
+            width:          100%;
+            height:         auto;
+            vertical-align: top;
+        }
+
+        .d {
+            width:    78px;
+            position: absolute;
+            right:    12px;
+            bottom:   15px;
+        }
+
+        .d svg {
+            width:  100%;
+            height: auto;
+        }
+
+        .d:hover svg .st0 {
+            fill: #E50056;
+        }
+
+        .d:hover svg .st1 {
+            fill:      #FFFFFF;
+            transform: translateY(-100%);
+        }
+
+        .d:hover svg .st2 {
+            fill:      #FFFFFF;
+            transform: translateY(0);
+        }
+
+        .list { /*JS Class*/
+            position: relative;
+            top:      0;
+        }
+
+        [class*="carousel"] {
+            width:            88px;
+            background-color: #E50056;
+            overflow:         hidden;
+        }
+
+        [class*="carousel"] img {
+            width:          88px;
+            height:         88px;
+            vertical-align: top;
+        }
+
+        [class*="1-"] {
+            height:  37px;
+            opacity: 0.3;
+        }
+
+        [class*="1-"] + [class*="1-"] {
+            margin-left: 6px;
+        }
+
+        [class*="2-"] {
+            height:     88px;
+            margin-top: 6px;
+        }
+
+        [class*="2-"] + [class*="2-"] {
+            margin-left: 6px;
+        }
+
+        [class*="3-"] {
+            height:     37px;
+            opacity:    0.3;
+            margin-top: 6px;
+        }
+
+        [class*="3-"] .list img {
+            transform: translateY(-51px);
+        }
+
+        [class*="3-"] + [class*="3-"] {
+            margin-left: 6px;
+        }
+
+        /*Animation*/
+        [class*="1-"] .list,
+        [class*="2-"] .list,
+        [class*="3-"] .list {
+            animation-name:            fadePos0, fadePos1, fadePos2;
+            animation-fill-mode:       forwards, none, forwards;
+            animation-timing-function: ease-out, ease-in-out, ease-in-out;
+        }
+
+        [class*="1-1"] .list,
+        [class*="2-1"] .list,
+        [class*="3-1"] .list {
+            animation-delay:    0s, 3s, 7s;
+            animation-duration: 2.4s, 4s, 4s;
+        }
+
+        [class*="1-2"] .list,
+        [class*="2-2"] .list,
+        [class*="3-2"] .list {
+            animation-delay:    0s, 3.15s, 7.15s;
+            animation-duration: 2.7s, 4s, 4s;
+        }
+
+        [class*="1-3"] .list,
+        [class*="2-3"] .list,
+        [class*="3-3"] .list {
+            animation-delay:    0s, 3.3s, 7.3s;
+            animation-duration: 3s, 4s, 4s;
+        }
+
+        [class*="1-4"] .list,
+        [class*="2-4"] .list,
+        [class*="3-4"] .list {
+            animation-delay:    0s, 3.45s, 7.45s;
+            animation-duration: 3.3s, 4s, 4s;
+        }
+
+        [class*="1-5"] .list,
+        [class*="2-5"] .list,
+        [class*="3-5"] .list {
+            animation-delay:    0s, 3.6s, 7.6s;
+            animation-duration: 3.6s, 4s, 4s;
+        }
+
+        @keyframes fadePos0 { /* 2e In Array */
+            0% {
+                top: -528px;
+            }
+            33.333333334% {
+                top: -792px;
+            }
+
+            100% {
+                top: -792px;
+            }
+        }
+
+        @keyframes fadePos1 { /* 3e In Array */
+            0% {
+                top: -88px;
+            }
+            50% {
+                top: -880px;
+            }
+
+            100% {
+                top: -880px;
+            }
+        }
+
+        @keyframes fadePos2 { /* 1e In Array */
+            0% {
+                top: -176px;
+            }
+            50% {
+                top: -1056px;
+            }
+
+            100% {
+                top: -1056px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<a href="javascript:window.open(window.clickTag)" class="a">
+    <div class="b">
+        <div class="carousel1-1"></div>
+        <div class="carousel1-2"></div>
+        <div class="carousel1-3"></div>
+
+        <div class="carousel2-1"></div>
+        <div class="carousel2-2"></div>
+        <div class="carousel2-3"></div>
+
+        <div class="carousel3-1"></div>
+        <div class="carousel3-2"></div>
+        <div class="carousel3-3"></div>
+    </div>
+    <div class="c">
+        <img src="assets/main-logo-small.png">
+    </div>
+    <div class="d">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 54.6 18.8" style="enable-background:new 0 0 54.6 18.8;" xml:space="preserve">
+        <style type="text/css">
+            .st0 {
+                fill-rule:  evenodd;
+                clip-rule:  evenodd;
+                fill:       #FFFFFF;
+                transition: all 0.3s ease;
+            }
+
+            .st1 {
+                fill:       #ED125F;
+                transition: all 0.3s ease;
+                transform:  translateY(0);
+            }
+
+            .st2 {
+                fill:       #ED125F;
+                transition: all 0.3s ease;
+                transform:  translateY(100%);
+            }
+        </style>
+        <path class="st0" d="M0,9.4C0,4.2,4.2,0,9.4,0h35.8c5.2,0,9.4,4.2,9.4,9.4c0,5.2-4.2,9.4-9.4,9.4H9.4C4.2,18.8,0,14.6,0,9.4"/>
+        <g>
+            <path class="st1" d="M9.4,6.6v2h0.3l0.9-1C10.8,7.3,10.9,7,10.9,7V6.6h0.9V7c0,0.1,0,0.6-0.5,1.1L10.5,9l0.9,0.9
+                c0.5,0.5,0.5,1.1,0.5,1.1v0.5h-0.9v-0.5c0,0,0-0.3-0.2-0.5l-1-1.1H9.4v2.1H8.5v-5H9.4z"/>
+            <path class="st1" d="M13.9,6.6v4.1H16v0.9h-3v-5H13.9z"/>
+            <path class="st1" d="M18.2,10.7V7.4h-1V6.6h2.9v0.9h-1v3.2h1.1v0.9h-3.1v-0.9H18.2z"/>
+            <path class="st1" d="M22.4,6.6v2h0.3l0.9-1C23.8,7.3,23.8,7,23.8,7V6.6h0.9V7c0,0.1,0,0.6-0.5,1.1L23.4,9l0.9,0.9
+                c0.5,0.5,0.5,1.1,0.5,1.1v0.5h-0.9v-0.5c0,0,0-0.3-0.2-0.5l-1-1.1h-0.3v2.1h-0.9v-5H22.4z"/>
+            <path class="st1" d="M33.2,6.6v5h-0.9V9.5H31v2.1h-0.9v-5H31v2.1h1.3V6.6H33.2z"/>
+            <path class="st1" d="M35.5,10.7V7.4h-1V6.6h2.9v0.9h-1v3.2h1.1v0.9h-3.1v-0.9H35.5z"/>
+            <path class="st1" d="M38.9,6.6h3.1v0.9h-2.2v1.2h2v0.9h-2v1.2h2.2v0.9h-3.1V6.6z"/>
+            <path class="st1" d="M46.3,11.1v0.5h-0.9v-0.5c0-0.2-0.1-0.4-0.2-0.5l-0.8-0.8H44v1.8h-0.9v-5h1.7c0.8,0,1.4,0.6,1.4,1.4v0.3
+                c0,0.5-0.3,1-0.8,1.3l0.4,0.4C46.1,10.2,46.3,10.7,46.3,11.1z M44,8.8h0.8c0.3,0,0.5-0.2,0.5-0.5V8c0-0.3-0.2-0.5-0.5-0.5H44V8.8z"
+                />
+        </g>
+        <g>
+            <path class="st2" d="M9.4,6.6v2h0.3l0.9-1C10.8,7.3,10.9,7,10.9,7V6.6h0.9V7c0,0.1,0,0.6-0.5,1.1L10.5,9l0.9,0.9
+                c0.5,0.5,0.5,1.1,0.5,1.1v0.5h-0.9v-0.5c0,0,0-0.3-0.2-0.5l-1-1.1H9.4v2.1H8.5v-5H9.4z"/>
+            <path class="st2" d="M13.9,6.6v4.1H16v0.9h-3v-5H13.9z"/>
+            <path class="st2" d="M18.2,10.7V7.4h-1V6.6h2.9v0.9h-1v3.2h1.1v0.9h-3.1v-0.9H18.2z"/>
+            <path class="st2" d="M22.4,6.6v2h0.3l0.9-1C23.8,7.3,23.8,7,23.8,7V6.6h0.9V7c0,0.1,0,0.6-0.5,1.1L23.4,9l0.9,0.9
+                c0.5,0.5,0.5,1.1,0.5,1.1v0.5h-0.9v-0.5c0,0,0-0.3-0.2-0.5l-1-1.1h-0.3v2.1h-0.9v-5H22.4z"/>
+            <path class="st2" d="M33.2,6.6v5h-0.9V9.5H31v2.1h-0.9v-5H31v2.1h1.3V6.6H33.2z"/>
+            <path class="st2" d="M35.5,10.7V7.4h-1V6.6h2.9v0.9h-1v3.2h1.1v0.9h-3.1v-0.9H35.5z"/>
+            <path class="st2" d="M38.9,6.6h3.1v0.9h-2.2v1.2h2v0.9h-2v1.2h2.2v0.9h-3.1V6.6z"/>
+            <path class="st2" d="M46.3,11.1v0.5h-0.9v-0.5c0-0.2-0.1-0.4-0.2-0.5l-0.8-0.8H44v1.8h-0.9v-5h1.7c0.8,0,1.4,0.6,1.4,1.4v0.3
+                c0,0.5-0.3,1-0.8,1.3l0.4,0.4C46.1,10.2,46.3,10.7,46.3,11.1z M44,8.8h0.8c0.3,0,0.5-0.2,0.5-0.5V8c0-0.3-0.2-0.5-0.5-0.5H44V8.8z"
+                />
+        </g>
+</svg>
+
+    </div>
+</a>
+<script>
+    function changeArray($array, $active) {
+        var strtindex = $array.indexOf($active);
+        $array = $array.slice(strtindex, $array.length).concat($array.slice(0, strtindex));
+
+        return $array;
+    }
+
+    var logoArray = ['autotrack.png', 'gaspendaal.png',  'amv.png', 'autowereld.png'];
+    var textArray1 = ['4mil.png', '10mil.png', 'van-kijkers.png', '26mil.png'];
+    var textArray2 = ['de-serieuze.png', 'deultieme-vergelijker.png', 'naar-kopers.png', 'data-insight.png'];
+
+    var logoArray1 = changeArray(logoArray, activeLogo1);
+    textArray1 = changeArray(textArray1, activeText1);
+    textArray2 = changeArray(textArray2, activeText2);
+    var combineArray = [logoArray1, textArray1, textArray2];
+
+    var target1 = document.querySelectorAll("[class*='1-']");
+    var target2 = document.querySelectorAll("[class*='2-']");
+    var target3 = document.querySelectorAll("[class*='3-']");
+
+    function createImages($array, $index, $target, $math) {
+        var count = 0;
+        var div = document.createElement('div');
+        div.classList.add('list');
+
+        $target[$index].appendChild(div);
+        var targetList = $target[$index].querySelector('.list');
+
+        for (var i = 0; i < $array.length * 3 + 1; i++) {
+            var img = document.createElement('img');
+            if ($math == -1) {
+                img.setAttribute('src', 'assets/' + $array[((count + $math) < 0 ? 3 : count + $math)]);
+            } else if ($math == 1) {
+                img.setAttribute('src', 'assets/' + $array[((count + $math) > 3 ? 0 : count + $math)]);
+            } else {
+                img.setAttribute('src', 'assets/' + $array[count]);
+            }
+
+            var fragment = document.createDocumentFragment();
+            fragment.appendChild(img);
+
+            targetList.appendChild(fragment);
+
+            (count > 2) ? count = 0 : count++;
+        }
+    }
+
+    for (var i = 0; i < target1.length; i++) {
+        createImages(combineArray[i], i, target1, -1);
+    }
+
+    for (var i = 0; i < target2.length; i++) {
+        createImages(combineArray[i], i, target2, 0);
+    }
+
+    for (var i = 0; i < target3.length; i++) {
+        createImages(combineArray[i], i, target3, 1);
+    }
+</script>
+</body>
+</html>
