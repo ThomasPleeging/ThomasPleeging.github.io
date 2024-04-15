@@ -1,39 +1,416 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>AMV Banners</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+			font-family: 'Inter';
+			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+			-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+			box-sizing: border-box;
+		}
+		:root{
+			--background: #F6F9F3;
+			--dark: #131313;
+			--white: white;
+			--source-stroke-02: hsla(0, 0%, 0%, 0.09);
+			--active: hsla(209, 100%, 55%, 1);
+			--character-secondary: hsla(0, 0%, 0%, 0.45);
+			--deep-blue: hsla(211, 31%, 36%, 1);
+			--deep-blue_02: hsla(212, 32%, 92%, 1);
+			--burnt-orange: #CC672F;
+			font-size: 14px;
+		}
+
+		body{
+			background-color: var(--background);
+			display: grid; 
+			grid-template-columns: 220px 1fr; 
+			gap: 0px 0px;
+			grid-template-areas: 
+			"left right"; 
+		}
+		.right{
+			width: 100%;
+			height: 100%;
+			grid-area: right;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.header{
+			background-color: var(--white);
+			border-bottom: 1px solid var(--source-stroke-02);
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding: 16px 24px;
+			width: 100%;
+		}
+
+/*		Tabs*/
+.tabs{
+	background-color: var(--white);
+	border-bottom: 1px solid var(--source-stroke-02);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px 24px;
+	width: 100%;
+}
+.tab{
+	font-size: 14px;
+	margin-right: 16px;
+	padding: 12px 0;
+	color: var(--dark);
+	transition: all 0.2s ease-in-out;
+}
+
+.tab_active{
+	color: var(--active);
+	border-bottom: 2px solid var(--active);
+}
+.tab_inactive{
+	border-bottom: 2px solid transparent;
+	opacity: 0.5;
+}
+.tab_inactive:hover{
+	color: var(--dark);
+	border-bottom: 2px solid var(--dark);
+	cursor: pointer;
+	opacity: 1;
+}
+.header-left{
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	align-items: center;
+}
+.header-right{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.header-right > p{
+	font-size: 14px;
+	color: var(--character-secondary);
+	padding-right: 8px;
+}
+.breadcrumb{
+	font-family: 'Inter';
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: 0.1px;
+	color: hsla(0, 0%, 0%, 0.45);
+	padding-bottom: 4px;
+	display: block;
+}
+.pagetitle{
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+h1{
+	font-family: 'Acid Grotesk Revised 3';
+	font-size: 24px;
+	color: hsla(0, 0%, 7%, 1);
+	letter-spacing: 0.2px;
+	font-weight: 500;
+	margin-right: 8px;
+}
+
+
+/*		buttons*/
+button{
+
+	border: none;
+	padding: 8px 16px;
+	border-radius: 2px;
+	font-size: 14px;
+}
+.primary_button{
+	background-color: var(--deep-blue);
+	color: white;
+	box-shadow: 0px 2px 0px 0px hsla(0, 0%, 0%, 0.1);
+}
+.secondary_button{
+
+}
+.text_button{
+	color: var(--white);
+	background: transparent;
+}
+.back_button {
+	background-color: white;
+	height: 40px;
+	width: 40px;
+	border-radius: 160px;
+	background-image: url('Arrow-Left.svg');
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	outline: 1px solid #ffffff;
+	transition: all 0.2s ease-in-out;
+}
+.back_button:hover{
+	background-color: #f2f2f2;
+	outline: 8px solid #f2f2f2;
+}
+
+button + button{
+	margin-left: 8px;
+}
+
+
+/*Savebar*/
+.savebar{
+	width: 80%;
+	max-width: 800px;
+	background-color: var(--deep-blue);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 16px 24px;
+	justify-content: space-between;
+	position: absolute;
+	bottom: 56px;
+	border-radius: 2px;
+	box-shadow:
+	0px 0.7px 1.1px rgba(0, 0, 0, 0.02),
+	0px 1.6px 2.7px rgba(0, 0, 0, 0.028),
+	0px 3px 5px rgba(0, 0, 0, 0.035),
+	0px 5.4px 8.9px rgba(0, 0, 0, 0.042),
+	0px 10px 16.7px rgba(0, 0, 0, 0.05),
+	0px 24px 40px rgba(0, 0, 0, 0.07)
+	;
+}
+.savebar > p{
+	color: var(--white);
+	opacity: 0.7;
+}
+
+/*Header*/
+.colorbar{
+	width: 100%;
+	height: 8px;
+	background-color: var(--deep-blue);
+}
+
+/*		Sidebar*/
+.sidebar{
+	background-color: var(--white);
+	height: 100%;
+	width: 100%;
+	grid-area: left;
+	border-right: 1px solid var(--source-stroke-02);
+	position: relative;
+}
+.sidebar > section {
+}
+.sidebar_devider{
+	height: 1px;
+	background-color: var(--source-stroke-02);
+	margin: 16px 20px;
+}
+.logo{
+	padding: 16px;
+	border-bottom: 1px solid var(--source-stroke-02);
+	margin-bottom: 16px;
+}
+h4{
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+	text-transform: uppercase;
+	color: #595959;
+}
+li{
+	list-style-type: none;
+	margin: 8px 13px;
+	padding: 6px 11px;
+	border-radius: 8px;
+}
+.menu_icon{
+	margin-right: 16px;
+	width: 18px;
+	height: 18px;
+}
+li > a{
+	color: #676767;
+	text-decoration: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 22px;
+	transition: color 0.3s ease-in-out;
+}
+li > a:hover{
+	color: #424242;
+}
+.menu_active{
+	background-color: var(--deep-blue_02);
+	position: relative;
+}
+.menu_active > a{
+	color: var(--deep-blue);
+}
+.menu_active > a > svg{
+	fill: var(--deep-blue);
+}
+.menu_active::before{
+	width: 5px;
+	height: 34px;
+	background-color: var(--deep-blue);
+	content: '';
+	display: inline-block;
+	position: absolute;
+	left: -13px;
+	top: 0px;
+	border-radius: 0 8px 8px 0;
+}
+.cultivation_switcher{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6px 12px;
+	margin: 0 13px;
+	border-radius: 8px;
+	transition: all 0.3s ease-in-out;
+}
+.cultivation_switcher:hover{
+	background-color: #f2f2f2;
+	cursor: pointer;
+}
+.sidebar_subheader{
+	padding: 6px 12px;
+	margin: 0 13px;
+}
+
+.collapse{
+	position: absolute;
+	bottom: 0;
+	height: 32px;
+	width: 100%;
+	background-color: #FAFAFA;
+	border-top: 1px solid var(--source-stroke-02);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.collapse > svg{
+	margin-right: 8px;
+}
+
+</style>
+
 </head>
-
 <body>
-	<h2>AMV</h2>
-	<ul>
-		<li><a href="AMV/300x250/index.html">300x250</a></li>
-		<li><a href="AMV/300x600/index.html">300x600</a></li>
-		<li><a href="AMV/336x280/index.html">336x280</a></li>
-		<li><a href="AMV/970x250/index.html">970x250</a></li>
-	</ul>
 
-	<h2>Autotrack</h2>
-	<ul>
-		<li><a href="Autotrack/300x250/index.html">300x250</a></li>
-		<li><a href="Autotrack/300x600/index.html">300x600</a></li>
-		<li><a href="Autotrack/336x280/index.html">336x280</a></li>
-		<li><a href="Autotrack/970x250/index.html">970x250</a></li>
-	</ul>
+	<aside class="sidebar">
+		<div class="logo">
+			<img src="source_logo.svg">
+		</div>
+		<section class="sidebar_company">
+			<div class="sidebar_subheader">
+				<h4>Company</h4>
+			</div>
 
-	<h2>Autowereld</h2>
-	<ul>
-		<li><a href="Autowereld/970x250/index.html">970x250</a></li>
-	</ul>
+			<ul>
+				<li class="menu_active"><a href="#">
+					<svg class="menu_icon" xmlns="http://www.w3.org/2000/svg">
+						<path d="M15.7524 5.44061L9.39896 0.559287C9.27975 0.484805 9.14199 0.445312 9.0014 0.445312C8.86082 0.445312 8.72306 0.484805 8.60384 0.559287L2.25038 5.44061C2.14228 5.50814 2.05318 5.60211 1.9915 5.71362C1.92981 5.82514 1.89757 5.95053 1.89783 6.07795V16.8004C1.89783 16.9992 1.97686 17.1899 2.11753 17.3306C2.25821 17.4712 2.449 17.5502 2.64794 17.5502H15.3999C15.5988 17.5502 15.7896 17.4712 15.9303 17.3306C16.071 17.1899 16.15 16.9992 16.15 16.8004V6.07795C16.1456 5.94616 16.1066 5.81783 16.0368 5.70593C15.967 5.59403 15.8689 5.50251 15.7524 5.44061ZM7.87623 14.9333C7.87623 15.1322 7.7972 15.3229 7.65653 15.4635C7.51586 15.6041 7.32506 15.6831 7.12612 15.6831H4.87578C4.67684 15.6831 4.48604 15.6041 4.34537 15.4635C4.20469 15.3229 4.12567 15.1322 4.12567 14.9333V12.6839C4.12567 12.485 4.20469 12.2943 4.34537 12.1537C4.48604 12.013 4.67684 11.934 4.87578 11.934H7.12612C7.32506 11.934 7.51586 12.013 7.65653 12.1537C7.7972 12.2943 7.87623 12.485 7.87623 12.6839V14.9333ZM7.87623 8.93476C7.87623 9.13363 7.7972 9.32435 7.65653 9.46497C7.51586 9.60558 7.32506 9.68458 7.12612 9.68458H4.87578C4.67684 9.68458 4.48604 9.60558 4.34537 9.46497C4.20469 9.32435 4.12567 9.13363 4.12567 8.93476V6.68531C4.12567 6.48644 4.20469 6.29572 4.34537 6.15511C4.48604 6.01449 4.67684 5.93549 4.87578 5.93549H7.12612C7.32506 5.93549 7.51586 6.01449 7.65653 6.15511C7.7972 6.29572 7.87623 6.48644 7.87623 6.68531V8.93476ZM13.8771 14.9333C13.8771 15.1322 13.7981 15.3229 13.6574 15.4635C13.5168 15.6041 13.326 15.6831 13.127 15.6831H10.8767C10.6777 15.6831 10.4869 15.6041 10.3463 15.4635C10.2056 15.3229 10.1266 15.1322 10.1266 14.9333V12.6839C10.1266 12.485 10.2056 12.2943 10.3463 12.1537C10.4869 12.013 10.6777 11.934 10.8767 11.934H13.127C13.326 11.934 13.5168 12.013 13.6574 12.1537C13.7981 12.2943 13.8771 12.485 13.8771 12.6839V14.9333ZM13.8771 8.93476C13.8771 9.13363 13.7981 9.32435 13.6574 9.46497C13.5168 9.60558 13.326 9.68458 13.127 9.68458H10.8767C10.6777 9.68458 10.4869 9.60558 10.3463 9.46497C10.2056 9.32435 10.1266 9.13363 10.1266 8.93476V6.68531C10.1266 6.48644 10.2056 6.29572 10.3463 6.15511C10.4869 6.01449 10.6777 5.93549 10.8767 5.93549H13.127C13.326 5.93549 13.5168 6.01449 13.6574 6.15511C13.7981 6.29572 13.8771 6.48644 13.8771 6.68531V8.93476Z"/>
+					</svg>With breadcrumb</a></li>
+					<li><a href="#">
+						<svg class="menu_icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g clip-path="url(#clip0_141_438)">
+								<path d="M7.7088 9.825H9.365C9.53679 9.82593 9.70119 9.89501 9.82207 10.0171C9.94296 10.1391 10.0104 10.3042 10.0097 10.476C10.0093 10.5523 9.99536 10.6279 9.9684 10.6993L8.3584 15.0001M1 7.55H16.75M5.2 4.925V1.25M12.55 4.925V1.25M2.05 3.35H15.7C15.7 3.35 16.75 3.35 16.75 4.4V15.95C16.75 15.95 16.75 17 15.7 17H2.05C2.05 17 1 17 1 15.95V4.4C1 4.4 1 3.35 2.05 3.35Z" stroke="#8C8C8C" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+							</g>
+							<defs>
+								<clipPath id="clip0_141_438">
+									<rect width="18" height="18" />
+								</clipPath>
+							</defs>
+						</svg>
+					Without breadcrumb</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">With color bar</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">With back button</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">With tabs</a></li>
+				</ul>
+			</section>
+			<div class="sidebar_devider"></div>
+			<section class="sidebar_cultivation">
+				<div class="cultivation_switcher">
+					<h4>Kas 10 / Xandor</h4>
+					<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g clip-path="url(#clip0_138_33061)">
+							<path opacity="0.3" d="M5.9863 11.9562C5.75349 11.9562 5.55393 11.8565 5.4209 11.6902L2.12828 7.99844C1.92873 7.73237 1.96199 7.33327 2.22806 7.13372C2.49413 6.93416 2.85998 6.93416 3.05953 7.20023L5.91978 10.4596C5.95304 10.4928 5.9863 10.4928 6.05281 10.4596L8.91307 7.20023C9.14588 6.93416 9.51172 6.9009 9.77779 7.13372C10.0439 7.36653 10.0771 7.73237 9.84431 7.99844L9.81105 8.0317L6.5517 11.7234C6.41866 11.8565 6.18585 11.9562 5.9863 11.9562Z" fill="black"/>
+							<path opacity="0.3" d="M5.9863 -0.000178337C5.75349 -0.000178337 5.55393 0.0995979 5.4209 0.265892L2.12828 3.95761C1.92873 4.22368 1.96199 4.62279 2.22806 4.82234C2.49413 5.02189 2.85998 5.02189 3.05953 4.75582L5.91978 1.49646C5.95304 1.46321 5.9863 1.46321 6.05281 1.49646L8.91307 4.75582C9.14588 5.02189 9.51172 5.05515 9.77779 4.82234C10.0439 4.58953 10.0771 4.22368 9.84431 3.95761L9.81105 3.92435L6.5517 0.232633C6.41866 0.0995979 6.18585 -0.000178337 5.9863 -0.000178337Z" fill="black"/>
+						</g>
+						<defs>
+							<clipPath id="clip0_138_33061">
+								<rect width="12" height="12" fill="white"/>
+							</clipPath>
+						</defs>
+					</svg>
 
-	<h2>Gaspedaal</h2>
-	<ul>
-		<li><a href="Gaspedaal/300x250/index.html">300x250</a></li>
-		<li><a href="Gaspedaal/300x600/index.html">300x600</a></li>
-		<li><a href="Gaspedaal/336x280/index.html">336x280</a></li>
-		<li><a href="Gaspedaal/970x250/index.html">970x250</a></li>
-	</ul>
+				</div>
+				<ul>
+					<li><a href="#"><img class="menu_icon" src="info.svg">Cultivation</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">Crop plan</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">Yield prediction</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">Control</a></li>
+					<li><a href="#"><img class="menu_icon" src="info.svg">Cultivation settings</a></li>
+				</ul>
+			</section>
 
-</body>
+			<div class="user">
+				<div class="profile_pic"></div>
+			</div>
+			<div class="collapse">
+				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M5.325 1.125V16.875M12.1117 12.111L9.00063 8.99993L12.1117 5.88881M15.475 1.125H2.525C2.525 1.125 1.125 1.125 1.125 2.525V15.475C1.125 15.475 1.125 16.875 2.525 16.875H15.475C15.475 16.875 16.875 16.875 16.875 15.475V2.525C16.875 2.525 16.875 1.125 15.475 1.125Z" stroke="#8C8C8C" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</div>
+		</aside>
+		<div class="right">
+			<div class="colorbar"></div>
+			<nav class="header">
+				<div class="header-left">
+					<button class="back_button"></button>
+					<div>
+						<span class="breadcrumb">Source.ag / B. Amsterdam 1 / Kas 10 / Xandor</span>
+						<div class="pagetitle">
+							<h1>Crop plan</h1>
+							<img src="info.svg">
+						</div>			
+					</div>
+				</div>
+				<div class="header-right">
+					<p>Last simulated: Three weeks ago, monday, 11-01-2024, 14:23</p>
+					<button class="primary_button">Click here</button>
+				</div>
+			</nav>
+			<nav class="tabs">
+				<span class="tab tab_active">Tab 1</span>
+				<span class="tab tab_inactive">Tab 2</span>
+				<span class="tab tab_inactive">Tab 3</span>
+			</nav>
 
-</html>
+			<div class="savebar">
+				<p>There are unsaved changes. Last saved: 2 days ago</p>
+				<div class="button_group">
+					<button class="text_button">Discard changes</button>
+					<button class="secondary_button">Save crop plan</button>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+
+	</html>
