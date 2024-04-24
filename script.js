@@ -1,9 +1,17 @@
-// Make the DIV element draggable:
-dragElement(document.getElementById("savebar_id"));
+const saveBarElement = document.getElementById("savebar_id");
+const startPosition = window.innerHeight - saveBarElement.offsetHeight - 56;
 
+// Sets the start position
+saveBarElement.style.top = startPosition;
+
+// Make the DIV element draggable:
+dragElement(saveBarElement);
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
 
   elmnt.onmousedown = dragMouseDown;
 
@@ -27,8 +35,8 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
