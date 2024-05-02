@@ -8,7 +8,8 @@
     :root{
       --deep-blue: hsla(211, 31%, 36%, 1);
       --deep-blue-05: rgba(141, 167, 195, 1);
-      --bar-height: 40px;
+      --bar-height: 56px;
+      --bar-width: calc(var(--bar-height)/5);
       font-size: 14px;
     }
 
@@ -28,10 +29,10 @@
     .spinner_bars{
       display: flex;
       flex-direction: row;
-      gap: 8px;
+      gap: var(--bar-width);
     }
     .spinner_bar{
-      width: 8px;
+      width: var(--bar-width);
       height: var(--bar-height);
       background-color: var(--deep-blue-05);
     }
@@ -89,7 +90,7 @@
       color: #FFF;
       text-align: center;
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 400;
     }
