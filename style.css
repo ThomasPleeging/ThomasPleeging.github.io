@@ -169,6 +169,7 @@ button + button{
 
 /*Savebar*/
 .savebar{
+	cursor: grab;
 	width: 80%;
 	max-width: 800px;
 	background-color: var(--deep-blue);
