@@ -54,21 +54,22 @@
 				],
   // Columns to be displayed (Should match rowData properties)
 			columnDefs: [
-				{field: "Week", pinned: "left"},
+				{field: "Week", pinned: "left",
+},
 				{
 					headerName: 'Tuin 1',
 					children: [
-						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter',},
-						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',},
-						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',},
+						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter', type: 'rightAligned'},
+						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
 						]
 				},
 				{
 					headerName: 'Tuin 2',
 					children: [
-						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter',},
-						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',},
-						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',},
+						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
 						]
 				}
 				],
