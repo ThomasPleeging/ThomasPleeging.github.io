@@ -170,6 +170,7 @@ button + button{
 /*Savebar*/
 .savebar{
 	cursor: grab;
+	z-index: 100;
 	width: 80%;
 	max-width: 800px;
 	background-color: var(--deep-blue);
@@ -207,7 +208,7 @@ button + button{
 	height: 100vh;
 	width: 100%;
 	grid-area: left;
-	border-right: 1px solid var(--source-stroke-02);
+	border-right: 1px solid hsla(0, 0%, 0%, 0.18);
 	position: relative;
 }
 .sidebar > section {
@@ -308,4 +309,14 @@ li > a:hover{
 }
 .collapse > svg{
 	margin-right: 8px;
+}
+
+/*Datagrid*/
+
+.data-grid{
+	background-color: #FAFAFA; 
+	height:100%; 
+	width:100%; 
+	margin-top: 48px;
+	border-top: 1px solid var(--source-stroke-02);
 }

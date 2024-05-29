@@ -5,6 +5,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+	<link rel="stylesheet" href="ag-grid-theme-builder.css">
 
 </head>
 <body>
@@ -74,7 +76,7 @@
 					<path d="M5.325 1.125V16.875M12.1117 12.111L9.00063 8.99993L12.1117 5.88881M15.475 1.125H2.525C2.525 1.125 1.125 1.125 1.125 2.525V15.475C1.125 15.475 1.125 16.875 2.525 16.875H15.475C15.475 16.875 16.875 16.875 16.875 15.475V2.525C16.875 2.525 16.875 1.125 15.475 1.125Z" stroke="#8C8C8C" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</div>
-		</aside>
+	</aside>
 		<div class="right">
 			<div class="colorbar"></div>
 			<nav class="header">
@@ -106,8 +108,79 @@
 					<button class="secondary_button">Save crop plan</button>
 				</div>
 			</div>
+
+			<div id="myGrid" class="ag-theme-custom data-grid"></div>
+
 		</div>
 
+
+
+	<script type="text/javascript">
+
+// Grid API: Access to Grid API methods
+		let gridApi;
+
+// Grid Options: Contains all of the grid configurations
+		const gridOptions = {
+  // Data to be displayed
+			rowData: [
+				{Week: "w 19-24", Newlysetfruits: 40.2, Openflowers: 4.4, Plantload: 323.4, Newlysetfruits: 39.1, Openflowers: 2.1, Plantload: 123.5},
+				{Week: "w 20-24", Newlysetfruits: 39.1, Openflowers: 3.9, Plantload: 322.3, Newlysetfruits: 20.7, Openflowers: 4.6, Plantload: 276.0},
+				{Week: "w 21-24", Newlysetfruits: 36.4, Openflowers: 5.6, Plantload: 421.4, Newlysetfruits: 34.6, Openflowers: 6.8, Plantload: 209.1},
+				{Week: "w 22-24", Newlysetfruits: 33.9, Openflowers: 7.3, Plantload: 399.4, Newlysetfruits: 33.8, Openflowers: 7.0, Plantload: 421.3},
+				{Week: "w 25-24", Newlysetfruits: 34.2, Openflowers: 6.8, Plantload: 412.7, Newlysetfruits: 32.1, Openflowers: 7.5, Plantload: 420.1},
+				{Week: "w 26-24", Newlysetfruits: 30.5, Openflowers: 8.1, Plantload: 435.9, Newlysetfruits: 33.4, Openflowers: 6.9, Plantload: 410.5},
+				{Week: "w 27-24", Newlysetfruits: 32.7, Openflowers: 7.5, Plantload: 398.2, Newlysetfruits: 34.6, Openflowers: 7.2, Plantload: 423.7},
+				{Week: "w 28-24", Newlysetfruits: 31.3, Openflowers: 7.0, Plantload: 415.6, Newlysetfruits: 32.9, Openflowers: 7.1, Plantload: 430.2},
+				{Week: "w 29-24", Newlysetfruits: 35.1, Openflowers: 6.9, Plantload: 427.4, Newlysetfruits: 31.7, Openflowers: 8.0, Plantload: 422.8},
+				{Week: "w 30-24", Newlysetfruits: 33.0, Openflowers: 7.2, Plantload: 403.8, Newlysetfruits: 34.8, Openflowers: 6.6, Plantload: 414.5},
+				{Week: "w 31-24", Newlysetfruits: 34.5, Openflowers: 7.1, Plantload: 421.7, Newlysetfruits: 30.2, Openflowers: 7.3, Plantload: 426.3},
+				{Week: "w 32-24", Newlysetfruits: 32.0, Openflowers: 8.0, Plantload: 410.9, Newlysetfruits: 31.5, Openflowers: 7.6, Plantload: 419.9},
+				{Week: "w 33-24", Newlysetfruits: 35.0, Openflowers: 6.7, Plantload: 434.5, Newlysetfruits: 33.7, Openflowers: 7.0, Plantload: 428.7},
+				{Week: "w 34-24", Newlysetfruits: 30.8, Openflowers: 7.4, Plantload: 418.3, Newlysetfruits: 34.4, Openflowers: 7.9, Plantload: 411.6},
+				{Week: "w 35-24", Newlysetfruits: 31.9, Openflowers: 7.3, Plantload: 429.6, Newlysetfruits: 32.2, Openflowers: 7.7, Plantload: 424.4},
+				{Week: "w 36-24", Newlysetfruits: 34.7, Openflowers: 6.6, Plantload: 412.2, Newlysetfruits: 33.3, Openflowers: 6.8, Plantload: 431.1},
+				{Week: "w 37-24", Newlysetfruits: 32.5, Openflowers: 7.8, Plantload: 404.1, Newlysetfruits: 31.4, Openflowers: 7.4, Plantload: 417.3},
+				{Week: "w 38-24", Newlysetfruits: 33.6, Openflowers: 7.1, Plantload: 425.8, Newlysetfruits: 30.9, Openflowers: 7.5, Plantload: 429.2},
+				{Week: "w 39-24", Newlysetfruits: 31.2, Openflowers: 7.7, Plantload: 409.3, Newlysetfruits: 32.6, Openflowers: 7.8, Plantload: 415.0},
+				{Week: "w 40-24", Newlysetfruits: 35.3, Openflowers: 6.5, Plantload: 430.2, Newlysetfruits: 34.1, Openflowers: 7.2, Plantload: 422.4},
+				{Week: "w 41-24", Newlysetfruits: 32.8, Openflowers: 7.6, Plantload: 417.5, Newlysetfruits: 33.5, Openflowers: 7.0, Plantload: 427.1},
+				{Week: "w 42-24", Newlysetfruits: 33.4, Openflowers: 7.2, Plantload: 428.4, Newlysetfruits: 31.8, Openflowers: 6.9, Plantload: 419.4},
+				{Week: "w 43-24", Newlysetfruits: 31.0, Openflowers: 7.9, Plantload: 402.9, Newlysetfruits: 34.0, Openflowers: 7.3, Plantload: 430.5},
+				{Week: "w 44-24", Newlysetfruits: 34.0, Openflowers: 6.8, Plantload: 419.7, Newlysetfruits: 32.3, Openflowers: 7.4, Plantload: 423.9},
+
+				],
+  // Columns to be displayed (Should match rowData properties)
+			columnDefs: [
+				{field: "Week", pinned: "left",
+},
+				{
+					headerName: 'Tuin 1',
+					children: [
+						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter', type: 'rightAligned'},
+						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						]
+				},
+				{
+					headerName: 'Tuin 2',
+					children: [
+						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
+						]
+				}
+				],
+			defaultColDef: {
+				flex: 1,
+			},
+			autoSizeStrategy: {
+				type: 'fitGridWidth'
+			},
+		};
+// Create Grid: Create new grid within the #myGrid div, using the Grid Options object
+		gridApi = agGrid.createGrid(document.querySelector("#myGrid"), gridOptions);
+	</script>
 	<script src="script.js"></script>
 	</body>
 
