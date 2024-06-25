@@ -222,6 +222,7 @@ button + button{
 	padding: 16px;
 	border-bottom: 1px solid var(--source-stroke-02);
 	margin-bottom: 16px;
+	background-color: var(--white);
 }
 h4{
 	font-size: 12px;

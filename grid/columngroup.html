@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+	<!-- Includes all JS & CSS for the JavaScript Data Grid -->
+	<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+	<link rel="stylesheet" href="ag-grid-theme-builder.css">
+	<style type="text/css">
+		body{
+			background-color: #F6F9F3;
+			padding: 32px;
+		}
+	</style>
+
+</head>
+<body>
+	<!-- Your grid container -->
+	<div id="myGrid" class="ag-theme-custom" style="height:500px"></div>
+
+
+
+	<script type="text/javascript">
+
+// Grid API: Access to Grid API methods
+		let gridApi;
+
+// Grid Options: Contains all of the grid configurations
+		const gridOptions = {
+  // Data to be displayed
+			rowData: [
+				{Week: "w 19-24", radiation_solar: 40.2, radiation_hps: 4.4, radiation_led: 323.4, Total: 368},
+				{Week: "w 20-24", radiation_solar: 39.1, radiation_hps: 3.9, radiation_led: 322.3, Total: 365.3},
+				{Week: "w 21-24", radiation_solar: 36.4, radiation_hps: 5.6, radiation_led: 421.4, Total: 463.4},
+				{Week: "w 22-24", radiation_solar: 33.9, radiation_hps: 7.3, radiation_led: 399.4, Total: 440.6},
+				{Week: "w 25-24", radiation_solar: 34.2, radiation_hps: 6.8, radiation_led: 412.7, Total: 453.7},
+				{Week: "w 26-24", radiation_solar: 30.5, radiation_hps: 8.1, radiation_led: 435.9, Total: 474.5},
+				{Week: "w 27-24", radiation_solar: 32.7, radiation_hps: 7.5, radiation_led: 398.2, Total: 438.4},
+				{Week: "w 28-24", radiation_solar: 31.3, radiation_hps: 7.0, radiation_led: 415.6, Total: 454.9},
+				{Week: "w 29-24", radiation_solar: 35.1, radiation_hps: 6.9, radiation_led: 427.4, Total: 469.4},
+				{Week: "w 30-24", radiation_solar: 33.0, radiation_hps: 7.2, radiation_led: 403.8, Total: 443.0},
+				{Week: "w 31-24", radiation_solar: 34.5, radiation_hps: 7.1, radiation_led: 421.7, Total: 463.3},
+				{Week: "w 32-24", radiation_solar: 32.0, radiation_hps: 8.0, radiation_led: 410.9, Total: 450.9},
+				{Week: "w 33-24", radiation_solar: 35.0, radiation_hps: 6.7, radiation_led: 434.5, Total: 476.2},
+				{Week: "w 34-24", radiation_solar: 30.8, radiation_hps: 7.4, radiation_led: 418.3, Total: 456.5},
+				{Week: "w 35-24", radiation_solar: 31.9, radiation_hps: 7.3, radiation_led: 429.6, Total: 468.8},
+				{Week: "w 36-24", radiation_solar: 34.7, radiation_hps: 6.6, radiation_led: 412.2, Total: 453.5},
+				{Week: "w 37-24", radiation_solar: 32.5, radiation_hps: 7.8, radiation_led: 404.1, Total: 444.4},
+				{Week: "w 38-24", radiation_solar: 33.6, radiation_hps: 7.1, radiation_led: 425.8, Total: 466.5},
+				{Week: "w 39-24", radiation_solar: 31.2, radiation_hps: 7.7, radiation_led: 409.3, Total: 448.2},
+				{Week: "w 40-24", radiation_solar: 35.3, radiation_hps: 6.5, radiation_led: 430.2, Total: 472.0},
+				{Week: "w 41-24", radiation_solar: 32.8, radiation_hps: 7.6, radiation_led: 417.5, Total: 457.9},
+				{Week: "w 42-24", radiation_solar: 33.4, radiation_hps: 7.2, radiation_led: 428.4, Total: 469.0},
+				{Week: "w 43-24", radiation_solar: 31.0, radiation_hps: 7.9, radiation_led: 402.9, Total: 441.8},
+				{Week: "w 44-24", radiation_solar: 34.0, radiation_hps: 6.8, radiation_led: 419.7, Total: 460.5}
+
+				],
+  // Columns to be displayed (Should match rowData properties)
+			columnDefs: [
+				{field: "Week", pinned: "left",
+			},
+			{
+				headerName: 'Radiation',
+				children: [
+					{ columnGroupShow: 'open', field: 'radiation_solar', headerName: "Solar radiation", filter: 'agNumberColumnFilter', type: 'rightAligned' },
+					{ columnGroupShow: 'open', field: 'radiation_hps', headerName: "Radiation from HPS", filter: 'agNumberColumnFilter', type: 'rightAligned' },
+					{ columnGroupShow: 'open', field: 'radiation_led', headerName: "Radiation from LED", filter: 'agNumberColumnFilter', type: 'rightAligned' },
+					{ columnGroupShow: 'closed, open', field: 'Total', headerName: "Total radiation", filter: 'agNumberColumnFilter', type: 'rightAligned'  }
+
+					]
+			}
+			],
+			defaultColDef: {
+				flex: 1,
+			},
+			autoSizeStrategy: {
+				type: 'fitCellContents'
+			},
+		};
+// Create Grid: Create new grid within the #myGrid div, using the Grid Options object
+		gridApi = agGrid.createGrid(document.querySelector("#myGrid"), gridOptions);
+	</script>
+</body>
+</html>
