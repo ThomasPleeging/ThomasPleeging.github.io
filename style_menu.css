@@ -155,7 +155,7 @@ li{
 	margin-right: 16px;
 	width: 18px;
 	height: 18px;
-	opacity: 0.8;
+	opacity: 0.6;
 }
 
 /*Topmenu*/
@@ -169,7 +169,7 @@ li{
 	align-items: center;
 	font-size: 14px;
 	font-weight: 500;
-	margin: 0px 13px;
+	margin: 0px 16px;
 	padding: 12px;
 	border-radius: 8px;
 	position: relative;
@@ -193,7 +193,7 @@ li{
 	content: '';
 	display: inline-block;
 	position: absolute;
-	left: -13px;
+	left: -16px;
 	top: 0px;
 	border-radius: 0 8px 8px 0;
 }
@@ -211,7 +211,7 @@ li{
 	content: '';
 	display: inline-block;
 	position: absolute;
-	left: -13px;
+	left: -16px;
 	top: 0px;
 	border-radius: 0 8px 8px 0;
 }
@@ -242,16 +242,15 @@ li{
 .topmenu.hassubmenu.submenu_open + .submenu{
     max-height: 200px;
     overflow-y: hidden;
+    margin-bottom: 8px;
 }
 
 /*Submenu*/
 .submenu{
 	border-left: 1px solid var(--source-stroke-02);
 	margin-left: 33px;
-	margin-bottom: 8px;
     max-height: 0;
     overflow-y: hidden;
-    transition: max-height 0.2s cubic-in-out;
 }
 .submenu li{
 	opacity: 0.7;
@@ -277,7 +276,7 @@ li{
 	align-items: center;
 	justify-content: space-between;
 	padding: 12px 12px;
-	margin: 0 13px;
+	margin: 0 16px;
 	border-radius: 8px;
 	outline: 1px solid transparent;
 }
@@ -308,18 +307,16 @@ li{
 .sidebar_subheader{
 	padding: 12px 24px;
 }
-.sidebar_subheader, .cultivation_switcher{
-	margin-bottom: 8px;
-}
+
 
 /*User profile*/
 .user{
 
 	display: flex;
 	align-items: center;
-	margin: 0 13px;
+	margin: 0 16px;
 	gap: 8px;
-	width: calc(100% - 26px);
+	width: calc(100% - 32px);
 	box-sizing: border-box;
 	padding: 12px 12px;
 	border-radius: 8px;
