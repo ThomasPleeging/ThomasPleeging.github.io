@@ -143,7 +143,13 @@ h1{
 	padding: 16px;
 	border-bottom: 1px solid var(--source-stroke-02);
 }
-.logo img{
+.logo2{
+	padding: 16px;
+	border-bottom: 1px solid var(--source-stroke-02);
+	background-color: var(--dark);
+}
+.logo2 img{
+	height: 48px;
 }
 
 li{
@@ -248,7 +254,7 @@ li{
 /*Submenu*/
 .submenu{
 	border-left: 1px solid var(--source-stroke-02);
-	margin-left: 33px;
+	margin-left: 36px;
     max-height: 0;
     overflow-y: hidden;
 }
