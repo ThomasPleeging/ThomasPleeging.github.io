@@ -44,7 +44,7 @@
 body{
 	background-color: var(--background);
 	display: grid; 
-	grid-template-columns: 260px 1fr; 
+	grid-template-columns: 240px 1fr; 
 	gap: 0px 0px;
 	grid-template-areas: 
 	"left right"; 
@@ -258,7 +258,7 @@ li{
 /*Submenu*/
 .submenu{
 	border-left: 1px solid var(--source-stroke-02);
-	margin-left: 36px;
+	margin-left: 32px;
     max-height: 0;
     overflow-y: hidden;
 }
