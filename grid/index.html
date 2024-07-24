@@ -26,6 +26,10 @@
 
 	<script type="text/javascript">
 
+const decimalFormatter = (params) => {
+    return params.value.toFixed(1);  // Set the number of decimal places to 1
+};
+
 // Grid API: Access to Grid API methods
 		let gridApi;
 
@@ -72,17 +76,17 @@
 			{
 				headerName: 'Tuin 1',
 				children: [
-					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned'},
-					{ field: 'Openflowers', headerName: "Open flowers", type: 'rightAligned'},
-					{ field: 'Plantload', headerName: "Plant load", type: 'rightAligned'},
+					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned', valueFormatter: decimalFormatter },
+					{ field: 'Openflowers', headerName: "Open flowers", type: 'rightAligned', valueFormatter: decimalFormatter },
+					{ field: 'Plantload', headerName: "Plant load", type: 'rightAligned', valueFormatter: decimalFormatter },
 					]
 			},
 			{
-				headerName: 'Tuin 2', headerClass: 'my-border', cellClass: 'my-border',
+				headerName: 'Tuin 2',
 				children: [
-					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned'},
-					{ field: 'Openflowers', headerName: "Open flowers",type: 'rightAligned'},
-					{ field: 'Plantload', headerName: "Plant load",type: 'rightAligned'},
+					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned', valueFormatter: decimalFormatter },
+					{ field: 'Openflowers', headerName: "Open flowers",type: 'rightAligned', valueFormatter: decimalFormatter },
+					{ field: 'Plantload', headerName: "Plant load",type: 'rightAligned', valueFormatter: decimalFormatter },
 					]
 			}
 			],
