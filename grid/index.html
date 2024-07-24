@@ -2,12 +2,19 @@
 <head>
 	<!-- Includes all JS & CSS for the JavaScript Data Grid -->
 	<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-	<link rel="stylesheet" href="ag-grid-theme-builder.css">
+	<link rel="stylesheet" href="ag-grid-theme-builder1.css">
 	<style type="text/css">
 		body{
 			background-color: #F6F9F3;
 			padding: 32px;
 		}
+		.ag-header-cell-text{
+
+		}
+		.ag-cell-value{
+			font-feature-settings: "tnum";
+		}
+
 	</style>
 
 </head>
@@ -24,6 +31,10 @@
 
 // Grid Options: Contains all of the grid configurations
 		const gridOptions = {
+			defaultColDef: {
+				sortable: false,
+			},
+
   // Data to be displayed
 			rowData: [
 				{Week: "w 19-24", Newlysetfruits: 40.2, Openflowers: 4.4, Plantload: 323.4, Newlysetfruits: 39.1, Openflowers: 2.1, Plantload: 123.5},
@@ -52,36 +63,33 @@
 				{Week: "w 44-24", Newlysetfruits: 34.0, Openflowers: 6.8, Plantload: 419.7, Newlysetfruits: 32.3, Openflowers: 7.4, Plantload: 423.9},
 
 				],
-  // Columns to be displayed (Should match rowData properties)
+
+
+			// Columns to be displayed (Should match rowData properties)
 			columnDefs: [
-				{field: "Week", pinned: "left",
-},
-				{
-					headerName: 'Tuin 1',
-					children: [
-						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter', type: 'rightAligned'},
-						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
-						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
-						]
-				},
-				{
-					headerName: 'Tuin 2',
-					children: [
-						{ field: 'Newlysetfruits', headerName: "Newly set fruits", filter: 'agNumberColumnFilter',type: 'rightAligned'},
-						{ field: 'Openflowers', headerName: "Open flowers", filter: 'agNumberColumnFilter',type: 'rightAligned'},
-						{ field: 'Plantload', headerName: "Plant load", filter: 'agNumberColumnFilter',type: 'rightAligned'},
-						]
-				}
-				],
-			defaultColDef: {
-				flex: 1,
+				{field: "Week", pinned: "left", width: 100
 			},
-			autoSizeStrategy: {
-				type: 'fitCellContents'
+			{
+				headerName: 'Tuin 1',
+				children: [
+					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned'},
+					{ field: 'Openflowers', headerName: "Open flowers", type: 'rightAligned'},
+					{ field: 'Plantload', headerName: "Plant load", type: 'rightAligned'},
+					]
 			},
-			autoSizePadding: {
-				number: '100'
+			{
+				headerName: 'Tuin 2', headerClass: 'my-border', cellClass: 'my-border',
+				children: [
+					{ field: 'Newlysetfruits', headerName: "Newly set fruits", type: 'rightAligned'},
+					{ field: 'Openflowers', headerName: "Open flowers",type: 'rightAligned'},
+					{ field: 'Plantload', headerName: "Plant load",type: 'rightAligned'},
+					]
 			}
+			],
+			autoSizeStrategy: {
+				type: 'fitCellContents',
+			},
+			autoSizePadding: 0,
 		};
 // Create Grid: Create new grid within the #myGrid div, using the Grid Options object
 		gridApi = agGrid.createGrid(document.querySelector("#myGrid"), gridOptions);
