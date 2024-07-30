@@ -153,7 +153,7 @@
 	--ag-tab-selected-underline-transition-duration: 0;
 	--ag-tab-bar-border: solid 1px var(--ag-border-color);
 	--ag-input-background-color: var(--ag-background-color);
-	--ag-input-border: solid 1px var(--ag-border-color);
+	--ag-input-border: solid 8px green;
 	--ag-input-border-radius: var(--ag-border-radius);
 	--ag-input-text-color: var(--ag-text-color);
 	--ag-input-padding-start: var(--ag-grid-size);
