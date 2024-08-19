@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Source.ag Product Principles</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+<style type="text/css">
+
+@font-face {
+	font-family: "Acid Grotesk Revised 3";
+	src: url("AcidGrotesk-Regular.woff") format('woff');
+}
+
+
+:root {
+
+  font-family: Inter;
+  font-size: 16px;
+  color: #131313;
+}
+
+h1,h2,h3,h4,h5{
+	font-family: 'Acid Grotesk Revised 3' !important;
+	font-weight: 500;
+}
+
+h1{
+	font-size: 3.815rem;
+}
+h2{
+	font-size: 3.052rem;
+}
+h3{
+	font-size: 2.441rem;
+}
+h4{
+	font-size: 1.953rem;
+}
+h5{
+	font-size: 1.563rem;
+}
+p{
+	font-size: 1rem;
+	line-height: 1.7;
+}
+small{
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	opacity: 0.5;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+section{
+	margin-bottom: 8rem;
+}
+
+.paragraph {
+    opacity: 0; /* Start invisible */
+    transform: translateY(40px); /* Optional: start slightly below */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+}
+
+.paragraph.is-visible {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* No translation */
+}
+
+
+
+.wrapper{
+	width: 45%;
+	margin: 8rem 0;
+}
+
+</style>
+<body>
+
+<div class="wrapper">
+	<section class="paragraph">
+		<small>one</small>
+		<h2> It’s the UX, not the UI</h2>
+		<p>We don’t consider a feature done until it makes growers more effective. What we ship only truly matters when there is a holistic experience around it. It’s the UX, not the UI. Service + Product = UX</p>
+	</section>
+
+	<section class="paragraph">
+		<small>two</small>
+		<h2>We set the industry standard in cultivation management</h2>
+		<p></p>
+	</section>
+
+	<section class="paragraph">
+		<small>three</small>
+		<h2>Trust is built on data quality</h2>
+		<p>Bad data is worse than no data. We need good data to train AI models. Growers can't make decisions on bad data.</p>
+	</section>
+
+	<section class="paragraph">
+		<small>four</small>
+		<h2>Opinionated on fundamentals, flexible on usage</h2>
+		<p>Our products are firmly rooted in plant and data science. We know this best. Growers know their job best, and so we are flexible in how they can use Source.	</p>
+	</section>
+
+	<section class="paragraph">
+		<small>five</small>
+		<h2>We create a knowledge multiplier for growers</h2>
+		<p>By using Source, experienced growers achieve more and new growers can level up their knowledge. Over time, less and less input, and more and more output delivered.</p>
+	</section>
+
+
+	<section class="paragraph">
+		<small>six</small>
+		<h2>New features start with a problem and we make pragmatic decisions</h2>
+		<p>We build and release the minimal steps that increase value for users.</p>
+	</section>
+
+	<section class="paragraph">
+		<small>seven</small>
+		<h2>We strive for operational dependency</h2>
+		<p>Users start and end their day with Source. Every feature should contribute to this.</p>
+	</section>
+
+
+</div>
+
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function() {
+    const sections = document.querySelectorAll('.paragraph');
+
+    const options = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Stop observing once visible
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+
+</script>
+</body>
+</html>

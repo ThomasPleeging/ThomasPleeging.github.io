@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coloring</title>
+	<style type="text/css">
+		:root{
+			--green: #77E637;
+			--neutral-01: #FFFFFF;
+			--neutral-02: #FAFAFA;
+			--neutral-03: #F5F5F5;
+
+			--table-cell-border: var(--neutral-03);
+
+			--table-row-uneven: var(--neutral-01);
+			--table-row-even: var(--neutral-02);
+
+			--table-row-uneven_green: color-mix(in srgb, var(--green) 20%, var(--table-row-uneven));
+			--table-row-even_green: color-mix(in srgb, var(--green) 20%, var(--table-row-even));
+
+		}
+
+		.wrapper{
+			display: flex;
+			flex-direction: row;
+		}
+		.column{
+			display: flex;
+			flex-direction: column;
+		}
+		.cell{
+			width: 200px;
+			height: 60px;
+			border-bottom: 1px solid var(--table-cell-border);
+		}
+		.uneven{
+			background-color: var(--table-row-uneven);
+		}
+		.even{
+			background-color: var(--table-row-even);
+		}
+
+		.uneven.green{
+			background-color: var(--table-row-uneven_green);
+		}
+		.even.green{
+			background-color: var(--table-row-even_green);
+		}
+
+	</style>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="column">
+		<div class="cell uneven"></div>
+		<div class="cell even"></div>
+	</div>
+
+	<div class="column">
+		<div class="cell green uneven"></div>
+		<div class="cell green even"></div>
+	</div>	
+
+</div>
+
+</body>
+</html>
