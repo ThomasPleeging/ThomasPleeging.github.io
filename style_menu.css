@@ -97,7 +97,12 @@ body{
 	color: var(--character-secondary);
 	display: block;
 	font-weight: 500;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
+
+
 .pagetitle{
 	display: flex;
 	flex-direction: row;
@@ -316,6 +321,7 @@ li{
 	margin: 0 12px;
 	border-radius: 8px;
 	outline: 1px solid transparent;
+	height: 42px;
 }
 
 .cultivation_switcher span{
@@ -325,7 +331,10 @@ li{
 	outline: 1px solid var(--source-stroke-02);
 	border-radius: 2px;
 	opacity: 0;
+	display: none;
+white-space: nowrap;
 }
+
 .cultivation_switcher div{
 	display: flex;
 	align-items: center;
@@ -339,6 +348,7 @@ li{
 }
 .cultivation_switcher:hover div span{
 	opacity: 1;
+	display: inline;
 }
 
 .sidebar_subheader{
