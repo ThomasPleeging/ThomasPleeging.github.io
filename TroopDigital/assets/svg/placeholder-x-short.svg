@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1392" height="304" viewBox="0 0 1392 304" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 10">
+<mask id="mask0_0_20" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1392" height="304">
+<path id="Subtract" d="M1368 0C1381.25 0 1392 10.7452 1392 24V280C1392 293.255 1381.25 304 1368 304H24C10.7452 304 0 293.255 0 280V24C0 10.7452 10.7452 0 24 0H1368ZM498.266 261H903.409V43H498.266V261Z" fill="url(#paint0_radial_0_20)"/>
+</mask>
+<g mask="url(#mask0_0_20)">
+<g id="Group 9">
+<line id="Line 125" y1="-0.5" x2="1424.81" y2="-0.5" transform="matrix(0.976973 0.213362 -0.778446 0.627711 0 0)" stroke="white"/>
+<line id="Line 126" y1="-0.5" x2="1424.81" y2="-0.5" transform="matrix(0.976973 -0.213362 -0.778446 -0.627711 0 304)" stroke="white"/>
+</g>
+</g>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_20" cx="0" cy="0" r="1" gradientTransform="matrix(0.604692 238.785 -1093.38 0.487602 696 152)" gradientUnits="userSpaceOnUse">
+<stop offset="0.274038" stop-color="#737373"/>
+<stop offset="0.703301" stop-color="#737373"/>
+<stop offset="1" stop-color="#454444"/>
+</radialGradient>
+</defs>
+</svg>
