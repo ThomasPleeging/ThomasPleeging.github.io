@@ -64,11 +64,10 @@
   /* ---------------------------------------------------------------------
      3. Scroll-linked state (one rAF-throttled handler)
         · hero: full-bleed → 16 px inset + rounded lower corners
-        · hero plane drifts forward/down slightly
         · CTA portraits rise into place
         · nav gets a hairline once the page moves
      --------------------------------------------------------------------- */
-  const HERO_DISTANCE = 280;   // px of scroll for the hero to reach its final inset
+  const HERO_DISTANCE = 420;   // px of scroll for the hero to reach its final inset
   let ticking = false;
 
   const update = () => {
@@ -77,10 +76,7 @@
 
     nav.classList.toggle('is-scrolled', y > 4);
 
-    if (hero) {
-      hero.style.setProperty('--p', smoothstep(clamp(y / HERO_DISTANCE, 0, 1)).toFixed(4));
-      if (motion) hero.style.setProperty('--sy', Math.min(y, 800).toFixed(1));
-    }
+    if (hero) hero.style.setProperty('--p', smoothstep(clamp(y / HERO_DISTANCE, 0, 1)).toFixed(4));
 
     if (cta && motion) {
       const vh = window.innerHeight;

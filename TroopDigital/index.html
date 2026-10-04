@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Troop Digital – De radicaal efficiënte digitale ontwikkelpartner</title>
   <meta name="description" content="Een team van ervaren ontwikkelaars, productmanagers en designers. Strategie, design en development in één hand. We helpen bedrijven vooruit met simpele, toekomstbestendige oplossingen.">
-  <meta name="theme-color" content="#e3ab21">
+  <meta name="theme-color" content="#fcb523">
   <!-- Private site: keep out of search engines, archives and AI training/answer engines -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="tdm-reservation" content="1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e3ab21'/%3E%3Cpath d='M7 9h18v4h-7v11h-4V13H7z' fill='%23010041'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fcb523'/%3E%3Cpath d='M7 9h18v4h-7v11h-4V13H7z' fill='%23010041'/%3E%3C/svg%3E">
 
   <script>
     /* Motion is progressive enhancement: hidden start-states only apply when JS runs and motion is allowed. */
@@ -21,7 +21,7 @@
     })(document.documentElement);
   </script>
 
-  <link rel="preload" href="assets/img/hero-plane.avif" as="image" type="image/avif">
+  <link rel="preload" href="assets/img/hero-plane.png" as="image" type="image/png">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -79,7 +79,7 @@
         <span class="hero__grid"></span>
         <span class="hero__grid hero__grid--hi"></span>
         <div class="hero__plane" data-anim style="--d:.25s">
-          <img src="assets/img/hero-plane.avif" width="3860" height="909" alt="" decoding="async" fetchpriority="high">
+          <img src="assets/img/hero-plane.png" width="2400" height="1227" alt="" fetchpriority="high">
         </div>
       </div>
 
@@ -185,115 +185,129 @@
     <section class="kinds" id="wat-we-maken" aria-labelledby="kinds-title">
       <div class="bento" data-reveal-group>
 
-        <div class="tile tile--intro tile--navy" data-reveal>
-          <svg class="viz viz--ripples" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
-            <circle class="draw" pathLength="1" cx="320" cy="0" r="70"  style="--d:.2s"/>
-            <circle class="draw" pathLength="1" cx="320" cy="0" r="120" style="--d:.35s"/>
-            <circle class="draw accent" pathLength="1" cx="320" cy="0" r="170" style="--d:.5s"/>
-            <circle class="draw" pathLength="1" cx="320" cy="0" r="220" style="--d:.65s"/>
-            <circle class="draw" pathLength="1" cx="320" cy="0" r="270" style="--d:.8s"/>
-          </svg>
-          <p class="tile__label">Wat we maken</p>
-          <h2 class="tile__heading" id="kinds-title" data-split>Toekomstbestendige digitale oplossingen</h2>
+        <div class="tile tile--intro" data-reveal>
+          <p class="tile__tab">Wat we maken</p>
+          <div class="tile__box">
+            <svg class="viz viz--ripples" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+              <circle class="draw" pathLength="1" cx="320" cy="0" r="70"  style="--d:.2s"/>
+              <circle class="draw" pathLength="1" cx="320" cy="0" r="120" style="--d:.35s"/>
+              <circle class="draw accent" pathLength="1" cx="320" cy="0" r="170" style="--d:.5s"/>
+              <circle class="draw" pathLength="1" cx="320" cy="0" r="220" style="--d:.65s"/>
+              <circle class="draw" pathLength="1" cx="320" cy="0" r="270" style="--d:.8s"/>
+            </svg>
+            <h2 class="tile__heading" id="kinds-title" data-split>Toekomstbestendige digitale oplossingen</h2>
+          </div>
         </div>
 
-        <div class="tile tile--portal tile--white" data-reveal style="--i:1">
-          <svg class="viz viz--portal" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
-            <path class="draw" pathLength="1" d="M8 119V60a72 72 0 0 1 144 0v59" style="--d:.2s"/>
-            <path class="draw" pathLength="1" d="M28 119V60a52 52 0 0 1 104 0v59" style="--d:.35s"/>
-            <path class="solid" d="M48 119V60a32 32 0 0 1 64 0v59Z"/>
-          </svg>
-          <h3 class="tile__title">Klantportalen</h3>
-          <p class="tile__text">Zelfbediening voor je klanten zonder handmatige tussenkomst.</p>
+        <div class="tile tile--portal" data-reveal style="--i:1">
+          <h3 class="tile__tab">Klantportalen</h3>
+          <div class="tile__box">
+            <svg class="viz viz--portal" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+              <path class="draw" pathLength="1" d="M8 119V60a72 72 0 0 1 144 0v59" style="--d:.2s"/>
+              <path class="draw" pathLength="1" d="M28 119V60a52 52 0 0 1 104 0v59" style="--d:.35s"/>
+              <path class="solid" d="M48 119V60a32 32 0 0 1 64 0v59Z"/>
+            </svg>
+            <p class="tile__text">Zelfbediening voor je klanten zonder handmatige tussenkomst.</p>
+          </div>
         </div>
 
-        <div class="tile tile--dash tile--amber" data-reveal style="--i:2">
-          <svg class="viz viz--bars" viewBox="0 0 380 110" aria-hidden="true" focusable="false">
-            <line class="base" x1="0" y1="108" x2="378" y2="108"/>
-            <rect class="bar" style="--b:0" x="0" y="86" width="14" height="22" rx="3"/>
-            <rect class="bar" style="--b:1" x="26" y="74" width="14" height="34" rx="3"/>
-            <rect class="bar" style="--b:2" x="52" y="80" width="14" height="28" rx="3"/>
-            <rect class="bar" style="--b:3" x="78" y="64" width="14" height="44" rx="3"/>
-            <rect class="bar" style="--b:4" x="104" y="70" width="14" height="38" rx="3"/>
-            <rect class="bar" style="--b:5" x="130" y="56" width="14" height="52" rx="3"/>
-            <rect class="bar" style="--b:6" x="156" y="62" width="14" height="46" rx="3"/>
-            <rect class="bar" style="--b:7" x="182" y="48" width="14" height="60" rx="3"/>
-            <rect class="bar" style="--b:8" x="208" y="54" width="14" height="54" rx="3"/>
-            <rect class="bar" style="--b:9" x="234" y="38" width="14" height="70" rx="3"/>
-            <rect class="bar" style="--b:10" x="260" y="46" width="14" height="62" rx="3"/>
-            <rect class="bar" style="--b:11" x="286" y="26" width="14" height="82" rx="3"/>
-            <rect class="bar" style="--b:12" x="312" y="36" width="14" height="72" rx="3"/>
-            <rect class="bar" style="--b:13" x="338" y="14" width="14" height="94" rx="3"/>
-            <rect class="bar bar--hl" style="--b:14" x="364" y="4" width="14" height="104" rx="3"/>
-          </svg>
-          <h3 class="tile__title">Dashboards &amp; Rapportage</h3>
-          <p class="tile__text">Complexe data helder en direct actiegericht in beeld.</p>
+        <div class="tile tile--dash" data-reveal style="--i:2">
+          <h3 class="tile__tab">Dashboards &amp; Rapportage</h3>
+          <div class="tile__box">
+            <svg class="viz viz--bars" viewBox="0 0 380 110" aria-hidden="true" focusable="false">
+              <line class="base" x1="0" y1="108" x2="378" y2="108"/>
+              <rect class="bar" style="--b:0" x="0" y="86" width="14" height="22" rx="3"/>
+              <rect class="bar" style="--b:1" x="26" y="74" width="14" height="34" rx="3"/>
+              <rect class="bar" style="--b:2" x="52" y="80" width="14" height="28" rx="3"/>
+              <rect class="bar" style="--b:3" x="78" y="64" width="14" height="44" rx="3"/>
+              <rect class="bar" style="--b:4" x="104" y="70" width="14" height="38" rx="3"/>
+              <rect class="bar" style="--b:5" x="130" y="56" width="14" height="52" rx="3"/>
+              <rect class="bar" style="--b:6" x="156" y="62" width="14" height="46" rx="3"/>
+              <rect class="bar" style="--b:7" x="182" y="48" width="14" height="60" rx="3"/>
+              <rect class="bar" style="--b:8" x="208" y="54" width="14" height="54" rx="3"/>
+              <rect class="bar" style="--b:9" x="234" y="38" width="14" height="70" rx="3"/>
+              <rect class="bar" style="--b:10" x="260" y="46" width="14" height="62" rx="3"/>
+              <rect class="bar" style="--b:11" x="286" y="26" width="14" height="82" rx="3"/>
+              <rect class="bar" style="--b:12" x="312" y="36" width="14" height="72" rx="3"/>
+              <rect class="bar" style="--b:13" x="338" y="14" width="14" height="94" rx="3"/>
+              <rect class="bar bar--hl" style="--b:14" x="364" y="4" width="14" height="104" rx="3"/>
+            </svg>
+            <p class="tile__text">Complexe data helder en direct actiegericht in beeld.</p>
+          </div>
         </div>
 
-        <div class="tile tile--hub tile--graphite" data-reveal style="--i:3">
-          <svg class="viz viz--hub" viewBox="0 0 170 130" aria-hidden="true" focusable="false">
-            <circle class="ring" cx="85" cy="65" r="54"/>
-            <g class="spokes">
-              <line class="draw" pathLength="1" x1="85"   y1="50"   x2="85"    y2="17"  style="--d:.3s"/>
-              <line class="draw" pathLength="1" x1="98"   y1="57.5" x2="126.6" y2="41"  style="--d:.4s"/>
-              <line class="draw" pathLength="1" x1="98"   y1="72.5" x2="126.6" y2="89"  style="--d:.5s"/>
-              <line class="draw" pathLength="1" x1="85"   y1="80"   x2="85"    y2="113" style="--d:.6s"/>
-              <line class="draw" pathLength="1" x1="72"   y1="72.5" x2="43.4"  y2="89"  style="--d:.7s"/>
-              <line class="draw" pathLength="1" x1="72"   y1="57.5" x2="43.4"  y2="41"  style="--d:.8s"/>
-            </g>
-            <circle class="node" cx="85"    cy="11"  r="6"/>
-            <circle class="node" cx="131.8" cy="38"  r="6"/>
-            <circle class="node" cx="131.8" cy="92"  r="6"/>
-            <circle class="node" cx="85"    cy="119" r="6"/>
-            <circle class="node" cx="38.2"  cy="92"  r="6"/>
-            <circle class="node" cx="38.2"  cy="38"  r="6"/>
-            <circle class="core" cx="85" cy="65" r="15"/>
-          </svg>
-          <h3 class="tile__title">Bedrijfsplatformen</h3>
-          <p class="tile__text">De digitale backbone die al je interne systemen soepel verbindt.</p>
+        <div class="tile tile--hub" data-reveal style="--i:3">
+          <h3 class="tile__tab">Bedrijfsplatformen</h3>
+          <div class="tile__box">
+            <svg class="viz viz--hub" viewBox="0 0 170 130" aria-hidden="true" focusable="false">
+              <circle class="ring" cx="85" cy="65" r="54"/>
+              <g class="spokes">
+                <line class="draw" pathLength="1" x1="85"   y1="50"   x2="85"    y2="17"  style="--d:.3s"/>
+                <line class="draw" pathLength="1" x1="98"   y1="57.5" x2="126.6" y2="41"  style="--d:.4s"/>
+                <line class="draw" pathLength="1" x1="98"   y1="72.5" x2="126.6" y2="89"  style="--d:.5s"/>
+                <line class="draw" pathLength="1" x1="85"   y1="80"   x2="85"    y2="113" style="--d:.6s"/>
+                <line class="draw" pathLength="1" x1="72"   y1="72.5" x2="43.4"  y2="89"  style="--d:.7s"/>
+                <line class="draw" pathLength="1" x1="72"   y1="57.5" x2="43.4"  y2="41"  style="--d:.8s"/>
+              </g>
+              <circle class="node" cx="85"    cy="11"  r="6"/>
+              <circle class="node" cx="131.8" cy="38"  r="6"/>
+              <circle class="node" cx="131.8" cy="92"  r="6"/>
+              <circle class="node" cx="85"    cy="119" r="6"/>
+              <circle class="node" cx="38.2"  cy="92"  r="6"/>
+              <circle class="node" cx="38.2"  cy="38"  r="6"/>
+              <circle class="core" cx="85" cy="65" r="15"/>
+            </svg>
+            <p class="tile__text">De digitale backbone die al je interne systemen soepel verbindt.</p>
+          </div>
         </div>
 
-        <div class="tile tile--web tile--white" data-reveal style="--i:4">
-          <svg class="viz viz--web" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
-            <rect class="draw" pathLength="1" x="1" y="1" width="198" height="118" rx="12" style="--d:.2s"/>
-            <line x1="1" y1="28" x2="199" y2="28"/>
-            <rect x="14" y="10" width="64" height="9" rx="4.5"/>
-            <line class="draw load" pathLength="1" x1="1" y1="28" x2="199" y2="28" style="--d:.7s"/>
-            <rect x="14" y="44" width="72" height="60" rx="6"/>
-            <line x1="100" y1="52" x2="186" y2="52"/>
-            <line x1="100" y1="70" x2="160" y2="70"/>
-            <line x1="100" y1="88" x2="176" y2="88"/>
-          </svg>
-          <h3 class="tile__title">Webapplicaties</h3>
-          <p class="tile__text">Snel ladende, robuuste applicaties gebouwd met moderne tech-stacks.</p>
+        <div class="tile tile--web" data-reveal style="--i:4">
+          <h3 class="tile__tab">Webapplicaties</h3>
+          <div class="tile__box">
+            <svg class="viz viz--web" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+              <rect class="draw" pathLength="1" x="1" y="1" width="198" height="118" rx="12" style="--d:.2s"/>
+              <line x1="1" y1="28" x2="199" y2="28"/>
+              <rect x="14" y="10" width="64" height="9" rx="4.5"/>
+              <line class="draw load" pathLength="1" x1="1" y1="28" x2="199" y2="28" style="--d:.7s"/>
+              <rect x="14" y="44" width="72" height="60" rx="6"/>
+              <line x1="100" y1="52" x2="186" y2="52"/>
+              <line x1="100" y1="70" x2="160" y2="70"/>
+              <line x1="100" y1="88" x2="176" y2="88"/>
+            </svg>
+            <p class="tile__text">Snel ladende, robuuste applicaties gebouwd met moderne tech-stacks.</p>
+          </div>
         </div>
 
-        <div class="tile tile--api tile--amber" data-reveal style="--i:5">
-          <svg class="viz viz--api" viewBox="0 0 360 110" aria-hidden="true" focusable="false">
-            <rect x="1" y="15" width="96" height="80" rx="10"/>
-            <line x1="17" y1="38" x2="65" y2="38"/><line x1="17" y1="55" x2="81" y2="55"/><line x1="17" y1="72" x2="49" y2="72"/>
-            <rect class="solid" x="263" y="15" width="96" height="80" rx="10"/>
-            <line class="on-solid" x1="279" y1="38" x2="327" y2="38"/><line class="on-solid" x1="279" y1="55" x2="343" y2="55"/><line class="on-solid" x1="279" y1="72" x2="311" y2="72"/>
-            <g class="flow fade" style="--d:.4s">
-              <line x1="113" y1="42" x2="240" y2="42"/>
-              <line x1="247" y1="68" x2="120" y2="68"/>
-            </g>
-            <path class="draw" pathLength="1" d="M232 34l8 8-8 8" style="--d:.8s"/>
-            <path class="draw" pathLength="1" d="M128 60l-8 8 8 8" style="--d:1s"/>
-          </svg>
-          <h3 class="tile__title">Maatwerk API’s</h3>
-          <p class="tile__text">Betrouwbare koppelingen tussen jouw legacy software en nieuwe tools.</p>
+        <div class="tile tile--api" data-reveal style="--i:5">
+          <h3 class="tile__tab">Maatwerk API’s</h3>
+          <div class="tile__box">
+            <svg class="viz viz--api" viewBox="0 0 360 110" aria-hidden="true" focusable="false">
+              <rect x="1" y="15" width="96" height="80" rx="10"/>
+              <line x1="17" y1="38" x2="65" y2="38"/><line x1="17" y1="55" x2="81" y2="55"/><line x1="17" y1="72" x2="49" y2="72"/>
+              <rect class="solid" x="263" y="15" width="96" height="80" rx="10"/>
+              <line class="on-solid" x1="279" y1="38" x2="327" y2="38"/><line class="on-solid" x1="279" y1="55" x2="343" y2="55"/><line class="on-solid" x1="279" y1="72" x2="311" y2="72"/>
+              <g class="flow fade" style="--d:.4s">
+                <line x1="113" y1="42" x2="240" y2="42"/>
+                <line x1="247" y1="68" x2="120" y2="68"/>
+              </g>
+              <path class="draw" pathLength="1" d="M232 34l8 8-8 8" style="--d:.8s"/>
+              <path class="draw" pathLength="1" d="M128 60l-8 8 8 8" style="--d:1s"/>
+            </svg>
+            <p class="tile__text">Betrouwbare koppelingen tussen jouw legacy software en nieuwe tools.</p>
+          </div>
         </div>
 
-        <div class="tile tile--ai tile--navy" data-reveal style="--i:6">
-          <svg class="viz viz--tasks" viewBox="0 0 360 110" aria-hidden="true" focusable="false">
-            <g><rect x="1" y="1" width="18" height="18" rx="5"/><line x1="34" y1="10" x2="250" y2="10"/><path class="draw tick" pathLength="1" d="M6 10.5l4 4 7-8.5" style="--d:.6s"/></g>
-            <g><rect x="1" y="29" width="18" height="18" rx="5"/><line x1="34" y1="38" x2="210" y2="38"/><path class="draw tick" pathLength="1" d="M6 38.5l4 4 7-8.5" style="--d:1s"/></g>
-            <g><rect x="1" y="57" width="18" height="18" rx="5"/><line x1="34" y1="66" x2="234" y2="66"/><path class="draw tick" pathLength="1" d="M6 66.5l4 4 7-8.5" style="--d:1.4s"/></g>
-            <g><rect x="1" y="85" width="18" height="18" rx="5"/><line x1="34" y1="94" x2="174" y2="94"/><path class="draw tick" pathLength="1" d="M6 94.5l4 4 7-8.5" style="--d:1.8s"/></g>
-          </svg>
-          <h3 class="tile__title">AI &amp; Automatisering</h3>
-          <p class="tile__text">Slimme integraties die repeterend werk direct overnemen.</p>
+        <div class="tile tile--ai" data-reveal style="--i:6">
+          <h3 class="tile__tab">AI &amp; Automatisering</h3>
+          <div class="tile__box">
+            <svg class="viz viz--tasks" viewBox="0 0 360 110" aria-hidden="true" focusable="false">
+              <g><rect x="1" y="1" width="18" height="18" rx="5"/><line x1="34" y1="10" x2="250" y2="10"/><path class="draw tick" pathLength="1" d="M6 10.5l4 4 7-8.5" style="--d:.6s"/></g>
+              <g><rect x="1" y="29" width="18" height="18" rx="5"/><line x1="34" y1="38" x2="210" y2="38"/><path class="draw tick" pathLength="1" d="M6 38.5l4 4 7-8.5" style="--d:1s"/></g>
+              <g><rect x="1" y="57" width="18" height="18" rx="5"/><line x1="34" y1="66" x2="234" y2="66"/><path class="draw tick" pathLength="1" d="M6 66.5l4 4 7-8.5" style="--d:1.4s"/></g>
+              <g><rect x="1" y="85" width="18" height="18" rx="5"/><line x1="34" y1="94" x2="174" y2="94"/><path class="draw tick" pathLength="1" d="M6 94.5l4 4 7-8.5" style="--d:1.8s"/></g>
+            </svg>
+            <p class="tile__text">Slimme integraties die repeterend werk direct overnemen.</p>
+          </div>
         </div>
 
       </div>
