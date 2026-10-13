@@ -37,9 +37,9 @@
     <nav class="menu" aria-label="Hoofdmenu" data-menu>
       <span class="menu__ind" aria-hidden="true"></span>
       <a class="menu__link" href="#werkwijze">Zo werken we</a>
-      <a class="menu__link" href="#wat-we-maken">Wat we bouwen</a>
+      <a class="menu__link" href="#ingredienten">Wat we bouwen</a>
       <a class="menu__link" href="#werk">Werk</a>
-      <a class="menu__link" href="#contact">Wie zijn wij</a>
+      <a class="menu__link" href="#team">Wie zijn wij</a>
     </nav>
 
     <div class="nav__end">
@@ -58,9 +58,9 @@
 
     <div class="nav__panel" id="nav-panel" data-nav-panel hidden>
       <a href="#werkwijze">Zo werken we</a>
-      <a href="#wat-we-maken">Wat we bouwen</a>
+      <a href="#ingredienten">Wat we bouwen</a>
       <a href="#werk">Werk</a>
-      <a href="#contact">Wie zijn wij</a>
+      <a href="#team">Wie zijn wij</a>
       <a class="btn btn--primary nav__panel-cta" href="#contact">
         <span class="btn__label">Plan een gesprek</span>
         <span class="arrow arrow--ne" aria-hidden="true">
@@ -103,59 +103,104 @@
                 <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               </span>
             </a>
-            <a class="btn btn--ghost" href="#wat-we-maken"><span class="btn__label">Wat we bouwen</span></a>
+            <a class="btn btn--ghost" href="#ingredienten"><span class="btn__label">Wat we bouwen</span></a>
           </div>
         </div>
+
+        <ul class="promises" aria-label="Onze drie beloftes">
+          <li class="promise" data-anim style="--d:1s">
+            <strong class="promise__title">Werkende software in weken</strong>
+            <span class="promise__sub">Vaste prijs, geen meerwerk</span>
+          </li>
+          <li class="promise" data-anim style="--d:1.1s">
+            <strong class="promise__title">Strategische en senior bouwers</strong>
+            <span class="promise__sub">Geen tussenlagen</span>
+          </li>
+          <li class="promise" data-anim style="--d:1.2s">
+            <strong class="promise__title">Geen overhead</strong>
+            <span class="promise__sub">Pure snelheid en efficiëntie</span>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ─────────── Voordelen ─────────── -->
-    <section class="usp" id="voordelen" aria-label="Waarom Troop Digital" data-reveal-group>
-      <ul class="usp__list">
-        <li class="usp__item" data-reveal style="--i:0">
-          <span class="usp__num">01</span>
-          <h2 class="usp__title">Werkende software in weken</h2>
-          <p class="usp__sub">Vaste prijs, geen meerwerk</p>
-        </li>
-        <li class="usp__item" data-reveal style="--i:1">
-          <span class="usp__num">02</span>
-          <h2 class="usp__title">Strategische en senior bouwers</h2>
-          <p class="usp__sub">Geen tussenlagen</p>
-        </li>
-        <li class="usp__item" data-reveal style="--i:2">
-          <span class="usp__num">03</span>
-          <h2 class="usp__title">Geen overhead</h2>
-          <p class="usp__sub">Pure snelheid en efficiëntie</p>
-        </li>
-      </ul>
-    </section>
-
     <!-- ─────────── Wat we doen ─────────── -->
-    <section class="what" id="wat-we-doen" aria-labelledby="what-title">
-      <div class="what__inner">
-        <p class="tag" data-reveal>Wat we doen</p>
-        <h2 class="h-section" id="what-title" data-split>We bouwen wat werkt voor jouw bedrijf</h2>
+    <section class="intro" id="wat-we-doen" aria-labelledby="intro-title">
+      <h2 class="intro__lead" id="intro-title" data-split>Troop Digital unlockt de volle potentie van jouw bedrijf, door je digitaal te transformeren en versnellen.</h2>
 
-        <div class="cards" data-reveal-group>
-          <article class="card" data-reveal style="--i:0">
-            <span class="card__num" aria-hidden="true">1</span>
+      <div class="cards" data-reveal-group>
+        <article class="card" data-reveal style="--i:0">
+          <span class="card__num" aria-hidden="true">1</span>
+          <div class="card__main">
             <h3 class="card__title">Efficiënter proces</h3>
-            <p class="card__text">We unlocken de volle potentie van jouw bedrijf, door je digitaal te transformeren en versnellen.</p>
-          </article>
-          <article class="card" data-reveal style="--i:1">
-            <span class="card__num" aria-hidden="true">2</span>
+            <!-- Placeholder copy from the Figma (lorem ipsum) – replace with the real text -->
+            <p class="card__text">Nieuwe tools, nieuwe processen, lorem ipsum dolor sit amet. Nullam feugiat maximus pretium. Vivamus blandit eu augue vel finibus.</p>
+          </div>
+        </article>
+        <article class="card" data-reveal style="--i:1">
+          <span class="card__num" aria-hidden="true">2</span>
+          <div class="card__main">
             <h3 class="card__title">Nieuw perspectief</h3>
             <p class="card__text">Een nieuw systeem is geen doel. Het doel is een bedrijf dat meer aankan, sneller levert en anders verdient. Dat is wat er bij onze klanten verandert.</p>
-          </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─────────── De ingrediënten ───────────
+         The dial is decorative. Figma only designs step 01 (Technische fundering); the 60° markers
+         suggest more steps may follow, but there is no copy for them yet. -->
+    <section class="ing grain" id="ingredienten" aria-labelledby="ing-title">
+      <div class="dial" aria-hidden="true" data-reveal>
+        <span class="dial__ring">
+            <i class="tick tick--mark" style="--k:0"></i>
+            <i class="tick" style="--k:1"></i>
+            <i class="tick" style="--k:2"></i>
+            <i class="tick" style="--k:3"></i>
+            <i class="tick" style="--k:4"></i>
+            <i class="tick tick--mark" style="--k:5"></i>
+            <i class="tick" style="--k:6"></i>
+            <i class="tick" style="--k:7"></i>
+            <i class="tick" style="--k:8"></i>
+            <i class="tick" style="--k:9"></i>
+            <i class="tick" style="--k:10"></i>
+            <i class="tick" style="--k:11"></i>
+            <i class="tick" style="--k:12"></i>
+            <i class="tick" style="--k:13"></i>
+            <i class="tick" style="--k:14"></i>
+            <i class="tick tick--mark" style="--k:15"></i>
+            <i class="tick" style="--k:16"></i>
+            <i class="tick" style="--k:17"></i>
+            <i class="tick" style="--k:18"></i>
+            <i class="tick" style="--k:19"></i>
+            <i class="tick" style="--k:20"></i>
+            <i class="tick" style="--k:21"></i>
+            <i class="tick" style="--k:22"></i>
+            <i class="tick" style="--k:23"></i>
+            <i class="tick" style="--k:24"></i>
+            <i class="tick tick--mark" style="--k:25"></i>
+            <i class="tick" style="--k:26"></i>
+            <i class="tick" style="--k:27"></i>
+            <i class="tick" style="--k:28"></i>
+            <i class="tick" style="--k:29"></i>
+        </span>
+        <img class="dial__plane" src="assets/svg/plane-outline.svg" width="287" height="376.715" alt="">
+        <span class="dial__label">01</span>
+      </div>
+
+      <div class="ing__inner">
+        <h2 class="h-ing" id="ing-title" data-split>De ingrediënten voor innovatie met succes</h2>
+        <div class="ing__step" data-reveal>
+          <h3 class="ing__name">Technische fundering</h3>
+          <p class="ing__text">Ambities lopen vaak stuk op complexiteit en data. Wij leggen een fundering die meegroeit.</p>
         </div>
       </div>
     </section>
 
     <!-- ─────────── Werkwijze ─────────── -->
-    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
+    <section class="way grain" id="werkwijze" aria-labelledby="way-title" data-way>
       <div class="way__inner">
-        <p class="tag tag--light" data-reveal>Zo werken we</p>
-        <h2 class="h-section way__title" id="way-title" data-split>Start klein. Valideer. Schaal op.</h2>
+        <h2 class="h-section way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
 
         <div class="ruler" data-reveal aria-hidden="true">
           <img class="ruler__img" src="assets/svg/ruler.svg" width="1172" height="32" alt="" decoding="async">
@@ -181,61 +226,61 @@
       </div>
     </section>
 
-    <!-- ─────────── Wat we maken (bento) ─────────── -->
-    <section class="kinds" id="wat-we-maken" aria-labelledby="kinds-title">
-      <p class="tag" id="kinds-title" data-reveal>Wat we maken</p>
+    <!-- ─────────── Ons team ───────────
+         Portraits are the Figma placeholder (the same photo six times): swap each <img> for the real portrait. -->
+    <section class="team" id="team" aria-labelledby="team-title">
+      <img class="team__bg" src="assets/img/team-bg.webp" width="1439" height="1126" alt="" aria-hidden="true" decoding="async">
 
-      <div class="bento" data-reveal-group>
-        <div class="tile tile--portal" data-reveal>
-          <h2 class="tile__title">Klantportalen</h2>
-          <div class="tile__media" aria-hidden="true"></div>
+      <div class="team__inner">
+        <div class="team__intro">
+          <h2 class="h-section" id="team-title" data-split>De mensen die het maken</h2>
+          <div class="team__copy" data-reveal>
+            <p>Je werkt direct - en alleen - met senior specialisten. Geen overdrachten, geen accountmanagement, geen ruis.</p>
+            <p><b>Jan en Jesse leiden de meeste trajecten</b> van begin tot eind en schakelen onze experts bij. We nemen verantwoordelijkheid voor jouw uitdaging, alsof het ons eigen bedrijf is.</p>
+          </div>
         </div>
 
-        <div class="tile tile--dash" data-reveal style="--i:1">
-          <h2 class="tile__title">Dashboards &amp;<br> Rapportage</h2>
-          <div class="tile__media" aria-hidden="true"></div>
-        </div>
-
-        <div class="tile tile--hub" data-reveal style="--i:2">
-          <h2 class="tile__title">Bedrijfsplatformen</h2>
-          <div class="tile__media" aria-hidden="true"></div>
-        </div>
-
-        <div class="tile tile--web" data-reveal style="--i:3">
-          <h2 class="tile__title">Webapplicaties</h2>
-          <div class="tile__media" aria-hidden="true"></div>
-        </div>
-
-        <div class="tile tile--api" data-reveal style="--i:4">
-          <h2 class="tile__title">Maatwerk API’s</h2>
-          <div class="tile__media" aria-hidden="true"></div>
-        </div>
-
-        <div class="tile tile--ai" data-reveal style="--i:5">
-          <h2 class="tile__title">AI &amp; Automatisering</h2>
-          <div class="tile__media" aria-hidden="true"></div>
-        </div>
+        <ul class="people" data-reveal-group>
+          <li class="person" data-reveal style="--i:0">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Jan Kranendonk" loading="lazy" decoding="async"></div>
+            <p class="person__name">Jan Kranendonk</p>
+            <p class="person__role">Product Lead</p>
+          </li>
+          <li class="person" data-reveal style="--i:1">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Jesse van Thijn" loading="lazy" decoding="async"></div>
+            <p class="person__name">Jesse van Thijn</p>
+            <p class="person__role">Tech Lead</p>
+          </li>
+          <li class="person" data-reveal style="--i:2">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Mike van Laar" loading="lazy" decoding="async"></div>
+            <p class="person__name">Mike van Laar</p>
+            <p class="person__role">SEO &amp; Growth</p>
+          </li>
+          <li class="person" data-reveal style="--i:0">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Rogier Bisschop" loading="lazy" decoding="async"></div>
+            <p class="person__name">Rogier Bisschop</p>
+            <p class="person__role">Brand Designer</p>
+          </li>
+          <li class="person" data-reveal style="--i:1">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Erik Schuur" loading="lazy" decoding="async"></div>
+            <p class="person__name">Erik Schuur</p>
+            <p class="person__role">Brand Designer</p>
+          </li>
+          <li class="person" data-reveal style="--i:2">
+            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Ruud Kooiman" loading="lazy" decoding="async"></div>
+            <p class="person__name">Ruud Kooiman</p>
+            <p class="person__role">AI &amp; Data</p>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- ═══════════ PLACEHOLDERS ═══════════
-         The three blocks below are layout placeholders (no design exists yet in Figma).
+         The two blocks below are layout placeholders (the Figma only holds a grey box for each).
          Replace each <section class="ph"> as a whole when its design arrives; ids are kept so links keep working. -->
 
-    <!-- Placeholder: Troopers -->
-    <section class="ph" id="troopers" aria-label="Troopers (placeholder)" data-placeholder data-reveal>
-      <img class="ph__x" src="assets/svg/placeholder-x.svg" alt="" aria-hidden="true">
-      <h2 class="ph__label">Troopers</h2>
-    </section>
-
-    <!-- Placeholder: Co-Troopers (shorter block) -->
-    <section class="ph ph--short" id="co-troopers" aria-label="Co-Troopers (placeholder)" data-placeholder data-reveal>
-      <img class="ph__x" src="assets/svg/placeholder-x-short.svg" alt="" aria-hidden="true">
-      <h2 class="ph__label">Co-Troopers</h2>
-    </section>
-
     <!-- Placeholder: Testimonials -->
-    <section class="ph" id="testimonials" aria-label="Testimonials (placeholder)" data-placeholder data-reveal>
+    <section class="ph ph--testimonials" id="testimonials" aria-label="Testimonials (placeholder)" data-placeholder data-reveal>
       <img class="ph__x" src="assets/svg/placeholder-x.svg" alt="" aria-hidden="true">
       <h2 class="ph__label">Testimonials</h2>
     </section>
@@ -311,6 +356,12 @@
       </div>
     </section>
 
+    <!-- Placeholder: Blog -->
+    <section class="ph ph--blog" id="blog" aria-label="Blog (placeholder)" data-placeholder data-reveal>
+      <img class="ph__x" src="assets/svg/placeholder-x-blog.svg" alt="" aria-hidden="true">
+      <h2 class="ph__label">Blog</h2>
+    </section>
+
     <!-- ─────────── Call to action ─────────── -->
     <section class="cta" id="contact" aria-labelledby="cta-title" data-cta>
       <div class="cta__band" data-reveal>
@@ -340,6 +391,8 @@
 
   <!-- ─────────── Footer ─────────── -->
   <footer class="footer">
+    <img class="footer__plane" src="assets/img/footer-plane.webp" width="4096" height="1093" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
     <div class="footer__inner">
       <div class="footer__intro">
         <img class="footer__logo" src="assets/svg/logo-light.svg" width="145.268" height="14.36" alt="Troop Digital">
@@ -361,7 +414,7 @@
           <h3 class="fcol__title" id="f-nav">Navigatie</h3>
           <ul>
             <li><a href="#top">Home</a></li>
-            <li><a href="#contact">Over ons</a></li>
+            <li><a href="#team">Over ons</a></li>
             <li><a href="#werk">Werk</a></li>
             <li><a href="#werkwijze">Werkwijze</a></li>
             <li><a href="#kennisbank">Kennisbank</a></li>

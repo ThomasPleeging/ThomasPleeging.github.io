@@ -26,7 +26,7 @@
 :root {
   --yellow: #fcb523;
   --yellow-ink: #966d00;      /* same hue, darkened for text on white (4.7:1) */
-  --amber: #fcb523;
+  --amber: #eda800;           /* CTA band */
   --darkblue: #010041;
   --darkgrey: #28292b;
   --paper: #f2f2f2;
@@ -40,13 +40,17 @@
   --nav-h: 69px;
   --gutter: 25px;
   /* Two vertical lines everything hangs on:
-     --frame  inset of full-width surfaces (hero on scroll, bento, placeholders, CTA band)
-     --col    left/right edge of all text: a centred 1170 px column, never closer than frame + gutter.
-              Uses %, so it resolves against the full-width section it's used in. */
+     --frame  inset of full-width surfaces (hero on scroll, Werkwijze card, placeholders, CTA band)
+     --col    left/right edge of all text: a centred 1158 px column (Figma x 141 → 1299), never closer
+              than frame + gutter. Uses %, so it resolves against the full-width section it's used in. */
   --frame: 16px;
-  --content: 1170px;
+  --content: 1158px;
   --col: max(calc(var(--frame) + var(--gutter)), calc(50% - var(--content) / 2));
   --radius: 4px;
+
+  /* Vertical rhythm: the white gaps between sections are the Figma distances (px at 1440 wide),
+     shrinking in step with the viewport below that, never below half. Use as calc(156 * var(--sp)). */
+  --sp: clamp(.5px, calc(100vw / 1440), 1px);
 }
 
 /* ---------- Base ---------- */
@@ -188,11 +192,6 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .pill b { font-weight: 700; }
 @media (hover: hover) { .pill:hover { border-color: rgba(1, 0, 65, .5); background: rgba(255, 255, 255, .6); } }
 
-.tag {
-  display: inline-block; padding: 8px 16px; border: 1px solid rgba(1, 0, 65, .3); border-radius: 100px;
-  font-size: 14px; line-height: 14px; letter-spacing: -.03em; text-transform: uppercase; color: var(--darkblue);
-}
-
 /* ==========================================================================
    Navigation
    ========================================================================== */
@@ -237,8 +236,11 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
    ========================================================================== */
 .hero {
   --p: 0;                                  /* scroll progress 0 → 1, set by JS */
-  --plane-h: min(633px, 43.96vw);
-  position: relative; isolation: isolate; min-height: max(780px, calc(100svh + 48px));
+  --pw: min(1195px, 82.99vw);              /* plane width: 1195 px at 1440, shrinks with the viewport */
+  --hero-x: var(--gutter);                 /* text sits 25 px inside the card, which itself insets 16 px on scroll */
+  position: relative; isolation: isolate;
+  display: flex; flex-direction: column;
+  min-height: max(780px, calc(100svh - var(--nav-h)));
   contain: paint;                          /* the oversized plane image can't add horizontal scroll width */
 }
 
@@ -267,119 +269,93 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 }
 
 .hero__plane {
-  position: absolute; top: min(48px, 3.34vw); right: 0;
-  width: 39.51vw; height: var(--plane-h);
+  position: absolute; top: min(77px, 5.35vw); right: calc(var(--pw) * -.425);   /* 57.5 % of the plane is on screen */
+  width: var(--pw);
 }
-.hero__plane img { position: absolute; top: 0; left: 0; height: 100%; width: auto; max-width: none; }
+.hero__plane img { display: block; width: 100%; height: auto; max-width: none; }
 
 .hero__inner {
-  position: relative; display: flex; flex-direction: column; align-items: flex-start;
-  padding: 43px var(--col) 90px;
+  position: relative; flex: 1; display: flex; flex-direction: column; align-items: flex-start;
+  padding: 43px var(--hero-x) 56px;
+  translate: calc(var(--p) * var(--frame)) 0;          /* the text rides along with the card as it insets */
+  transition: translate .5s var(--ease-out);
 }
 .hero__body {
   display: flex; flex-direction: column; align-items: flex-start; gap: 32px;
   margin-top: 142px; max-width: min(823px, calc(60vw - 45px));
 }
-.hero .lead { max-width: 36em; }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
-/* ==========================================================================
-   Voordelen (USP strip)
-   ========================================================================== */
-.usp { padding: 80px var(--col) 0; }
-.usp__list {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+/* Drie beloftes: three equal columns pinned to the bottom of the card */
+.promises {
+  display: flex; width: min(823px, calc(60vw - 45px)); margin-top: auto; padding-top: 72px;
 }
-.usp__item {
-  position: relative; min-height: 186px;
-  padding: 0 24px;
+.promise {
+  display: flex; flex: 1 1 0; flex-direction: column; gap: 4px; min-width: 0;
+  font-size: 14px; line-height: 1.5;
 }
-/* dotted dividers, exactly the Figma 1 / 3 dash pattern */
-.usp__item::before, .usp__item:last-child::after {
-  content: ""; position: absolute; top: 0; bottom: 0; width: 1px;
-  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, .2) 0 2px, transparent 2px 4px);
-  transition: clip-path 1.3s var(--ease-out) calc(var(--i, 0) * .12s + .1s);
-}
-.usp__item::before { left: 0; }
-.usp__item:last-child::after { right: 0; transition-delay: .5s; }
-.motion .usp__item::before, .motion .usp__item:last-child::after { clip-path: inset(0 0 100% 0); }
-.motion .usp__item.is-in::before, .motion .usp__item.is-in:last-child::after { clip-path: inset(0); }
-
-.usp__num {
-  display: block; margin-bottom: 62px;
-  font-size: 16px; font-weight: 500; line-height: 1.06; letter-spacing: -.03em; color: var(--darkblue);
-  transition: color .3s ease;
-}
-.usp__title {
-  max-width: 294px;
-  font-size: clamp(1.25rem, .9rem + 1vw, 1.5rem); font-weight: 500;
-  line-height: 1.06; letter-spacing: -.03em; color: #000;
-}
-.usp__sub {
-  max-width: 320px; margin-top: 11px;
-  font-size: clamp(1.25rem, .9rem + 1vw, 1.5rem); font-weight: 400;
-  line-height: 1.06; letter-spacing: -.03em; color: var(--yellow-ink);
-  transition: transform .6s var(--ease-out);
-}
-@media (hover: hover) {
-  .usp__item:hover .usp__num { color: var(--yellow-ink); }
-  .usp__item:hover .usp__sub { transform: translateX(8px); }
-}
+.promise__title { font-weight: 500; color: var(--darkblue); }
+.promise__sub { color: var(--darkgrey); opacity: .6; }
 
 /* ==========================================================================
-   Wat we doen
+   Wat we doen: statement + two cards
+   Figma: 156 px of white above the statement and below the cards, 37 px between them.
    ========================================================================== */
-.what { padding: 135px var(--col) 0; }
-.h-section { max-width: 573px; margin: 19px 0 25px; }
+.h-section { max-width: 573px; margin: 0; }
 
-.cards { --cell: clamp(96px, 10.45vw, 150.5px); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.intro { padding: calc(156 * var(--sp)) var(--col); }
+.intro__lead {
+  max-width: 950px; margin: 0 auto calc(37 * var(--sp)); text-align: center;
+  font-size: clamp(1.5rem, .85rem + 2.2vw, 2.1875rem);   /* 35 px */
+  font-weight: 500; line-height: 1.2; color: var(--darkblue);
+}
+
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 33px; }
 .card {
-  position: relative; overflow: hidden; min-height: 209px;
-  display: grid; grid-template-columns: var(--cell) 1fr; grid-template-rows: 91.5px 1fr;
-  background: var(--paper);
+  --line: #c5c5c5;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: auto 1fr; min-height: 208px;
+  background: #e6e6e6; border: 1px solid #c5c4ca; border-radius: 16px;
   transition: background-color .5s ease;
 }
-.card::before, .card::after {
-  content: ""; position: absolute; background: #dadada;
-  transition: transform 1.1s var(--ease-out) calc(var(--i, 0) * .12s + .35s);
-}
-.card::before { left: var(--cell); top: 0; bottom: 0; width: 1px; transform-origin: 50% 0; }
-.card::after  { left: var(--cell); right: 0; top: 91.5px; height: 1px; transform-origin: 0 50%; transition-delay: calc(var(--i, 0) * .12s + .55s); }
-.motion .card::before { transform: scaleY(0); }
-.motion .card::after  { transform: scaleX(0); }
-.motion .card.is-in::before, .motion .card.is-in::after { transform: none; }
-
+/* The big digit is outline only. Its cell is as wide as the glyph + 24 px each side, so "1" and "2" differ. */
 .card__num {
-  grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center;
+  display: grid; place-items: center; padding: 0 24px;
   font-size: clamp(110px, 12.5vw, 180px); font-weight: 700; line-height: 1;
-  color: rgba(0, 0, 0, .1); user-select: none;
-  transition: color .5s ease, transform .8s var(--ease-out);
+  color: transparent; -webkit-text-stroke: 1px var(--darkblue); user-select: none;
+  transition: color .6s ease, transform .8s var(--ease-out);
+}
+.card__main { position: relative; display: flex; flex-direction: column; }
+.card__main::before {                                   /* vertical divider, drawn on the first pixel column */
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--line);
+  transition: transform 1.1s var(--ease-out) calc(var(--i, 0) * .12s + .35s); transform-origin: 50% 0;
 }
 .card__title {
-  grid-column: 2; grid-row: 1; align-self: center;
-  padding: 7px 24px 0 clamp(24px, 3.2vw, 46.5px);
-  font-size: clamp(1.375rem, 1rem + 1vw, 1.75rem); font-weight: 400;
-  line-height: 1; letter-spacing: -.03em; color: var(--darkblue);
+  position: relative; display: flex; align-items: center; min-height: 80px; padding: 24px;
+  font-size: clamp(1.25rem, 1rem + .9vw, 1.5625rem); font-weight: 600; line-height: 1.3; color: var(--darkblue);
 }
-.card__text {
-  grid-column: 2; grid-row: 2; align-self: center;
-  max-width: calc(331px + 24px + clamp(24px, 3.2vw, 46.5px)); box-sizing: content-box;
-  padding: 10px 24px 10px clamp(24px, 3.2vw, 46.5px);
-  font-size: 16px; line-height: 1.5; color: var(--ink);
+.card__title::after {                                   /* horizontal divider under the title */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line);
+  transition: transform 1.1s var(--ease-out) calc(var(--i, 0) * .12s + .55s); transform-origin: 0 50%;
 }
-@media (hover: hover) {
-  .card:hover { background: #ececec; }
-  .card:hover .card__num { color: rgba(0, 0, 0, .15); transform: translateY(-6px) scale(1.04); }
-}
+.card__text { padding: 24px; font-size: 16px; line-height: 1.5; color: var(--ink); }
+
+.motion .card__main::before { transform: scaleY(0); }
+.motion .card__title::after { transform: scaleX(0); }
+.motion .card.is-in .card__main::before, .motion .card.is-in .card__title::after { transform: none; }
 .motion .card__num { opacity: 0; translate: 0 28px;
-  transition: color .5s ease, transform .8s var(--ease-out), opacity 1s var(--ease-out) calc(var(--i, 0) * .12s + .3s), translate 1.2s var(--ease-out) calc(var(--i, 0) * .12s + .3s); }
+  transition: color .6s ease, transform .8s var(--ease-out), opacity 1s var(--ease-out) calc(var(--i, 0) * .12s + .3s), translate 1.2s var(--ease-out) calc(var(--i, 0) * .12s + .3s); }
 .motion .card.is-in .card__num { opacity: 1; translate: 0 0; }
+@media (hover: hover) {
+  .card:hover { background: #e0e0e0; }
+  .card:hover .card__num { color: rgba(1, 0, 65, .08); transform: translateY(-6px) scale(1.04); }
+}
 
 /* ==========================================================================
    CTA band
    Whole composition scales with the container (--u = 1 px at 1392 px wide)
    ========================================================================== */
-.cta { container-type: inline-size; margin: 0 var(--frame); }
+.cta { container-type: inline-size; margin: calc(76 * var(--sp)) var(--frame) 0; }
 .cta__band {
   --u: min(calc(100cqw / 1392), 1.08px);
   --nx: 0; --ny: 0;
@@ -400,7 +376,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 }
 .cta__band::before {
   z-index: -2;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 .5H80M.5 0V80' stroke='%23e7a620' fill='none'/%3E%3Cpath d='M0 40.5H80M40.5 0V80' stroke='%23e7a620' stroke-dasharray='2 3' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 .5H80M.5 0V80' stroke='%23d59700' fill='none'/%3E%3Cpath d='M0 40.5H80M40.5 0V80' stroke='%23d59700' stroke-dasharray='2 3' fill='none'/%3E%3C/svg%3E");
 }
 .cta__band::after {
   z-index: -1;
@@ -433,30 +409,91 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
 
 /* ==========================================================================
-   Shared bits for the lower sections
+   Surface textures shared by the dark sections (all measured from the Figma render)
+   --dots-*   4 × 4 px squares on a 24 px pitch, white at 10 % (navy) / 5 % (Werkwijze card)
+   --grid     80 px grid: 2 px solid lines + a 3 on / 3 off dotted line halfway, white at 10 %.
+              The tile is 240 px so the dashes stay in phase; it holds 3 × 3 cells.
+   --grain    the blue speckle Figma puts on the navy and the Werkwijze card: rgb(0,0,90) on about half the
+              pixels, `lighten`-blended (so red and green are untouched). Measured: it lifts blue to ~46 even
+              where the dark pool underneath is black, and the two sections match to within 1 level.
    ========================================================================== */
-.tag--light { border-color: rgba(255, 255, 255, .3); color: #fff; }
-.eyebrow {
-  display: inline-flex; align-items: center; padding: 10px 12px;
-  border: 1px solid var(--darkblue); border-radius: 1000px;
-  font-size: 13px; line-height: 1.5; letter-spacing: .04em; color: var(--darkblue);
+:root {
+  --dots-10: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect x='10' y='10' width='4' height='4' fill='%23fff' fill-opacity='.1'/%3E%3C/svg%3E");
+  --dots-05: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect x='10' y='10' width='4' height='4' fill='%23fff' fill-opacity='.05'/%3E%3C/svg%3E");
+  --grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' fill='none' stroke='%23fff' stroke-opacity='.1' stroke-width='2'%3E%3Cpath d='M1 0V240M81 0V240M161 0V240M0 1H240M0 81H240M0 161H240'/%3E%3Cpath d='M42 0V240M122 0V240M202 0V240M0 42H240M0 122H240M0 202H240' stroke-dasharray='3 3'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g' x='-10%25' y='-10%25' width='120%25' height='120%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/%3E%3CfeColorMatrix type='luminanceToAlpha'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='24' intercept='-11.5'/%3E%3C/feComponentTransfer%3E%3CfeGaussianBlur stdDeviation='.5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 .353 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+.grain::after {                                       /* above the section's own background, below everything inside it */
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grain); mix-blend-mode: lighten;
 }
 
 /* ==========================================================================
-   Werkwijze
+   De ingrediënten (navy)
+   A half-visible tick dial sits on the left page edge with a yellow plane outline inside it. Everything
+   inside .dial is measured from its centre (Figma: x 0, y 532 of the 942 px section) and scaled as one.
+   ========================================================================== */
+.ing {
+  --ds: 1;                                          /* dial scale, stepped down on narrower screens */
+  position: relative; isolation: isolate; overflow: clip;
+  min-height: 942px; padding: 168px 24px 0;
+  background-color: var(--darkblue);
+  background-image: radial-gradient(ellipse 851px 557px at 50% 98.5%, #000 0%, rgba(0, 0, 0, 0) 100%), var(--dots-10);
+  background-size: auto, 24px 24px;
+  background-position: 0 0, 12px 3px;               /* dot centres land on x = 24n, y = 15 + 24n */
+}
+.ing__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.h-ing {
+  max-width: 10.4em; text-align: center; color: #fff;   /* wraps after "voor", as drawn (723 px at 70 px) */
+  font-size: clamp(2.5rem, 4.86vw, 4.375rem);       /* 70 px */
+  font-weight: 500; line-height: 1.1; letter-spacing: -.02em;
+}
+.ing__step { width: min(366px, 100%); margin-top: calc(137 * var(--sp)); }
+.ing__name {
+  font-size: clamp(1.75rem, 2.43vw, 2.1875rem);     /* 35 px */
+  font-weight: 500; line-height: 1.2; color: var(--yellow);
+}
+.ing__text { max-width: 346px; margin-top: 16px; font-size: 18px; line-height: 1.6; color: #fff; }
+
+.dial { position: absolute; z-index: 0; left: 0; top: 532px; width: 0; height: 0; scale: var(--ds); transform-origin: 0 0; pointer-events: none; }
+.dial__ring { position: absolute; left: 0; top: 0; }
+/* One tick = a 68 × 592 box through the centre, rotated 6° per step; the two pills sit at its ends */
+.tick { position: absolute; left: -34px; top: -296px; width: 68px; height: 592px; transform: rotate(calc(var(--k) * -6deg)); }
+.tick::before, .tick::after { content: ""; position: absolute; left: 32px; width: 4px; height: 23px; border-radius: 100px; background: #fff; }
+.tick::before { top: 8px; }
+.tick::after { bottom: 8px; }
+.tick--mark { background: url("../assets/svg/dial-marker.svg") 0 0 / 100% 100% no-repeat; }   /* triangles pointing at the centre */
+.tick--mark::before, .tick--mark::after { display: none; }
+.dial__plane { position: absolute; left: -143.5px; top: -190.6px; width: 287px; height: 376.715px; max-width: none; }
+.dial__label {
+  position: absolute; left: 215px; top: -22px;
+  font-size: 36px; font-weight: 500; line-height: 1.06; letter-spacing: -.03em; color: var(--yellow);
+}
+
+/* Entrance: the ring turns into place while the outline is drawn in from the bottom */
+.motion .dial__ring { rotate: -24deg; transition: rotate 2.6s var(--ease-out) .1s; }
+.motion .dial.is-in .dial__ring { rotate: 0deg; }
+.motion .dial__plane { clip-path: inset(100% 0 0 0); transition: clip-path 1.8s var(--ease-in-out) .5s; }
+.motion .dial.is-in .dial__plane { clip-path: inset(0); }
+
+/* ==========================================================================
+   Werkwijze: inset card, 226 px of white above it
    ========================================================================== */
 @property --reveal { syntax: "<percentage>"; inherits: true; initial-value: 0%; }
 @keyframes sweep { to { --reveal: 112%; } }
 
 .way {
-  position: relative; isolation: isolate; margin-top: 150px;
-  padding: 123px var(--col) 140px; background: var(--darkblue); color: #fff;
+  position: relative; isolation: isolate; overflow: hidden;
+  margin: calc(226 * var(--sp)) var(--frame) 0;
+  padding: 141px calc(var(--col) - var(--frame)) 143px;   /* --col is measured from the page edge, the card starts 16 px in */
+  border-radius: 24px; color: #fff;
+  background-color: var(--darkgrey);
+  background-image: radial-gradient(ellipse 823px 360px at 50% 98.5%, #000 0%, rgba(0, 0, 0, 0) 100%), var(--dots-05);
+  background-size: auto, 24px 24px;
+  background-position: 0 0, 12px 5px;               /* dot centres land on x = 24n, y = 17 + 24n */
 }
-.way::before {                              /* soft black pool at the bottom centre */
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse 851px 376px at 50% 98.5%, #000 0%, rgba(0, 0, 0, 0) 100%);
-}
-.way__title { max-width: 1014px; margin: 13px 0 65px; color: #fff; }
+.way__inner { position: relative; z-index: 1; }
+.way__title { max-width: 1014px; margin: 0 auto 64px; text-align: center; color: #fff; }
 
 .ruler { position: relative; height: 32px; }
 .ruler__img { display: block; width: 100.17%; max-width: none; height: 32px; }   /* asset is 1172 px in a 1170 px track */
@@ -479,75 +516,53 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .step__text { max-width: 255px; margin-top: 8px; font-size: 16px; line-height: 1.5; color: #fff; }
 
 /* ==========================================================================
-   Wat we maken – bento grid
-   Figma 1786:476. Six navy tiles on a 3-column grid (282 : 321 : 345, rows 257 / 208 / 229, 12 px gaps).
-   Each tile carries a title and a wireframe slot: a 2 px hairline frame inset 16 px from the tile edge,
-   drawn over an 80 px grid (solid every 80, dotted halfway). Replace .tile__media with a real
-   screenshot / mockup when one exists.
+   Ons team
+   Navy with a blurred light streak (team-bg.webp, Figma's own render of the background at 1439 px, centred,
+   stretched on wider screens) and the 80 px grid on top. Portraits sit on a 439.33 px pitch: the grid is 1232 px wide at 1440 and
+   deliberately runs past the text column, as drawn.
    ========================================================================== */
-.kinds { padding: 72px var(--col); background: var(--white); }
-
-.bento {
-  display: grid; gap: 12px; margin-top: 26px;
-  grid-template-columns: minmax(0, 282fr) minmax(0, 321fr) minmax(0, 345fr);
-  grid-template-rows: 257px 208px 229px;
+.team {
+  position: relative; isolation: isolate; overflow: clip;
+  margin-top: calc(183 * var(--sp)); padding: 96px var(--col) 70px;
+  background-color: var(--darkblue); color: #fff;
 }
-.tile--portal { grid-column: 1 / 3; grid-row: 1; }
-.tile--dash   { grid-column: 3;     grid-row: 1; }
-.tile--hub    { grid-column: 1;     grid-row: 2 / 4; }
-.tile--web    { grid-column: 2;     grid-row: 2; }
-.tile--api    { grid-column: 3;     grid-row: 2 / 4; }
-.tile--ai     { grid-column: 2;     grid-row: 3; }
-
-.tile {
-  --gap: 12px;                                 /* title → wireframe slot, as drawn per tile in Figma */
-  position: relative; display: flex; flex-direction: column; min-width: 0;
-  padding: 24px 24px 16px; border-radius: 24px;
-  background: var(--darkgrey); color: #fff;
+.team__bg {
+  position: absolute; z-index: -2; top: 9px; left: 50%;
+  width: max(1439px, 100%); height: 1126px; max-width: none; translate: -50% 0;
 }
-.tile--hub, .tile--api { --gap: 40px; }
-.tile--web { --gap: 8px; }
-.tile--ai  { --gap: 18px; }
-.tile__title { font-size: 25px; font-weight: 600; line-height: 1.3; }
-
-.tile__media {
-  --line: rgba(255, 255, 255, .2);
-  position: relative; flex: 1; overflow: hidden;
-  margin: var(--gap) -8px 0;                   /* 16 px from the tile edge, 8 px outside the title's inset */
-  border: 2px solid var(--line); border-radius: 8px;
-  background:                                  /* solid lines every 80 px, measured from the frame's outer edge */
-    linear-gradient(to right,  transparent 78px, var(--line) 78px 80px) 0 0 / 80px 80px,
-    linear-gradient(to bottom, transparent 78px, var(--line) 78px 80px) 0 0 / 80px 80px;
-  background-clip: padding-box;                /* keep the grid out from under the border, or it doubles up */
+.team::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grid) 27px 42px / 240px 240px;
 }
-.tile__media::before, .tile__media::after { content: ""; position: absolute; inset: 0; }
-.tile__media::before {                         /* dotted verticals, halfway between the solid ones */
-  background: linear-gradient(to right, transparent 39px, var(--line) 39px 41px, transparent 41px) 0 0 / 80px 100%;
-  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 6px);
-          mask-image: repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 6px);
-}
-.tile__media::after {                          /* dotted horizontals */
-  background: linear-gradient(to bottom, transparent 39px, var(--line) 39px 41px, transparent 41px) 0 0 / 100% 80px;
-  -webkit-mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 6px);
-          mask-image: repeating-linear-gradient(to right, #000 0 3px, transparent 3px 6px);
-}
+.team__inner { display: flex; flex-direction: column; gap: 81px; }
 
-/* Klantportalen: the slot sits beside the title and runs the full height of the tile */
-.tile--portal .tile__media { position: absolute; inset: 16px 16px 16px auto; width: 59%; margin: 0; }
+.team__intro { display: grid; grid-template-columns: 1fr 1fr; column-gap: 27px; align-items: start; padding-top: 7px; }
+.team__intro .h-section { max-width: none; color: #fff; }
+.team__copy { font-size: 17px; line-height: 1.65; letter-spacing: -.02em; }
+.team__copy p + p { margin-top: 1.65em; }
+.team__copy b { font-weight: 700; }
 
-/* Entrance: the grid fades in just after its tile rises (only when motion is allowed) */
-.motion .tile__media { opacity: 0; }
-.motion .tile.is-in .tile__media { opacity: 1; transition: opacity 1.2s ease calc(.3s + var(--i, 0) * .1s); }
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 86px; width: calc(100% + 74px); }
+.person { display: flex; flex-direction: column; align-items: flex-start; }
+.person__photo {
+  width: min(256px, 100%); aspect-ratio: 1; margin-bottom: 24px;
+  overflow: hidden; border-radius: 8px; background: #d4d4d4;
+}
+.person__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease-out); }
+.person__name { font-size: 18px; font-weight: 600; line-height: 1.3; }
+.person__role { margin-top: 3px; font-size: 14px; line-height: 1.5; opacity: .7; }
+@media (hover: hover) { .person:hover .person__photo img { transform: scale(1.05); } }
 
 /* ==========================================================================
    Placeholders (temporary – replaced once the real designs exist)
    ========================================================================== */
 .ph {
   position: relative; display: grid; place-items: center;
-  margin: 64px var(--frame) 0; aspect-ratio: 1392 / 599; border-radius: 8px;
+  margin: 0 var(--frame); aspect-ratio: 1392 / 599; border-radius: 8px;
   background: radial-gradient(ellipse 78.5% 78.5% at 50% 50%, #737373 27.4%, #737373 70.3%, #5c5c5c 85.2%, #454444 100%);
 }
-.ph--short { aspect-ratio: 1392 / 304; }
+.ph--testimonials { margin-top: calc(212 * var(--sp)); }
+.ph--blog { margin-top: calc(114 * var(--sp)); aspect-ratio: 1392 / 497; }
 .ph__x { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
 .ph__label {
   position: relative; text-align: center; white-space: nowrap;
@@ -557,7 +572,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 /* ==========================================================================
    Veelgestelde vragen
    ========================================================================== */
-.faq { padding: 114px var(--col) 150px; background: var(--white); }
+.faq { margin-top: calc(115 * var(--sp)); padding: calc(173 * var(--sp)) var(--col); background: #f7f7f7; }
 .faq__title { max-width: none; margin: 0 0 56px; }
 
 .faq__list { position: relative; }
@@ -610,11 +625,20 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 /* ==========================================================================
    Footer
    ========================================================================== */
-.footer { margin-top: 64px; padding: 120px var(--col); background: var(--darkgrey); color: #fff; }
+.footer {
+  --col: max(calc(var(--frame) + var(--gutter)), calc(50% - 585px));   /* the footer keeps its own 1170 px frame (x 135) */
+  position: relative; isolation: isolate; overflow: clip;
+  min-height: 867px; margin-top: calc(37 * var(--sp)); padding: 120px var(--col); background: var(--darkgrey); color: #fff;
+}
+/* The fuselage runs along the bottom edge: 2781 px wide, centred 66 px right of the page centre as drawn, behind the links */
+.footer__plane {
+  position: absolute; z-index: -1; bottom: -1px; left: calc(50% - 1324px);
+  width: 2781px; max-width: none; height: auto; pointer-events: none;
+}
 .footer__inner { display: flex; justify-content: space-between; gap: 48px; min-height: 388px; }
 .footer__intro { display: flex; flex-direction: column; align-items: flex-start; max-width: 474px; }
 .footer__logo { width: 145.268px; height: 14.36px; margin-bottom: 22px; }
-.footer__title { margin-bottom: 48px; color: #fff; }
+.footer__title { margin-bottom: 48px; color: var(--yellow); }
 
 .totop { display: inline-flex; align-items: center; gap: 13px; margin-top: auto; font-size: 25px; font-weight: 600; line-height: 1.3; }
 .totop__btn {
@@ -646,14 +670,16 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .nav__panel { display: none !important; }
 }
 
-/* Bento: two columns once the 3-column grid gets too narrow for the titles */
-@media (max-width: 1080px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: auto; }
-  .tile { --gap: 16px; min-height: 300px; }   /* the per-tile gaps are drawn for the 3-column layout only */
-  .tile--dash, .tile--hub, .tile--web, .tile--api { grid-column: auto; grid-row: auto; }
-  .tile--portal, .tile--ai { grid-column: 1 / -1; grid-row: auto; }
-  .tile__media { min-height: 150px; }
-  .tile--portal .tile__media { position: relative; inset: auto; width: auto; margin: var(--gap) -8px 0; }
+/* The dial shrinks about its centre as the viewport narrows, so it keeps clear of the centred headline */
+@media (max-width: 1280px) { .ing { --ds: .86; } }
+@media (max-width: 1100px) {
+  .ing { --ds: .72; }
+  .people { width: auto; }                           /* the 74 px overhang only fits on the wide column */
+}
+
+/* Team: the 3-column grid needs 256 px portraits; below this it goes to two columns */
+@media (max-width: 980px) {
+  .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 32px; width: auto; }
 }
 
 @media (max-width: 900px) {
@@ -692,22 +718,23 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .nav__panel .nav__panel-cta .btn__label { color: inherit; }
 
   /* hero → stacked */
-  .hero { --plane-h: min(300px, 66vw); min-height: 0; }
-  .hero__inner { padding: 24px var(--col) calc(var(--plane-h) + 32px); }
+  .hero { --pw: min(120vw, 720px); min-height: 0; }
+  .hero__inner { padding: 24px var(--hero-x) calc(var(--pw) * .511 + 24px); }   /* room for the plane (aspect 2400 : 1227) */
   .hero__body { margin-top: 56px; max-width: none; gap: 24px; }
-  .hero__plane { top: auto; bottom: 0; width: min(66vw, 460px); }
+  .promises { width: auto; flex-direction: column; gap: 20px; padding-top: 40px; }
+  .hero__plane { top: auto; bottom: 0; right: calc(var(--pw) * -.3); }
   .pill { border-radius: 22px; }
 
   /* sections */
-  .usp { padding-top: 72px; }
-  .usp__list { grid-template-columns: 1fr; padding: 0; }
-  .usp__item { min-height: 0; padding: 32px 0 32px 24px; }
-  .usp__item::before { top: 0; bottom: 0; }
-  .usp__item:last-child::after { display: none; }
-  .usp__num { margin-bottom: 28px; }
+  .cards { grid-template-columns: 1fr; gap: 20px; }
+  .card__num { padding: 0 16px; font-size: clamp(88px, 24vw, 128px); }
+  .card__title { min-height: 72px; padding: 20px; }
+  .card__text { padding: 20px; }
 
-  .what { padding-top: 72px; }
-  .cards { grid-template-columns: 1fr; --cell: 104px; }
+  /* the dial drops below the copy and stays half-hidden at the left edge */
+  .ing { --ds: .6; min-height: 0; padding: 72px 20px calc(596px * var(--ds) + 72px); }
+  .dial { top: auto; bottom: calc(298px * var(--ds) + 36px); }
+  .ing__step { margin-top: 40px; }
 
   /* CTA → stacked, people below the copy */
   .cta__band { --u: 1px; --v: min(calc(100cqw / 640), 1.05px); display: block; min-height: 0; padding: 48px var(--gutter) var(--gutter); }
@@ -721,7 +748,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
 
   /* Werkwijze → stacked; each step carries its own slice of the ruler */
-  .way { margin-top: 96px; padding: 72px var(--col) 80px; }
+  .way { padding: 72px calc(var(--col) - var(--frame)) 80px; border-radius: 20px; }
   .way__title { margin-bottom: 40px; }
   .ruler { display: none; }
   .steps { grid-template-columns: 1fr; gap: 44px; margin-top: 0; }
@@ -734,16 +761,20 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .step:nth-child(3) { --at: 809px; }
   .step__title { margin-top: 24px; }
 
-  /* Wat we maken / placeholders / FAQ */
-  .kinds { padding: 72px var(--frame); }
-  .ph { margin: 40px var(--frame) 0; aspect-ratio: auto; height: clamp(200px, 52vw, 420px); }
-  .ph--short { height: clamp(160px, 30vw, 260px); }
+  /* Team / placeholders / FAQ */
+  .team { padding: 72px var(--col) 56px; }
+  .team__bg { top: 0; width: 100%; height: 100%; object-fit: cover; }   /* the section is taller than the 1126 px render: cover it instead */
+  .team__inner { gap: 56px; }
+  .team__intro { grid-template-columns: 1fr; row-gap: 24px; }
+  .ph { aspect-ratio: auto; height: clamp(200px, 52vw, 420px); }
+  .ph--blog { height: clamp(170px, 40vw, 340px); }
   .faq { padding: 72px var(--col) 96px; }
   .faq__title { margin-bottom: 36px; }
   .faq__a-in p { padding-right: 0; }
 
   /* footer */
-  .footer { margin-top: 56px; padding: 72px var(--col); }
+  .footer { min-height: 0; padding: 72px var(--col) 320px; }
+  .footer__plane { width: 1600px; left: calc(50% - 760px); }
   .footer__inner { flex-direction: column; gap: 56px; min-height: 0; }
   .footer__cols { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 40px 24px; }
   .footer__title { margin-bottom: 56px; }
@@ -753,9 +784,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .nav { padding-right: 12px; }
   .nav__cta { display: none; }
   .nav__brand { padding: 0 20px; }
-  .card__text { max-width: none; }
-  .bento { grid-template-columns: minmax(0, 1fr); }
-  .bento > .tile { grid-column: 1 / -1; }
+  .people { gap: 40px 16px; }
   .hero__actions .btn { flex: 1 1 auto; justify-content: center; }
   .totop { font-size: 22px; }
 }
