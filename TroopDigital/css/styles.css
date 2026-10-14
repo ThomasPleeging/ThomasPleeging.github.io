@@ -315,8 +315,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   --line: #c5c5c5;
   position: relative; overflow: hidden;
   display: grid; grid-template-columns: auto 1fr; min-height: 208px;
-  background: #e6e6e6; border: 1px solid #c5c4ca; border-radius: 16px;
-  transition: background-color .5s ease;
+  border: 1px solid #c5c4ca; border-radius: 16px;
 }
 /* The big digit is outline only. Its cell is as wide as the glyph + 24 px each side, so "1" and "2" differ. */
 .card__num {
@@ -347,7 +346,6 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   transition: color .6s ease, transform .8s var(--ease-out), opacity 1s var(--ease-out) calc(var(--i, 0) * .12s + .3s), translate 1.2s var(--ease-out) calc(var(--i, 0) * .12s + .3s); }
 .motion .card.is-in .card__num { opacity: 1; translate: 0 0; }
 @media (hover: hover) {
-  .card:hover { background: #e0e0e0; }
   .card:hover .card__num { color: rgba(1, 0, 65, .08); transform: translateY(-6px) scale(1.04); }
 }
 
@@ -430,51 +428,84 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
 /* ==========================================================================
    De ingrediënten (navy)
-   A half-visible tick dial sits on the left page edge with a yellow plane outline inside it. Everything
-   inside .dial is measured from its centre (Figma: x 0, y 532 of the 942 px section) and scaled as one.
+   A half-visible tick dial sits on the left page edge. Everything
+   inside .dial is measured from its centre (Figma: x 0, y 532 of the 942 px stage) and scaled as one.
+
+   Scroll story: .ing is a tall track and .ing__stage sticks inside it (.is-pinned, set by js whenever the
+   stage fits the viewport). js writes --s on .ing (0…2: the step, eased through detents so the dial rests
+   on a step) and --d / --o (distance from, and visibility of, a step) on every .ing__step and .dial__no.
+   Not pinned (no js, reduced motion, short viewport): the three steps stack and nothing sticks.
    ========================================================================== */
 .ing {
   --ds: 1;                                          /* dial scale, stepped down on narrower screens */
+  --count: 3;                                       /* steps */
+  --stage-h: max(560px, calc(100svh - var(--nav-h)));   /* what is left under the nav */
+  --run: clamp(420px, 70svh, 760px);                /* scroll spent on each step change */
+  position: relative; background-color: var(--darkblue);
+}
+.ing.is-pinned { height: calc(var(--stage-h) + (var(--count) - 1) * var(--run)); }
+.ing__stage {
   position: relative; isolation: isolate; overflow: clip;
-  min-height: 942px; padding: 168px 24px 0;
+  min-height: 942px; padding: 168px 24px 120px;
   background-color: var(--darkblue);
   background-image: radial-gradient(ellipse 851px 557px at 50% 98.5%, #000 0%, rgba(0, 0, 0, 0) 100%), var(--dots-10);
   background-size: auto, 24px 24px;
   background-position: 0 0, 12px 3px;               /* dot centres land on x = 24n, y = 15 + 24n */
 }
+.ing.is-pinned .ing__stage {
+  position: sticky; top: var(--nav-h);
+  height: var(--stage-h); min-height: 0;
+  padding: calc(var(--stage-h) * .178) 24px 0;      /* 168 of 942 */
+}
 .ing__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
 .h-ing {
-  max-width: 10.4em; text-align: center; color: #fff;   /* wraps after "voor", as drawn (723 px at 70 px) */
-  font-size: clamp(2.5rem, 4.86vw, 4.375rem);       /* 70 px */
+  max-width: 10.4em; text-align: center; color: #fff;   /* wraps after "voor" */
+  font-size: clamp(2rem, 3.75vw, 3.375rem);         /* 54 px */
   font-weight: 500; line-height: 1.1; letter-spacing: -.02em;
 }
-.ing__step { width: min(366px, 100%); margin-top: calc(137 * var(--sp)); }
+
+/* The steps: stacked in a column, or (pinned) laid over each other in one grid cell and cross-faded */
+.ing__steps { display: flex; flex-direction: column; gap: 56px; width: min(366px, 100%); margin-top: calc(137 * var(--sp)); }
+.ing__no { display: block; margin-bottom: 12px; font-size: 18px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; color: var(--yellow); }
 .ing__name {
   font-size: clamp(1.75rem, 2.43vw, 2.1875rem);     /* 35 px */
   font-weight: 500; line-height: 1.2; color: var(--yellow);
 }
 .ing__text { max-width: 346px; margin-top: 16px; font-size: 18px; line-height: 1.6; color: #fff; }
 
+.ing.is-pinned .ing__steps { display: grid; gap: 0; margin-top: min(calc(137 * var(--sp)), calc(var(--stage-h) * .145)); }
+.ing.is-pinned .ing__step {
+  grid-area: 1 / 1;
+  opacity: var(--o, 0);                             /* leaving steps rise, arriving steps come up from below */
+  translate: 0 calc(var(--d, -1) * -56px);
+}
+.ing.is-pinned .ing__step:first-child { --o: 1; --d: 0; }
+.ing.is-pinned .ing__no { display: none; }          /* the dial carries the number */
+
 .dial { position: absolute; z-index: 0; left: 0; top: 532px; width: 0; height: 0; scale: var(--ds); transform-origin: 0 0; pointer-events: none; }
-.dial__ring { position: absolute; left: 0; top: 0; }
+.ing.is-pinned .dial { top: 56.5%; }                /* 532 of 942 */
+.dial__ring { position: absolute; left: 0; top: 0; transform: rotate(calc(var(--s, 0) * -60deg)); }   /* 60° per step, anticlockwise: the face on the right travels up */
+.ing.is-pinned .dial__ring { will-change: transform; }
 /* One tick = a 68 × 592 box through the centre, rotated 6° per step; the two pills sit at its ends */
 .tick { position: absolute; left: -34px; top: -296px; width: 68px; height: 592px; transform: rotate(calc(var(--k) * -6deg)); }
-.tick::before, .tick::after { content: ""; position: absolute; left: 32px; width: 4px; height: 23px; border-radius: 100px; background: #fff; }
+.tick::before, .tick::after { content: ""; position: absolute; left: 33px; width: 2px; height: 8px; border-radius: 100px; background: #fff; }
 .tick::before { top: 8px; }
 .tick::after { bottom: 8px; }
 .tick--mark { background: url("../assets/svg/dial-marker.svg") 0 0 / 100% 100% no-repeat; }   /* triangles pointing at the centre */
 .tick--mark::before, .tick--mark::after { display: none; }
-.dial__plane { position: absolute; left: -143.5px; top: -190.6px; width: 287px; height: 376.715px; max-width: none; }
+
+/* The number beside the active marker is a three-digit reel behind a window; it rolls with the dial */
 .dial__label {
-  position: absolute; left: 215px; top: -22px;
+  position: absolute; left: 215px; top: -22px; display: none; width: 56px; height: 38px; overflow: clip;
   font-size: 36px; font-weight: 500; line-height: 1.06; letter-spacing: -.03em; color: var(--yellow);
 }
+.ing.is-pinned .dial__label { display: block; }
+.dial__no { position: absolute; left: 0; top: 0; translate: 0 calc(var(--d, -1) * -100%); }
+.dial__no:first-child { --d: 0; }
 
-/* Entrance: the ring turns into place while the outline is drawn in from the bottom */
+/* Entrance: the ring turns into place */
 .motion .dial__ring { rotate: -24deg; transition: rotate 2.6s var(--ease-out) .1s; }
 .motion .dial.is-in .dial__ring { rotate: 0deg; }
-.motion .dial__plane { clip-path: inset(100% 0 0 0); transition: clip-path 1.8s var(--ease-in-out) .5s; }
-.motion .dial.is-in .dial__plane { clip-path: inset(0); }
 
 /* ==========================================================================
    Werkwijze: inset card, 226 px of white above it
@@ -517,8 +548,8 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
 /* ==========================================================================
    Ons team
-   Navy with a blurred light streak (team-bg.webp, Figma's own render of the background at 1439 px, centred,
-   stretched on wider screens) and the 80 px grid on top. Portraits sit on a 439.33 px pitch: the grid is 1232 px wide at 1440 and
+   Navy with a blurred light streak (team-bg.webp, Figma's own render of the background at 1439 px, centred and
+   cropped to cover the section) and the 80 px grid on top. Portraits sit on a 439.33 px pitch: the grid is 1232 px wide at 1440 and
    deliberately runs past the text column, as drawn.
    ========================================================================== */
 .team {
@@ -527,8 +558,9 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   background-color: var(--darkblue); color: #fff;
 }
 .team__bg {
-  position: absolute; z-index: -2; top: 9px; left: 50%;
-  width: max(1439px, 100%); height: 1126px; max-width: none; translate: -50% 0;
+  position: absolute; z-index: -2; top: 0; left: 50%;
+  width: max(1439px, 100%); height: 100%; max-width: none; translate: -50% 0;
+  object-fit: cover;                       /* runs to the bottom edge however tall the section gets */
 }
 .team::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -562,7 +594,6 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   background: radial-gradient(ellipse 78.5% 78.5% at 50% 50%, #737373 27.4%, #737373 70.3%, #5c5c5c 85.2%, #454444 100%);
 }
 .ph--testimonials { margin-top: calc(212 * var(--sp)); }
-.ph--blog { margin-top: calc(114 * var(--sp)); aspect-ratio: 1392 / 497; }
 .ph__x { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
 .ph__label {
   position: relative; text-align: center; white-space: nowrap;
@@ -608,7 +639,6 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .faq__icon img { position: relative; width: 23px; height: 23px; transition: transform .7s var(--ease-out); }
 .faq__item.is-open .faq__icon::before { transform: scale(1); }
 .faq__item.is-open .faq__icon img { transform: rotate(135deg); }
-@media (hover: hover) { .faq__btn:hover .faq__icon::before { transform: scale(1); } }
 
 /* Height animates via grid rows; closed content is hidden from focus and screen readers */
 .faq__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease-out); }
@@ -621,6 +651,64 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   opacity: 0; translate: 0 -10px; transition: opacity .35s ease, translate .6s var(--ease-out);
 }
 .faq__item.is-open .faq__a-in p { opacity: 1; translate: 0 0; transition-delay: .12s; }
+
+/* ==========================================================================
+   Blog: three outlined tiles (image on top, tag / title / author + date below) and a "more" button.
+   The whole tile is the link (the title's ::after covers it); author and date always sit on the bottom edge.
+   ========================================================================== */
+.blog {
+  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "title more" "posts posts";
+  align-items: end; gap: 56px 24px;
+  padding: calc(114 * var(--sp)) var(--col) 0;
+}
+.blog__title { grid-area: title; max-width: none; }
+.blog__more { grid-area: more; }
+
+.posts { grid-area: posts; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 33px; }
+.post {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid #c5c4ca; border-radius: 16px;
+  transition: border-color .4s ease;
+}
+/* No photos: a solid page colour with a faint pattern borrowed from the section it echoes
+   (navy + the Ingrediënten dots, yellow + the CTA grid, the team streak's blue + a fine diagonal) */
+.post__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid #c5c4ca; }
+.post__media::before {
+  content: ""; position: absolute; inset: 0;
+  transition: transform .9s var(--ease-out);
+}
+.post__media--navy { background: var(--darkblue); }
+.post__media--navy::before { background: var(--dots-10) 12px 12px / 24px 24px; }
+.post__media--yellow { background: var(--yellow); }
+.post__media--yellow::before {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 .5H40M.5 0V40' stroke='%23010041' stroke-opacity='.12' fill='none'/%3E%3Cpath d='M0 20.5H40M20.5 0V40' stroke='%23010041' stroke-opacity='.12' stroke-dasharray='2 3' fill='none'/%3E%3C/svg%3E") 0 0 / 40px 40px;
+}
+.post__media--blue { background: #78a0b0; }
+.post__media--blue::before {
+  background: repeating-linear-gradient(-45deg, rgba(1, 0, 65, .1) 0 1px, transparent 1px 10px);
+}
+.post__body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; padding: 24px; }
+.post__tag {
+  padding: 5px 11px; border: 1px solid rgba(1, 0, 65, .2); border-radius: 100px;
+  font-size: 13px; line-height: 1.3; letter-spacing: .04em; color: var(--darkblue);
+}
+.post__title {
+  margin-top: 16px; text-wrap: balance;
+  font-size: clamp(1.25rem, 1.05rem + .55vw, 1.5rem); font-weight: 500; line-height: 1.3; letter-spacing: -.01em; color: var(--darkblue);
+}
+.post__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.post__link:focus-visible { outline: none; }
+.post:has(.post__link:focus-visible) { outline: 2px solid var(--darkblue); outline-offset: 3px; }
+.post__meta {
+  display: flex; justify-content: space-between; gap: 12px; width: 100%;
+  margin-top: auto; padding-top: 32px;
+  font-size: 14px; line-height: 1.5; color: #6b6b6b;
+}
+.post__meta span { font-weight: 500; color: var(--darkblue); }
+@media (hover: hover) {
+  .post:hover { border-color: rgba(1, 0, 65, .45); }
+  .post:hover .post__media::before { transform: scale(1.06); }
+}
 
 /* ==========================================================================
    Footer
@@ -731,10 +819,11 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .card__title { min-height: 72px; padding: 20px; }
   .card__text { padding: 20px; }
 
-  /* the dial drops below the copy and stays half-hidden at the left edge */
-  .ing { --ds: .6; min-height: 0; padding: 72px 20px calc(596px * var(--ds) + 72px); }
-  .dial { top: auto; bottom: calc(298px * var(--ds) + 36px); }
-  .ing__step { margin-top: 40px; }
+  /* the dial drops below the copy: centred 84 px above the stage's lower edge, so only its upper part shows */
+  .ing { --ds: .5; }
+  .ing__stage, .ing.is-pinned .ing__stage { min-height: 0; padding: 64px 20px calc(296px * var(--ds) + 108px); }
+  .ing .dial, .ing.is-pinned .dial { top: auto; bottom: 84px; }
+  .ing__steps, .ing.is-pinned .ing__steps { margin-top: 40px; }
 
   /* CTA → stacked, people below the copy */
   .cta__band { --u: 1px; --v: min(calc(100cqw / 640), 1.05px); display: block; min-height: 0; padding: 48px var(--gutter) var(--gutter); }
@@ -763,14 +852,21 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
   /* Team / placeholders / FAQ */
   .team { padding: 72px var(--col) 56px; }
-  .team__bg { top: 0; width: 100%; height: 100%; object-fit: cover; }   /* the section is taller than the 1126 px render: cover it instead */
+  .team__bg { width: 100%; }
   .team__inner { gap: 56px; }
   .team__intro { grid-template-columns: 1fr; row-gap: 24px; }
   .ph { aspect-ratio: auto; height: clamp(200px, 52vw, 420px); }
-  .ph--blog { height: clamp(170px, 40vw, 340px); }
   .faq { padding: 72px var(--col) 96px; }
   .faq__title { margin-bottom: 36px; }
   .faq__a-in p { padding-right: 0; }
+
+  /* blog → one column, the button under the tiles */
+  .blog { grid-template-columns: 1fr; grid-template-areas: "title" "posts" "more"; gap: 36px; padding-top: 72px; }
+  .blog__more { justify-self: start; }
+  .posts { grid-template-columns: 1fr; gap: 20px; }
+  .post__media { aspect-ratio: 16 / 9; }
+  .post__body { padding: 20px; }
+  .post__meta { padding-top: 24px; }
 
   /* footer */
   .footer { min-height: 0; padding: 72px var(--col) 320px; }

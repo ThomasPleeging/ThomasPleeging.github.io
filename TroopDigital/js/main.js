@@ -94,6 +94,99 @@
   update();
 
   /* ---------------------------------------------------------------------
+     3b. De ingrediënten: the stage pins and the dial turns through the steps
+         · .ing is a tall track, .ing__stage sticks inside it; scroll distance → s (0…count-1)
+         · s is eased toward the scroll position (the dial has weight) and then passed through detents:
+           it rests on a step for most of each stretch and turns in the middle, so it never parks halfway
+         · writes --s on .ing, and --d / --o on each step and dial number (see the CSS)
+         Only pins when the stage fits the viewport; otherwise the CSS fallback stacks the steps.
+     --------------------------------------------------------------------- */
+  const ing = $('[data-ing]');
+  if (ing && motion) {
+    const stage = $('.ing__stage', ing);
+    const inner = $('.ing__inner', ing);
+    const items = $$('.ing__step, .dial__no', ing).map(el => ({ el, n: Number(el.style.getPropertyValue('--n')) }));
+    const count = $$('.ing__step', ing).length;
+    const EASE_MS = 110;       // time constant of the follow: bigger = heavier dial
+    const TURN = [0.25, 0.75]; // share of each stretch in which the dial actually turns
+
+    let pinned = false;
+    let run = 1;               // px of scroll per step
+    let navH = 0;
+    let target = 0;
+    let shown = 0;
+    let raf = 0;
+    let lastT = 0;
+    let lastW = 0;
+    let lastH = 0;
+
+    const detent = s => {
+      const i = Math.min(Math.floor(s), count - 2);
+      return i + smoothstep(clamp((s - i - TURN[0]) / (TURN[1] - TURN[0]), 0, 1));
+    };
+
+    const paint = s => {
+      const step = detent(s);
+      ing.style.setProperty('--s', step.toFixed(4));
+      items.forEach(({ el, n }) => {
+        const d = step - n;
+        el.style.setProperty('--d', clamp(d, -1, 1).toFixed(4));
+        el.style.setProperty('--o', (1 - smoothstep(clamp((Math.abs(d) - 0.12) / 0.38, 0, 1))).toFixed(4));
+      });
+    };
+
+    const readTarget = () => {
+      target = clamp((navH - ing.getBoundingClientRect().top) / run, 0, count - 1);
+    };
+
+    const tick = now => {
+      raf = 0;
+      const dt = lastT ? Math.min(now - lastT, 64) : 16;
+      lastT = now;
+      shown += (target - shown) * (1 - Math.exp(-dt / EASE_MS));
+      if (Math.abs(target - shown) < 0.0008) shown = target;
+      paint(shown);
+      if (shown !== target) raf = requestAnimationFrame(tick);
+      else lastT = 0;
+    };
+    const follow = () => {
+      if (!pinned) return;
+      readTarget();
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+
+    // Pin if the stage's content fits the stage and the stage fits under the nav; measured with the
+    // pinned layout switched on, then switched back off if it doesn't.
+    const layout = () => {
+      lastW = window.innerWidth;
+      lastH = window.innerHeight;
+      navH = nav.offsetHeight;
+      ing.classList.add('is-pinned');
+      const need = inner.offsetTop + inner.offsetHeight + parseFloat(getComputedStyle(stage).paddingBottom);
+      pinned = need <= stage.clientHeight + 1 && stage.clientHeight <= lastH - navH + 1;
+      ing.classList.toggle('is-pinned', pinned);
+      cancelAnimationFrame(raf);
+      raf = 0;
+      lastT = 0;
+      if (!pinned) {
+        ['--s', '--d', '--o'].forEach(p => { ing.style.removeProperty(p); items.forEach(({ el }) => el.style.removeProperty(p)); });
+        return;
+      }
+      run = (ing.offsetHeight - stage.offsetHeight) / (count - 1);
+      readTarget();
+      shown = target;                                      // snap: no easing on load or resize
+      paint(shown);
+    };
+
+    layout();
+    fontsReady.then(layout);                               // the headline wraps differently once Brockmann is in
+    window.addEventListener('scroll', follow, { passive: true });
+    window.addEventListener('resize', () => {              // phone toolbars resize the height a little on scroll: ignore that
+      if (window.innerWidth !== lastW || Math.abs(window.innerHeight - lastH) > 120) layout();
+    }, { passive: true });
+  }
+
+  /* ---------------------------------------------------------------------
      4. Pointer-follow grid highlight (hero + CTA) and CTA portrait parallax
      --------------------------------------------------------------------- */
   const followPointer = (host, layer, { parallax = false } = {}) => {

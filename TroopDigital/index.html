@@ -148,51 +148,70 @@
     </section>
 
     <!-- ─────────── De ingrediënten ───────────
-         The dial is decorative. Figma only designs step 01 (Technische fundering); the 60° markers
-         suggest more steps may follow, but there is no copy for them yet. -->
-    <section class="ing grain" id="ingredienten" aria-labelledby="ing-title">
-      <div class="dial" aria-hidden="true" data-reveal>
-        <span class="dial__ring">
-            <i class="tick tick--mark" style="--k:0"></i>
-            <i class="tick" style="--k:1"></i>
-            <i class="tick" style="--k:2"></i>
-            <i class="tick" style="--k:3"></i>
-            <i class="tick" style="--k:4"></i>
-            <i class="tick tick--mark" style="--k:5"></i>
-            <i class="tick" style="--k:6"></i>
-            <i class="tick" style="--k:7"></i>
-            <i class="tick" style="--k:8"></i>
-            <i class="tick" style="--k:9"></i>
-            <i class="tick" style="--k:10"></i>
-            <i class="tick" style="--k:11"></i>
-            <i class="tick" style="--k:12"></i>
-            <i class="tick" style="--k:13"></i>
-            <i class="tick" style="--k:14"></i>
-            <i class="tick tick--mark" style="--k:15"></i>
-            <i class="tick" style="--k:16"></i>
-            <i class="tick" style="--k:17"></i>
-            <i class="tick" style="--k:18"></i>
-            <i class="tick" style="--k:19"></i>
-            <i class="tick" style="--k:20"></i>
-            <i class="tick" style="--k:21"></i>
-            <i class="tick" style="--k:22"></i>
-            <i class="tick" style="--k:23"></i>
-            <i class="tick" style="--k:24"></i>
-            <i class="tick tick--mark" style="--k:25"></i>
-            <i class="tick" style="--k:26"></i>
-            <i class="tick" style="--k:27"></i>
-            <i class="tick" style="--k:28"></i>
-            <i class="tick" style="--k:29"></i>
-        </span>
-        <img class="dial__plane" src="assets/svg/plane-outline.svg" width="287" height="376.715" alt="">
-        <span class="dial__label">01</span>
-      </div>
+         A tall scroll track with a sticky stage in it (js adds .is-pinned): the headline, dial and copy stay
+         put while the dial turns 60° per step. Without js, with reduced motion or on a viewport too short
+         for the stage, the three steps simply stack and nothing is pinned. -->
+    <section class="ing" id="ingredienten" aria-labelledby="ing-title" data-ing>
+      <div class="ing__stage grain">
+        <div class="dial" aria-hidden="true" data-reveal>
+          <span class="dial__ring">
+              <i class="tick" style="--k:0"></i>
+              <i class="tick" style="--k:1"></i>
+              <i class="tick" style="--k:2"></i>
+              <i class="tick" style="--k:3"></i>
+              <i class="tick" style="--k:4"></i>
+              <i class="tick tick--mark" style="--k:5"></i>
+              <i class="tick" style="--k:6"></i>
+              <i class="tick" style="--k:7"></i>
+              <i class="tick" style="--k:8"></i>
+              <i class="tick" style="--k:9"></i>
+              <i class="tick" style="--k:10"></i>
+              <i class="tick" style="--k:11"></i>
+              <i class="tick" style="--k:12"></i>
+              <i class="tick" style="--k:13"></i>
+              <i class="tick" style="--k:14"></i>
+              <i class="tick tick--mark" style="--k:15"></i>
+              <i class="tick" style="--k:16"></i>
+              <i class="tick" style="--k:17"></i>
+              <i class="tick" style="--k:18"></i>
+              <i class="tick" style="--k:19"></i>
+              <i class="tick" style="--k:20"></i>
+              <i class="tick" style="--k:21"></i>
+              <i class="tick" style="--k:22"></i>
+              <i class="tick" style="--k:23"></i>
+              <i class="tick" style="--k:24"></i>
+              <i class="tick tick--mark" style="--k:25"></i>
+              <i class="tick" style="--k:26"></i>
+              <i class="tick" style="--k:27"></i>
+              <i class="tick" style="--k:28"></i>
+              <i class="tick" style="--k:29"></i>
+          </span>
+          <span class="dial__label">
+            <span class="dial__no" style="--n:0">01</span>
+            <span class="dial__no" style="--n:1">02</span>
+            <span class="dial__no" style="--n:2">03</span>
+          </span>
+        </div>
 
-      <div class="ing__inner">
-        <h2 class="h-ing" id="ing-title" data-split>De ingrediënten voor innovatie met succes</h2>
-        <div class="ing__step" data-reveal>
-          <h3 class="ing__name">Technische fundering</h3>
-          <p class="ing__text">Ambities lopen vaak stuk op complexiteit en data. Wij leggen een fundering die meegroeit.</p>
+        <div class="ing__inner">
+          <h2 class="h-ing" id="ing-title" data-split>De ingrediënten voor innovatie met succes</h2>
+          <ol class="ing__steps" data-reveal>
+            <li class="ing__step" style="--n:0">
+              <span class="ing__no" aria-hidden="true">01</span>
+              <h3 class="ing__name">Technische fundering</h3>
+              <p class="ing__text">Ambities lopen vaak stuk op complexiteit en data. Wij leggen een fundering die meegroeit.</p>
+            </li>
+            <li class="ing__step" style="--n:1">
+              <span class="ing__no" aria-hidden="true">02</span>
+              <h3 class="ing__name">Strategische fit</h3>
+              <p class="ing__text">Waarom doen we dit? Wat is het doel, en hoe meten we succes? We maken scherpe keuzes, voor de eerste regel code.</p>
+            </li>
+            <li class="ing__step" style="--n:2">
+              <span class="ing__no" aria-hidden="true">03</span>
+              <h3 class="ing__name">Menselijke betekenis</h3>
+              <p class="ing__text">Verder kijken dan het werkt lekker. Mensen omarmen wat betekenis heeft. Zonder motivatie geen adoptie.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -275,9 +294,9 @@
       </div>
     </section>
 
-    <!-- ═══════════ PLACEHOLDERS ═══════════
-         The two blocks below are layout placeholders (the Figma only holds a grey box for each).
-         Replace each <section class="ph"> as a whole when its design arrives; ids are kept so links keep working. -->
+    <!-- ═══════════ PLACEHOLDER ═══════════
+         Layout placeholder (the Figma only holds a grey box). Replace the <section class="ph"> as a whole
+         when its design arrives; the id is kept so links keep working. -->
 
     <!-- Placeholder: Testimonials -->
     <section class="ph ph--testimonials" id="testimonials" aria-label="Testimonials (placeholder)" data-placeholder data-reveal>
@@ -356,10 +375,45 @@
       </div>
     </section>
 
-    <!-- Placeholder: Blog -->
-    <section class="ph ph--blog" id="blog" aria-label="Blog (placeholder)" data-placeholder data-reveal>
-      <img class="ph__x" src="assets/svg/placeholder-x-blog.svg" alt="" aria-hidden="true">
-      <h2 class="ph__label">Blog</h2>
+    <!-- ─────────── Blog ───────────
+         The three newest posts from troop.digital/kennisbank (copied by hand on 2026-10-14, not fetched live).
+         Each tile links to the article on the current site; the top half is a colour block (see .post__media). -->
+    <section class="blog" id="blog" aria-labelledby="blog-title">
+      <h2 class="h-section blog__title" id="blog-title" data-split>Uit de kennisbank</h2>
+      <a class="btn btn--ghost blog__more" href="https://troop.digital/kennisbank/" data-reveal>
+        <span class="btn__label">Meer artikelen</span>
+        <span class="arrow arrow--ne" aria-hidden="true">
+          <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+          <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+        </span>
+      </a>
+
+      <ul class="posts">
+        <li class="post" data-reveal style="--i:0">
+          <div class="post__media post__media--navy" aria-hidden="true"></div>
+          <div class="post__body">
+            <span class="post__tag">Platform</span>
+            <h3 class="post__title"><a class="post__link" href="https://troop.digital/platform/het-marketplace-model-waar-stuur-je-echt-op/">Het marketplace-model: waar stuur je écht op?</a></h3>
+            <p class="post__meta"><span>Jan Kranendonk</span><time datetime="2026-10-07">7 okt 2026</time></p>
+          </div>
+        </li>
+        <li class="post" data-reveal style="--i:1">
+          <div class="post__media post__media--yellow" aria-hidden="true"></div>
+          <div class="post__body">
+            <span class="post__tag">Software</span>
+            <h3 class="post__title"><a class="post__link" href="https://troop.digital/software/technical-debt-waarom-je-software-je-organisatie-afremt/">Technical debt: waarom je software je organisatie afremt</a></h3>
+            <p class="post__meta"><span>Jesse van Thijn</span><time datetime="2026-09-30">30 sep 2026</time></p>
+          </div>
+        </li>
+        <li class="post" data-reveal style="--i:2">
+          <div class="post__media post__media--blue" aria-hidden="true"></div>
+          <div class="post__body">
+            <span class="post__tag">Platform</span>
+            <h3 class="post__title"><a class="post__link" href="https://troop.digital/platform/wat-kost-een-platform-laten-bouwen/">Wat kost een platform laten bouwen?</a></h3>
+            <p class="post__meta"><span>Jan Kranendonk</span><time datetime="2026-09-22">22 sep 2026</time></p>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- ─────────── Call to action ─────────── -->
