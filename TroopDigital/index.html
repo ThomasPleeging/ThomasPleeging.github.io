@@ -11,7 +11,7 @@
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="tdm-reservation" content="1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fcb523'/%3E%3Cpath d='M7 9h18v4h-7v11h-4V13H7z' fill='%23010041'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fcb523'/%3E%3Cpath d='M7 9h18v4h-7v11h-4V13H7z' fill='%2304026f'/%3E%3C/svg%3E">
 
   <script>
     /* Motion is progressive enhancement: hidden start-states only apply when JS runs and motion is allowed. */
@@ -106,21 +106,6 @@
             <a class="btn btn--ghost" href="#ingredienten"><span class="btn__label">Wat we bouwen</span></a>
           </div>
         </div>
-
-        <ul class="promises" aria-label="Onze drie beloftes">
-          <li class="promise" data-anim style="--d:1s">
-            <strong class="promise__title">Werkende software in weken</strong>
-            <span class="promise__sub">Vaste prijs, geen meerwerk</span>
-          </li>
-          <li class="promise" data-anim style="--d:1.1s">
-            <strong class="promise__title">Strategische en senior bouwers</strong>
-            <span class="promise__sub">Geen tussenlagen</span>
-          </li>
-          <li class="promise" data-anim style="--d:1.2s">
-            <strong class="promise__title">Geen overhead</strong>
-            <span class="promise__sub">Pure snelheid en efficiëntie</span>
-          </li>
-        </ul>
       </div>
     </section>
 
@@ -149,44 +134,43 @@
 
     <!-- ─────────── De ingrediënten ───────────
          A tall scroll track with a sticky stage in it (js adds .is-pinned): the headline, dial and copy stay
-         put while the dial turns 60° per step. Without js, with reduced motion or on a viewport too short
-         for the stage, the three steps simply stack and nothing is pinned. -->
+         put while the dial turns 18° per step, carrying 01 / 02 / 03 round to 3 o'clock, where each number's
+         tick turns into the triangle marker. Without js, with
+         reduced motion or on a viewport too short for the stage, the three steps simply stack and nothing is pinned. -->
     <section class="ing" id="ingredienten" aria-labelledby="ing-title" data-ing>
-      <div class="ing__stage grain">
+      <div class="ing__stage">
         <div class="dial" aria-hidden="true" data-reveal>
           <span class="dial__ring">
-              <i class="tick" style="--k:0"></i>
-              <i class="tick" style="--k:1"></i>
-              <i class="tick" style="--k:2"></i>
-              <i class="tick" style="--k:3"></i>
-              <i class="tick" style="--k:4"></i>
-              <i class="tick tick--mark" style="--k:5"></i>
-              <i class="tick" style="--k:6"></i>
-              <i class="tick" style="--k:7"></i>
-              <i class="tick" style="--k:8"></i>
-              <i class="tick" style="--k:9"></i>
-              <i class="tick" style="--k:10"></i>
-              <i class="tick" style="--k:11"></i>
-              <i class="tick" style="--k:12"></i>
-              <i class="tick" style="--k:13"></i>
-              <i class="tick" style="--k:14"></i>
-              <i class="tick tick--mark" style="--k:15"></i>
-              <i class="tick" style="--k:16"></i>
-              <i class="tick" style="--k:17"></i>
-              <i class="tick" style="--k:18"></i>
-              <i class="tick" style="--k:19"></i>
-              <i class="tick" style="--k:20"></i>
-              <i class="tick" style="--k:21"></i>
-              <i class="tick" style="--k:22"></i>
-              <i class="tick" style="--k:23"></i>
-              <i class="tick" style="--k:24"></i>
-              <i class="tick tick--mark" style="--k:25"></i>
-              <i class="tick" style="--k:26"></i>
-              <i class="tick" style="--k:27"></i>
-              <i class="tick" style="--k:28"></i>
-              <i class="tick" style="--k:29"></i>
-          </span>
-          <span class="dial__label">
+            <i class="tick" style="--k:0"></i>
+            <i class="tick" style="--k:1"></i>
+            <i class="tick" style="--k:2"></i>
+            <i class="tick" style="--k:3"></i>
+            <i class="tick" style="--k:4"></i>
+            <i class="tick" style="--k:5"></i>
+            <i class="tick" style="--k:6"></i>
+            <i class="tick" style="--k:7"></i>
+            <i class="tick" style="--k:8"></i>
+            <i class="tick tick--no" style="--k:9; --n:2"></i>
+            <i class="tick" style="--k:10"></i>
+            <i class="tick" style="--k:11"></i>
+            <i class="tick tick--no" style="--k:12; --n:1"></i>
+            <i class="tick" style="--k:13"></i>
+            <i class="tick" style="--k:14"></i>
+            <i class="tick tick--no" style="--k:15; --n:0"></i>
+            <i class="tick" style="--k:16"></i>
+            <i class="tick" style="--k:17"></i>
+            <i class="tick" style="--k:18"></i>
+            <i class="tick" style="--k:19"></i>
+            <i class="tick" style="--k:20"></i>
+            <i class="tick" style="--k:21"></i>
+            <i class="tick" style="--k:22"></i>
+            <i class="tick" style="--k:23"></i>
+            <i class="tick" style="--k:24"></i>
+            <i class="tick" style="--k:25"></i>
+            <i class="tick" style="--k:26"></i>
+            <i class="tick" style="--k:27"></i>
+            <i class="tick" style="--k:28"></i>
+            <i class="tick" style="--k:29"></i>
             <span class="dial__no" style="--n:0">01</span>
             <span class="dial__no" style="--n:1">02</span>
             <span class="dial__no" style="--n:2">03</span>
@@ -194,7 +178,7 @@
         </div>
 
         <div class="ing__inner">
-          <h2 class="h-ing" id="ing-title" data-split>De ingrediënten voor innovatie met succes</h2>
+          <h2 class="h-display h-ing" id="ing-title" data-split>De ingrediënten voor innovatie met succes</h2>
           <ol class="ing__steps" data-reveal>
             <li class="ing__step" style="--n:0">
               <span class="ing__no" aria-hidden="true">01</span>
@@ -212,17 +196,19 @@
               <p class="ing__text">Verder kijken dan het werkt lekker. Mensen omarmen wat betekenis heeft. Zonder motivatie geen adoptie.</p>
             </li>
           </ol>
+          <!-- Figma draws this one graphic (for 01); it stays put through all three steps -->
+          <img class="ing__art" src="assets/svg/ing-blocks.svg" width="329" height="190" alt="" aria-hidden="true" data-reveal style="--d:.3s">
         </div>
       </div>
     </section>
 
     <!-- ─────────── Werkwijze ─────────── -->
-    <section class="way grain" id="werkwijze" aria-labelledby="way-title" data-way>
+    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
       <div class="way__inner">
-        <h2 class="h-section way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
+        <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
 
         <div class="ruler" data-reveal aria-hidden="true">
-          <img class="ruler__img" src="assets/svg/ruler.svg" width="1172" height="32" alt="" decoding="async">
+          <img class="ruler__img" src="assets/svg/ruler.svg" width="1199.09" height="32" alt="" decoding="async">
         </div>
 
         <ol class="steps">
@@ -248,15 +234,18 @@
     <!-- ─────────── Ons team ───────────
          Portraits are the Figma placeholder (the same photo six times): swap each <img> for the real portrait. -->
     <section class="team" id="team" aria-labelledby="team-title">
-      <img class="team__bg" src="assets/img/team-bg.webp" width="1439" height="1126" alt="" aria-hidden="true" decoding="async">
-
       <div class="team__inner">
         <div class="team__intro">
-          <h2 class="h-section" id="team-title" data-split>De mensen die het maken</h2>
+          <h2 class="h-display" id="team-title" data-split>Software makers die jouw business snappen</h2>
           <div class="team__copy" data-reveal>
             <p>Je werkt direct - en alleen - met senior specialisten. Geen overdrachten, geen accountmanagement, geen ruis.</p>
             <p><b>Jan en Jesse leiden de meeste trajecten</b> van begin tot eind en schakelen onze experts bij. We nemen verantwoordelijkheid voor jouw uitdaging, alsof het ons eigen bedrijf is.</p>
           </div>
+        </div>
+
+        <div class="team__crew">
+          <h3 class="h-display team__crew-title" data-split>co-Troopers</h3>
+          <p class="team__crew-text" data-reveal>De vaste ring van senior specialisten waarmee we werken.</p>
         </div>
 
         <ul class="people" data-reveal-group>
@@ -421,7 +410,7 @@
       <div class="cta__band" data-reveal>
         <div class="cta__copy">
           <h2 class="h-cta" id="cta-title" data-split>Begin met een gesprek</h2>
-          <p class="lead lead--cta" data-reveal style="--d:.35s">Geen pitch, geen verplichtingen. Wij kijken of we bij elkaar passen wat écht het verschil maakt.</p>
+          <p class="lead lead--cta" data-reveal style="--d:.35s">In een half uur bespreken we waar je staat en of we bij elkaar passen. Past het niet, dan zeggen we dat ook.</p>
           <a class="btn btn--primary" href="mailto:hello@troop.digital" data-reveal style="--d:.45s">
             <span class="btn__label">Plan een gesprek</span>
             <span class="arrow arrow--ne" aria-hidden="true">
@@ -445,8 +434,6 @@
 
   <!-- ─────────── Footer ─────────── -->
   <footer class="footer">
-    <img class="footer__plane" src="assets/img/footer-plane.webp" width="4096" height="1093" alt="" aria-hidden="true" loading="lazy" decoding="async">
-
     <div class="footer__inner">
       <div class="footer__intro">
         <img class="footer__logo" src="assets/svg/logo-light.svg" width="145.268" height="14.36" alt="Troop Digital">
@@ -490,7 +477,6 @@
             <li><a href="#ai">AI</a></li>
             <li><a href="#webapplicaties">Webapplicaties</a></li>
             <li><a href="#agencies">Agencies</a></li>
-            <li><a href="#tosti-hawaii">Tosti Hawaii</a></li>
           </ul>
         </nav>
         <div class="fcol">

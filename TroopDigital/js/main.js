@@ -49,14 +49,17 @@
 
   const revealTargets = $$('[data-reveal], [data-split]:not([data-split-load])');
   if (motion && 'IntersectionObserver' in window) {
+    // The dial is a 0 × 0 point off the left page edge, which the observer never sees intersect: it is
+    // revealed when its stage comes into view instead
+    const watched = new Map(revealTargets.map(el => [el.classList.contains('dial') ? el.parentElement : el, el]));
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
+        watched.get(entry.target).classList.add('is-in');
         io.unobserve(entry.target);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
-    revealTargets.forEach(el => io.observe(el));
+    watched.forEach((el, target) => io.observe(target));
   } else {
     revealTargets.forEach(el => el.classList.add('is-in'));
   }
@@ -98,14 +101,14 @@
          · .ing is a tall track, .ing__stage sticks inside it; scroll distance → s (0…count-1)
          · s is eased toward the scroll position (the dial has weight) and then passed through detents:
            it rests on a step for most of each stretch and turns in the middle, so it never parks halfway
-         · writes --s on .ing, and --d / --o on each step and dial number (see the CSS)
+         · writes --s on .ing, and --d / --o / --a on each step and dial number (see the CSS)
          Only pins when the stage fits the viewport; otherwise the CSS fallback stacks the steps.
      --------------------------------------------------------------------- */
   const ing = $('[data-ing]');
   if (ing && motion) {
     const stage = $('.ing__stage', ing);
     const inner = $('.ing__inner', ing);
-    const items = $$('.ing__step, .dial__no', ing).map(el => ({ el, n: Number(el.style.getPropertyValue('--n')) }));
+    const items = $$('.ing__step, .dial__no, .tick--no', ing).map(el => ({ el, n: Number(el.style.getPropertyValue('--n')) }));
     const count = $$('.ing__step', ing).length;
     const EASE_MS = 110;       // time constant of the follow: bigger = heavier dial
     const TURN = [0.25, 0.75]; // share of each stretch in which the dial actually turns
@@ -132,6 +135,7 @@
         const d = step - n;
         el.style.setProperty('--d', clamp(d, -1, 1).toFixed(4));
         el.style.setProperty('--o', (1 - smoothstep(clamp((Math.abs(d) - 0.12) / 0.38, 0, 1))).toFixed(4));
+        el.style.setProperty('--a', (1 - Math.min(Math.abs(d), 1)).toFixed(4));   // dial numbers and their ticks: size / opacity, pill → triangle
       });
     };
 
@@ -169,7 +173,7 @@
       raf = 0;
       lastT = 0;
       if (!pinned) {
-        ['--s', '--d', '--o'].forEach(p => { ing.style.removeProperty(p); items.forEach(({ el }) => el.style.removeProperty(p)); });
+        ['--s', '--d', '--o', '--a'].forEach(p => { ing.style.removeProperty(p); items.forEach(({ el }) => el.style.removeProperty(p)); });
         return;
       }
       run = (ing.offsetHeight - stage.offsetHeight) / (count - 1);

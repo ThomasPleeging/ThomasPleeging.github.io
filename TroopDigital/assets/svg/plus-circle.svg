@@ -1,7 +1,7 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Frame 52">
-<circle id="Ellipse 1" cx="11.5" cy="11.5" r="11" stroke="black"/>
-<line id="Line 122" x1="11.5" y1="5" x2="11.5" y2="18" stroke="black"/>
-<line id="Line 123" x1="18" y1="11.5" x2="5" y2="11.5" stroke="black"/>
+<path id="Ellipse 1" d="M22.5 11.5C22.5 17.5751 17.5751 22.5 11.5 22.5C5.42487 22.5 0.5 17.5751 0.5 11.5C0.5 5.42487 5.42487 0.5 11.5 0.5C17.5751 0.5 22.5 5.42487 22.5 11.5Z" stroke="#005CF1"/>
+<path id="Line 122" d="M11.5 5L11.5 18" stroke="#005CF1"/>
+<path id="Line 123" d="M18 11.5L5 11.5" stroke="#005CF1"/>
 </g>
 </svg>
