@@ -66,11 +66,9 @@
 
   /* ---------------------------------------------------------------------
      3. Scroll-linked state (one rAF-throttled handler)
-        · hero: full-bleed → 16 px inset + rounded lower corners
         · CTA portraits rise into place
         · nav gets a hairline once the page moves
      --------------------------------------------------------------------- */
-  const HERO_DISTANCE = 420;   // px of scroll for the hero to reach its final inset
   let ticking = false;
 
   const update = () => {
@@ -78,8 +76,6 @@
     const y = window.scrollY;
 
     nav.classList.toggle('is-scrolled', y > 4);
-
-    if (hero) hero.style.setProperty('--p', smoothstep(clamp(y / HERO_DISTANCE, 0, 1)).toFixed(4));
 
     if (cta && motion) {
       const vh = window.innerHeight;
@@ -183,7 +179,7 @@
     };
 
     layout();
-    fontsReady.then(layout);                               // the headline wraps differently once Brockmann is in
+    fontsReady.then(layout);                               // the headline wraps differently once Figtree is in
     window.addEventListener('scroll', follow, { passive: true });
     window.addEventListener('resize', () => {              // phone toolbars resize the height a little on scroll: ignore that
       if (window.innerWidth !== lastW || Math.abs(window.innerHeight - lastH) > 120) layout();
@@ -277,7 +273,7 @@
       current = null;
     };
     rest();
-    fontsReady.then(() => { if (!current) rest(); });      // menu width changes once Brockmann loads
+    fontsReady.then(() => { if (!current) rest(); });      // menu width changes once Figtree loads
     window.addEventListener('resize', () => { if (!current) rest(); }, { passive: true });
 
     $$('.menu__link', menu).forEach(link => {
@@ -303,6 +299,39 @@
       btn.closest('.faq__item').classList.toggle('is-open', open);
     });
   }
+
+  /* ---------------------------------------------------------------------
+     5c. Identity tiles – sunburst rays and dial ticks, drawn to fit the tile
+     --------------------------------------------------------------------- */
+  const SVG = 'http://www.w3.org/2000/svg';
+  $$('[data-sun]').forEach(tile => {
+    const svg = document.createElementNS(SVG, 'svg');
+    svg.setAttribute('class', 'tile__sun');
+    svg.setAttribute('aria-hidden', 'true');
+    tile.prepend(svg);
+    const draw = () => {                                   // darkgrey hairlines every 10° from a small solid disc
+      const w = tile.clientWidth, h = tile.clientHeight, cx = w / 2, cy = h / 2, r = Math.hypot(w, h);
+      let out = '';
+      for (let a = 5; a < 360; a += 10) {
+        const t = a * Math.PI / 180;
+        out += `<line x1="${cx}" y1="${cy}" x2="${(cx + r * Math.cos(t)).toFixed(1)}" y2="${(cy + r * Math.sin(t)).toFixed(1)}"/>`;
+      }
+      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      svg.innerHTML = out + `<circle cx="${cx}" cy="${cy}" r="18"/>`;
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(draw).observe(tile); else draw();
+  });
+  // data-dial="cx,cy,r,fromDeg,toDeg,count": yellow ticks on an arc
+  $$('[data-dial]').forEach(svg => {
+    const [cx, cy, r, a0, a1, n] = svg.dataset.dial.split(',').map(Number);
+    let out = '';
+    for (let i = 0; i < n; i++) {
+      const a = a0 + (a1 - a0) * i / (n - 1), t = a * Math.PI / 180;
+      const at = `transform="translate(${(cx + r * Math.cos(t)).toFixed(1)} ${(cy + r * Math.sin(t)).toFixed(1)}) rotate(${a + 90})"`;
+      out += `<rect class="t" x="-3" y="-14" width="6" height="28" rx="3" ${at}/>`;
+    }
+    svg.innerHTML = out;
+  });
 
   /* ---------------------------------------------------------------------
      6. Mobile menu

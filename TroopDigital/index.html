@@ -37,7 +37,7 @@
     <nav class="menu" aria-label="Hoofdmenu" data-menu>
       <span class="menu__ind" aria-hidden="true"></span>
       <a class="menu__link" href="#werkwijze">Zo werken we</a>
-      <a class="menu__link" href="#ingredienten">Wat we bouwen</a>
+      <a class="menu__link" href="#wat-we-bouwen">Wat we bouwen</a>
       <a class="menu__link" href="#werk">Werk</a>
       <a class="menu__link" href="#team">Wie zijn wij</a>
     </nav>
@@ -58,7 +58,7 @@
 
     <div class="nav__panel" id="nav-panel" data-nav-panel hidden>
       <a href="#werkwijze">Zo werken we</a>
-      <a href="#ingredienten">Wat we bouwen</a>
+      <a href="#wat-we-bouwen">Wat we bouwen</a>
       <a href="#werk">Werk</a>
       <a href="#team">Wie zijn wij</a>
       <a class="btn btn--primary nav__panel-cta" href="#contact">
@@ -103,32 +103,80 @@
                 <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               </span>
             </a>
-            <a class="btn btn--ghost" href="#ingredienten"><span class="btn__label">Wat we bouwen</span></a>
+            <a class="btn btn--ghost" href="#wat-we-bouwen"><span class="btn__label">Wat we bouwen</span></a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─────────── Wat we doen ─────────── -->
-    <section class="intro" id="wat-we-doen" aria-labelledby="intro-title">
-      <h2 class="intro__lead" id="intro-title" data-split>Troop Digital unlockt de volle potentie van jouw bedrijf, door je digitaal te transformeren en versnellen.</h2>
+    <!-- ─────────── Klanten ───────────
+         The logo files are white (for dark surfaces); css turns them dark grey. Each sits on a 303 × 103 canvas,
+         so --x / --y / --w / --h give the artwork's own bounds on it: css crops to those and spreads the six evenly. -->
+    <section class="clients" aria-label="Klanten">
+      <ul class="clients__list">
+        <li class="clients__item" data-reveal style="--i:0; --x:23.5; --y:21.2; --w:257.8; --h:63.3"><img src="assets/svg/clientlogos/Erasmus.svg" width="303" height="103" alt="Erasmus Universiteit Rotterdam" decoding="async"></li>
+        <li class="clients__item" data-reveal style="--i:1; --x:26; --y:25; --w:250; --h:41"><img src="assets/svg/clientlogos/Lighthouse.svg" width="303" height="103" alt="Lighthouse" decoding="async"></li>
+        <li class="clients__item" data-reveal style="--i:2; --x:54; --y:24; --w:196; --h:56.84"><img src="assets/svg/clientlogos/Multinal.svg" width="303" height="103" alt="Multinal Group" decoding="async"></li>
+        <li class="clients__item" data-reveal style="--i:3; --x:37; --y:27; --w:228; --h:49.9"><img src="assets/svg/clientlogos/hva.svg" width="303" height="103" alt="Hogeschool van Amsterdam" decoding="async"></li>
+        <li class="clients__item" data-reveal style="--i:4; --x:57; --y:19; --w:188.1; --h:64"><img src="assets/svg/clientlogos/lifeguard.svg" width="303" height="103" alt="Lifeguard" decoding="async"></li>
+        <li class="clients__item" data-reveal style="--i:5; --x:101; --y:1; --w:101; --h:101"><img src="assets/svg/clientlogos/nxtgenlogo.svg" width="303" height="103" alt="NXT GEN hightech" decoding="async"></li>
+      </ul>
+    </section>
 
-      <div class="cards" data-reveal-group>
-        <article class="card" data-reveal style="--i:0">
-          <span class="card__num" aria-hidden="true">1</span>
-          <div class="card__main">
-            <h3 class="card__title">Efficiënter proces</h3>
-            <!-- Placeholder copy from the Figma (lorem ipsum) – replace with the real text -->
-            <p class="card__text">Nieuwe tools, nieuwe processen, lorem ipsum dolor sit amet. Nullam feugiat maximus pretium. Vivamus blandit eu augue vel finibus.</p>
-          </div>
-        </article>
-        <article class="card" data-reveal style="--i:1">
-          <span class="card__num" aria-hidden="true">2</span>
-          <div class="card__main">
-            <h3 class="card__title">Nieuw perspectief</h3>
-            <p class="card__text">Een nieuw systeem is geen doel. Het doel is een bedrijf dat meer aankan, sneller levert en anders verdient. Dat is wat er bij onze klanten verandert.</p>
-          </div>
-        </article>
+    <!-- ─────────── Statement ───────────
+         Big positioning line between the client bar and "Wat we bouwen" (user copy, 2026-11-03). -->
+    <section class="statement" aria-label="Wat we doen">
+      <p class="statement__text" data-reveal>Troop Digital unlockt de <em>volle potentie</em> van jouw bedrijf, door je digitaal te transformeren en versnellen.</p>
+    </section>
+
+    <!-- ─────────── Wat we bouwen ───────────
+         Option C (2026-11-03): heading left, the three points as flush identity tiles right (navy, sunburst,
+         yellow grid / dark dial, grey, paper grid). The sunburst and dial are drawn by main.js §5c. -->
+    <section class="build" id="wat-we-bouwen" aria-label="Wat we bouwen">
+      <div class="build__row" data-reveal style="--i:0">
+        <h2 class="build__h">Upgrade je <em>dienstverlening</em> met eigen software</h2>
+        <ol class="build__tiles">
+          <li class="tile tile--navy"><span class="tile__no" aria-hidden="true">1</span><span class="tile__label">Maatwerk software</span></li>
+          <li class="tile tile--sun" data-sun><span class="tile__no" aria-hidden="true">2</span><span class="tile__label"><span>Klantportalen</span></span></li>
+          <li class="tile tile--grid"><span class="tile__no" aria-hidden="true">3</span><span class="tile__label">Websites en apps</span></li>
+        </ol>
+      </div>
+      <div class="build__row" data-reveal style="--i:1">
+        <h2 class="build__h">Upgrade je <em>proces</em> met AI en automatisering</h2>
+        <ol class="build__tiles">
+          <li class="tile tile--dark"><svg class="tile__dial" viewBox="0 0 300 400" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" data-dial="300,0,200,95,175,9"></svg><span class="tile__no" aria-hidden="true">1</span><span class="tile__label">Rapportage en dashboards</span></li>
+          <li class="tile tile--grey"><span class="tile__no" aria-hidden="true">2</span><span class="tile__label">AI-processen en workflows</span></li>
+          <li class="tile tile--paper"><span class="tile__no" aria-hidden="true">3</span><span class="tile__label">Koppelingen en tools</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ─────────── Werkwijze ─────────── -->
+    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
+      <div class="way__inner">
+        <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
+
+        <div class="ruler" data-reveal aria-hidden="true">
+          <img class="ruler__img" src="assets/svg/ruler.svg" width="1160" height="32" alt="" decoding="async">
+        </div>
+
+        <ol class="steps">
+          <li class="step" data-reveal style="--d:.35s">
+            <p class="step__when">Dag 1</p>
+            <h3 class="step__title">Start: workshop</h3>
+            <p class="step__text">Doel scherp, scope strak, grenzen helder. Je weet wat nodig is en wat niet.</p>
+          </li>
+          <li class="step" data-reveal style="--d:.75s">
+            <p class="step__when">2 tot 3 weken</p>
+            <h3 class="step__title">Bewijs: proof of concept</h3>
+            <p class="step__text">Vaste prijs. Gebouwd en getest. We bouwen een eerste versie om te valideren.</p>
+          </li>
+          <li class="step" data-reveal style="--d:1.2s">
+            <p class="step__when">4 tot 6 weken</p>
+            <h3 class="step__title">Live: in gebruik</h3>
+            <p class="step__text">Een werkende versie die je team echt gebruikt. Daarna opschalen, of stoppen.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -202,63 +250,34 @@
       </div>
     </section>
 
-    <!-- ─────────── Werkwijze ─────────── -->
-    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
-      <div class="way__inner">
-        <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
-
-        <div class="ruler" data-reveal aria-hidden="true">
-          <img class="ruler__img" src="assets/svg/ruler.svg" width="1199.09" height="32" alt="" decoding="async">
-        </div>
-
-        <ol class="steps">
-          <li class="step" data-reveal style="--d:.35s">
-            <p class="step__when">Dag 1</p>
-            <h3 class="step__title">Start: workshop</h3>
-            <p class="step__text">Doel scherp, scope strak, grenzen helder. Je weet wat nodig is en wat niet.</p>
-          </li>
-          <li class="step" data-reveal style="--d:.75s">
-            <p class="step__when">2 tot 3 weken</p>
-            <h3 class="step__title">Bewijs: proof of concept</h3>
-            <p class="step__text">Vaste prijs. Gebouwd en getest. We bouwen een eerste versie om te valideren.</p>
-          </li>
-          <li class="step" data-reveal style="--d:1.2s">
-            <p class="step__when">4 tot 6 weken</p>
-            <h3 class="step__title">Live: in gebruik</h3>
-            <p class="step__text">Een werkende versie die je team echt gebruikt. Daarna opschalen, of stoppen.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
     <!-- ─────────── Ons team ───────────
          Portraits are the Figma placeholder (the same photo six times): swap each <img> for the real portrait. -->
     <section class="team" id="team" aria-labelledby="team-title">
       <div class="team__inner">
         <div class="team__intro">
-          <h2 class="h-display" id="team-title" data-split>Software makers die jouw business snappen</h2>
-          <div class="team__copy" data-reveal>
-            <p>Je werkt direct - en alleen - met senior specialisten. Geen overdrachten, geen accountmanagement, geen ruis.</p>
-            <p><b>Jan en Jesse leiden de meeste trajecten</b> van begin tot eind en schakelen onze experts bij. We nemen verantwoordelijkheid voor jouw uitdaging, alsof het ons eigen bedrijf is.</p>
-          </div>
+          <h2 class="h-display" id="team-title" data-split>Door ervaren specialisten die jouw business snappen.</h2>
+          <p class="team__copy" data-reveal>Troop Digital heeft geen accountmanagers en geen overdracht naar een projectteam. Jan en Jesse leiden elk project zelf, van de eerste strategiesessie tot de livegang.</p>
         </div>
 
+        <ul class="people people--founders" data-reveal-group aria-label="Founders">
+          <li class="person person--founder" data-reveal style="--i:0">
+            <div class="person__photo"><img src="assets/img/team-jan.webp" width="1024" height="1024" alt="Jan Kranendonk" loading="lazy" decoding="async"></div>
+            <p class="person__name">Jan Kranendonk</p>
+            <p class="person__role">Product en digitale strategie</p>
+          </li>
+          <li class="person person--founder" data-reveal style="--i:1">
+            <div class="person__photo"><img src="assets/img/team-jesse.webp" width="960" height="960" alt="Jesse van Thijn" loading="lazy" decoding="async"></div>
+            <p class="person__name">Jesse van Thijn</p>
+            <p class="person__role">Techniek en architectuur</p>
+          </li>
+        </ul>
+
         <div class="team__crew">
-          <h3 class="h-display team__crew-title" data-split>co-Troopers</h3>
+          <h3 class="h-display team__crew-title" data-split>Co-Troopers</h3>
           <p class="team__crew-text" data-reveal>De vaste ring van senior specialisten waarmee we werken.</p>
         </div>
 
-        <ul class="people" data-reveal-group>
-          <li class="person" data-reveal style="--i:0">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Jan Kranendonk" loading="lazy" decoding="async"></div>
-            <p class="person__name">Jan Kranendonk</p>
-            <p class="person__role">Product Lead</p>
-          </li>
-          <li class="person" data-reveal style="--i:1">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Jesse van Thijn" loading="lazy" decoding="async"></div>
-            <p class="person__name">Jesse van Thijn</p>
-            <p class="person__role">Tech Lead</p>
-          </li>
+        <ul class="people people--crew" data-reveal-group>
           <li class="person" data-reveal style="--i:2">
             <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Mike van Laar" loading="lazy" decoding="async"></div>
             <p class="person__name">Mike van Laar</p>
@@ -277,20 +296,20 @@
           <li class="person" data-reveal style="--i:2">
             <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Ruud Kooiman" loading="lazy" decoding="async"></div>
             <p class="person__name">Ruud Kooiman</p>
-            <p class="person__role">AI &amp; Data</p>
+            <p class="person__role">AI &amp; Data expert</p>
           </li>
         </ul>
       </div>
     </section>
 
     <!-- ═══════════ PLACEHOLDER ═══════════
-         Layout placeholder (the Figma only holds a grey box). Replace the <section class="ph"> as a whole
-         when its design arrives; the id is kept so links keep working. -->
-
-    <!-- Placeholder: Testimonials -->
-    <section class="ph ph--testimonials" id="testimonials" aria-label="Testimonials (placeholder)" data-placeholder data-reveal>
-      <img class="ph__x" src="assets/svg/placeholder-x.svg" alt="" aria-hidden="true">
-      <h2 class="ph__label">Testimonials</h2>
+         Layout placeholder: the Figma holds four unlabelled grey cards here. They are assumed to be the "Werk"
+         cases (the nav links to #werk). Replace the <section class="cases"> as a whole when the design arrives. -->
+    <section class="cases" id="werk" aria-label="Werk (placeholder)">
+      <div class="case" data-reveal aria-hidden="true"></div>
+      <div class="case" data-reveal aria-hidden="true"></div>
+      <div class="case" data-reveal aria-hidden="true"></div>
+      <div class="case" data-reveal aria-hidden="true"></div>
     </section>
 
     <!-- ─────────── Veelgestelde vragen ───────────
@@ -298,8 +317,9 @@
          already made elsewhere on the page. Have them reviewed (pricing, scope changes, ownership). -->
     <section class="faq" id="faq" aria-labelledby="faq-title">
       <div class="faq__inner">
-        <h2 class="h-section faq__title" id="faq-title" data-split>Veelgestelde vragen</h2>
-
+        <div class="faq__grid">
+        <div class="faq__main">
+        <h2 class="faq__title" id="faq-title" data-split>Veelgestelde vragen</h2>
         <div class="faq__list" data-faq data-reveal-group>
           <div class="faq__item" data-reveal style="--i:0">
             <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
@@ -361,48 +381,24 @@
             </div></div>
           </div>
         </div>
+        </div>
+        <aside class="feature" data-reveal aria-label="Uitgelicht artikel">
+          <div class="feature__art" aria-hidden="true"><img src="assets/svg/article-art.svg" width="498" height="280" alt="" loading="lazy" decoding="async"></div>
+          <div class="feature__body">
+          <p class="feature__eyebrow">Lees verder · AI</p>
+          <h3 class="feature__title"><a class="feature__link" href="#kennisbank">AI voor bedrijven, van strategie tot implementatie</a></h3>
+          <p class="feature__text">AI is geen toekomstmuziek meer. Hoe je begint bij je business in plaats van bij de tool, en wat het in de praktijk oplevert.</p>
+          <p class="feature__by">Jesse van Thijn</p>
+          <span class="feature__cta">Lees het artikel
+            <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span>
+          </span>
+          </div>
+        </aside>
+        </div>
       </div>
-    </section>
-
-    <!-- ─────────── Blog ───────────
-         The three newest posts from troop.digital/kennisbank (copied by hand on 2026-10-14, not fetched live).
-         Each tile links to the article on the current site; the top half is a colour block (see .post__media). -->
-    <section class="blog" id="blog" aria-labelledby="blog-title">
-      <h2 class="h-section blog__title" id="blog-title" data-split>Uit de kennisbank</h2>
-      <a class="btn btn--ghost blog__more" href="https://troop.digital/kennisbank/" data-reveal>
-        <span class="btn__label">Meer artikelen</span>
-        <span class="arrow arrow--ne" aria-hidden="true">
-          <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-          <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-        </span>
-      </a>
-
-      <ul class="posts">
-        <li class="post" data-reveal style="--i:0">
-          <div class="post__media post__media--navy" aria-hidden="true"></div>
-          <div class="post__body">
-            <span class="post__tag">Platform</span>
-            <h3 class="post__title"><a class="post__link" href="https://troop.digital/platform/het-marketplace-model-waar-stuur-je-echt-op/">Het marketplace-model: waar stuur je écht op?</a></h3>
-            <p class="post__meta"><span>Jan Kranendonk</span><time datetime="2026-10-07">7 okt 2026</time></p>
-          </div>
-        </li>
-        <li class="post" data-reveal style="--i:1">
-          <div class="post__media post__media--yellow" aria-hidden="true"></div>
-          <div class="post__body">
-            <span class="post__tag">Software</span>
-            <h3 class="post__title"><a class="post__link" href="https://troop.digital/software/technical-debt-waarom-je-software-je-organisatie-afremt/">Technical debt: waarom je software je organisatie afremt</a></h3>
-            <p class="post__meta"><span>Jesse van Thijn</span><time datetime="2026-09-30">30 sep 2026</time></p>
-          </div>
-        </li>
-        <li class="post" data-reveal style="--i:2">
-          <div class="post__media post__media--blue" aria-hidden="true"></div>
-          <div class="post__body">
-            <span class="post__tag">Platform</span>
-            <h3 class="post__title"><a class="post__link" href="https://troop.digital/platform/wat-kost-een-platform-laten-bouwen/">Wat kost een platform laten bouwen?</a></h3>
-            <p class="post__meta"><span>Jan Kranendonk</span><time datetime="2026-09-22">22 sep 2026</time></p>
-          </div>
-        </li>
-      </ul>
     </section>
 
     <!-- ─────────── Call to action ─────────── -->

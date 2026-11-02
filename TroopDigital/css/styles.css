@@ -4,15 +4,7 @@
    ========================================================================== */
 
 /* ---------- Fonts ---------- */
-@font-face { font-family: "Brockmann"; font-weight: 400; font-style: normal; font-display: swap;
-  src: url("../assets/fonts/brockmann-regular-webfont.woff2") format("woff2"); }
-@font-face { font-family: "Brockmann"; font-weight: 500; font-style: normal; font-display: swap;
-  src: url("../assets/fonts/brockmann-medium-webfont.woff2") format("woff2"); }
-@font-face { font-family: "Brockmann"; font-weight: 600; font-style: normal; font-display: swap;
-  src: url("../assets/fonts/brockmann-semibold-webfont.woff2") format("woff2"); }
-@font-face { font-family: "Brockmann"; font-weight: 700; font-style: normal; font-display: swap;
-  src: url("../assets/fonts/brockmann-bold-webfont.woff2") format("woff2"); }
-/* Figtree (display headings and the dial numbers): Google's variable font, latin subset, self-hosted */
+/* Figtree (everything): Google's variable font, latin subset, self-hosted */
 @font-face { font-family: "Figtree"; font-weight: 300 900; font-style: normal; font-display: swap;
   src: url("../assets/fonts/figtree-var.woff2") format("woff2"); }
 
@@ -28,24 +20,24 @@
 /* ---------- Tokens ---------- */
 :root {
   --yellow: #fcb523;
-  --yellow-ink: #8c6600;      /* same hue, darkened for text on white / #f2f2f2 (5.2 / 4.7:1) */
   --darkblue: #04026f;
-  --lightblue: #005cf1;       /* FAQ, "co-Troopers" */
+  --lightblue: #005cf1;       /* accents, FAQ title, Werkwijze marks */
   --darkgrey: #28292b;
-  --lightgrey: #ccc;          /* card outlines, FAQ band */
+  --lightgrey: #ccc;          /* outlines, number chips */
+  --hairline: rgba(4, 2, 111, .09);   /* the soft rule under the header, reused by the client bar */
   --paper: #f2f2f2;
   --ink: #363636;
   --white: #fff;
 
-  --font: "Brockmann", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --display: "Figtree", var(--font);
+  --font: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;   /* the only family */
+  --display: var(--font);
   --ease-out: cubic-bezier(.22, 1, .36, 1);
   --ease-in-out: cubic-bezier(.65, 0, .35, 1);
 
   --nav-h: 69px;
   --gutter: 25px;
   /* Two vertical lines everything hangs on:
-     --frame  inset of full-width surfaces (hero on scroll, Werkwijze card, placeholders, CTA band)
+     --frame  inset of full-width surfaces (the Werk placeholders, CTA band)
      --col    left/right edge of all text: a centred 1158 px column (Figma x 141 → 1299), never closer
               than frame + gutter. Uses %, so it resolves against the full-width section it's used in. */
   --frame: 16px;
@@ -66,6 +58,7 @@ html {
   scroll-padding-top: var(--nav-h);
   -webkit-text-size-adjust: 100%;
 }
+
 
 body {
   margin: 0;
@@ -109,11 +102,11 @@ button { font: inherit; color: inherit; }
 .h-hero, .h-display, .h-cta, .footer__title { font-family: var(--display); font-weight: 800; color: var(--darkblue); }
 .h-hero {
   font-size: clamp(2.5rem, 1.1rem + 3.9vw, 4.375rem);        /* 70 px */
-  line-height: 1.15; letter-spacing: -.01em;
+  line-height: 1.1; letter-spacing: -.02em;
 }
 .h-display {
-  font-size: clamp(2.5rem, 1.2rem + 3.9vw, 4.5rem);          /* 72 px */
-  line-height: 1.02;
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.125rem);          /* 50 px */
+  line-height: 1.15; letter-spacing: -.01em;
 }
 .lead {
   font-size: clamp(1rem, .95rem + .2vw, 1.125rem);         /* 18 px */
@@ -200,7 +193,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 /* ---------- Eyebrow pill ---------- */
 .pill {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 10px 12px; border: 1px solid rgba(4, 2, 111, .2); border-radius: 1000px;
+  padding: 10px 12px; border: 1px solid var(--lightgrey); border-radius: 1000px;
   font-size: 13px; line-height: 1.5; letter-spacing: .04em; color: var(--darkblue);
   transition: border-color .35s ease, background-color .35s ease;
 }
@@ -218,7 +211,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   box-shadow: 0 1px 0 rgba(4, 2, 111, 0);
   transition: box-shadow .35s ease;
 }
-.nav.is-scrolled { box-shadow: 0 1px 0 rgba(4, 2, 111, .09); }
+.nav.is-scrolled { box-shadow: 0 1px 0 var(--hairline); }
 
 .nav__brand {
   display: flex; align-items: center; justify-self: start;
@@ -250,23 +243,21 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
    Hero
    ========================================================================== */
 .hero {
-  --p: 0;                                  /* scroll progress 0 → 1, set by JS */
   --pw: min(1195px, 82.99vw);              /* plane width: 1195 px at 1440, shrinks with the viewport */
-  --hero-x: var(--gutter);                 /* text sits 25 px inside the card, which itself insets 16 px on scroll */
+  --hero-x: var(--gutter);                 /* text sits 25 px in from the page edge */
   position: relative; isolation: isolate;
   display: flex; flex-direction: column;
   min-height: max(780px, calc(100svh - var(--nav-h)));
   contain: paint;                          /* the oversized plane image can't add horizontal scroll width */
 }
 
-/* Full-bleed at load → 16 px side inset with rounded lower corners on scroll */
+/* Full-bleed, square-cornered: the client bar sits flush underneath */
 .hero__bg {
   position: absolute; inset: 0; z-index: -1; overflow: hidden;
   background:
     radial-gradient(ellipse 820px 520px at 37% 54%, rgba(102, 102, 102, 0) 0%, rgba(102, 102, 102, .13) 100%),
     var(--paper);
-  clip-path: inset(0 calc(var(--p) * var(--frame)) 0 calc(var(--p) * var(--frame)) round 0 0 24px 24px);
-  transition: clip-path .5s var(--ease-out), --mx .6s var(--ease-out), --my .6s var(--ease-out), --spot .6s var(--ease-out);
+  transition: --mx .6s var(--ease-out), --my .6s var(--ease-out), --spot .6s var(--ease-out);
 }
 .hero.is-pointer .hero__bg { --spot: 230px; }
 
@@ -292,14 +283,36 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .hero__inner {
   position: relative; flex: 1; display: flex; flex-direction: column; align-items: flex-start;
   padding: 43px var(--hero-x) 56px;
-  translate: calc(var(--p) * var(--frame)) 0;          /* the text rides along with the card as it insets */
-  transition: translate .5s var(--ease-out);
 }
 .hero__body {
   display: flex; flex-direction: column; align-items: flex-start; gap: 32px;
   margin-top: 142px; max-width: min(823px, calc(60vw - 45px));
 }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.hero .lead { color: var(--darkblue); }
+
+/* ==========================================================================
+   Client bar: white, the same soft hairline as the header above and below, six logos across the text column.
+   The logo files are white; brightness(0) makes them black and invert(.16) lifts that to the dark grey (#292929 ≈ --darkgrey).
+   ========================================================================== */
+.clients {
+  /* px per canvas unit: .62 on the 1158 px text column, scaling with it below that */
+  --s: calc(min(100cqw - 2 * var(--frame), var(--content)) / 1158 * .62);
+  container-type: inline-size;
+  background: var(--white); border-block: 1px solid var(--hairline);
+}
+/* Each canvas is cropped to its artwork (--x --y --w --h, set in the HTML), so the row spreads by what you see: first and
+   last logos sit on the column edges, the gaps are equal */
+.clients__list {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: calc(var(--content) + 2 * var(--frame)); margin: 0 auto; padding: 24px var(--frame);
+}
+.clients__item { position: relative; flex: none; overflow: hidden; width: calc(var(--w) * var(--s)); height: calc(var(--h) * var(--s)); }
+.clients__item img {
+  position: absolute; left: calc(var(--x) * var(--s) * -1); top: calc(var(--y) * var(--s) * -1);
+  width: calc(303 * var(--s)); height: calc(103 * var(--s)); max-width: none;
+  filter: brightness(0) invert(.16);
+}
 
 
 /* ==========================================================================
@@ -308,57 +321,80 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
    ========================================================================== */
 .h-section { max-width: 573px; margin: 0; }
 
-.intro { padding: calc(156 * var(--sp)) var(--col); }
-.intro__lead {
-  max-width: 950px; margin: 0 auto calc(37 * var(--sp)); text-align: center;
-  font-size: clamp(1.5rem, .85rem + 2.2vw, 2.1875rem);   /* 35 px */
-  font-weight: 500; line-height: 1.2; color: var(--darkblue);
+/* ---------- Statement ---------- */
+.statement { width: min(var(--content), calc(100% - 2 * (var(--frame) + var(--gutter)))); margin: calc(148 * var(--sp)) auto 0; }
+.statement__text {
+  max-width: 1040px;
+  font-family: var(--display); font-size: clamp(2rem, 1.1rem + 3vw, 3.75rem); font-weight: 800; line-height: 1.3; letter-spacing: -.02em;
+  color: var(--darkblue); text-wrap: balance;
 }
+.statement__text em { font-style: normal; color: var(--lightblue); }
 
-.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 33px; }
-.card {
-  --line: #dadada;
-  position: relative; overflow: hidden;
-  display: grid; grid-template-columns: auto 1fr; min-height: 208px;
-  border: 1px solid var(--lightgrey); border-radius: 16px;
+/* Wat we bouwen, option C: per row a heading left and three identity tiles right, top-aligned.
+   133 px of white under the statement and between the rows, 208 before the dial. */
+.build {
+  --edge: calc(var(--frame) + var(--gutter));
+  display: flex; flex-direction: column; gap: calc(133 * var(--sp));
+  margin-top: calc(133 * var(--sp)); margin-bottom: calc(208 * var(--sp));
 }
-/* The big digit is solid navy. Its cell is as wide as the glyph + 24 px each side, so "1" and "2" differ. */
-.card__num {
-  display: grid; place-items: center; padding: 0 24px;
-  font-size: clamp(110px, 12.5vw, 180px); font-weight: 700; line-height: 1;
-  color: var(--darkblue); user-select: none;
-  transition: transform .8s var(--ease-out);
+.build__row {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; align-items: start;
+  width: min(var(--content), calc(100% - 2 * var(--edge))); margin-inline: auto;
 }
-.card__main { position: relative; display: flex; flex-direction: column; }
-.card__main::before {                                   /* vertical divider, drawn on the first pixel column */
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--line);
-  transition: transform 1.1s var(--ease-out) calc(var(--i, 0) * .12s + .35s); transform-origin: 50% 0;
+.build__h {
+  margin-top: -.12em;   /* cap height lines up with the tiles' top edge */
+  font-family: var(--display); font-size: clamp(1.75rem, 1.1rem + 2vw, 2.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -.01em;
+  color: var(--darkblue);
 }
-.card__title {
-  position: relative; display: flex; align-items: center; min-height: 80px; padding: 24px;
-  font-size: clamp(1.25rem, 1rem + .9vw, 1.5625rem); font-weight: 600; line-height: 1.3; color: var(--darkblue);
-}
-.card__title::after {                                   /* horizontal divider under the title */
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line);
-  transition: transform 1.1s var(--ease-out) calc(var(--i, 0) * .12s + .55s); transform-origin: 0 50%;
-}
-.card__text { padding: 24px; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.build__h em { font-style: normal; color: var(--lightblue); }
+.build__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 
-.motion .card__main::before { transform: scaleY(0); }
-.motion .card__title::after { transform: scaleX(0); }
-.motion .card.is-in .card__main::before, .motion .card.is-in .card__title::after { transform: none; }
-.motion .card__num { opacity: 0; translate: 0 28px;
-  transition: transform .8s var(--ease-out), opacity 1s var(--ease-out) calc(var(--i, 0) * .12s + .3s), translate 1.2s var(--ease-out) calc(var(--i, 0) * .12s + .3s); }
-.motion .card.is-in .card__num { opacity: 1; translate: 0 0; }
-@media (hover: hover) {
-  .card:hover .card__num { transform: translateY(-6px) scale(1.04); }
+/* Identity tiles: flush, square, one pattern each (see the design system's Visual identity) */
+.tile {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 3 / 4; padding: 24px;
 }
+.tile__no { position: relative; font-family: var(--display); font-size: 64px; font-weight: 800; line-height: .9; letter-spacing: -.03em;
+  transition: transform .6s var(--ease-out); }
+.tile__label { position: relative; font-family: var(--display); font-size: 22px; font-weight: 700; line-height: 1.15; }
+@media (hover: hover) { .tile:hover .tile__no { transform: translateY(-6px); } }
+
+.tile--navy { background: var(--darkblue); color: var(--lightblue); }
+.tile--navy .tile__label { color: var(--white); }
+.tile--sun { background: var(--lightblue); color: var(--darkblue); }   /* darkblue on lightblue: 3.1:1, display sizes only */
+.tile--sun .tile__label span { background: var(--lightblue); box-shadow: 0 0 0 6px var(--lightblue); }   /* clears the rays behind the words */
+.tile--grid, .tile--paper { color: var(--lightblue); }
+.tile--grid .tile__label, .tile--paper .tile__label, .tile--grey .tile__label { color: var(--darkblue); }
+.tile--grid {
+  background-color: var(--yellow);
+  background-image:
+    linear-gradient(rgba(140, 90, 0, .22) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 90, 0, .22) 1px, transparent 1px),
+    linear-gradient(rgba(140, 90, 0, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 90, 0, .12) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+}
+.tile--dark { background: var(--darkgrey); color: var(--yellow); }
+.tile--dark .tile__label { color: var(--white); }
+.tile--grey {   /* fine monochrome grain over lightgrey, as on the identity board */
+  background-color: var(--lightgrey); color: var(--lightblue);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+.tile--paper {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--lightgrey) 1px, transparent 1px), linear-gradient(90deg, var(--lightgrey) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.tile__sun, .tile__dial { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.tile__sun line { stroke: var(--darkgrey); stroke-width: 1; }
+.tile__sun circle { fill: var(--lightblue); }
+.tile__dial .t { fill: var(--yellow); }
 
 /* ==========================================================================
    CTA band
-   Whole composition scales with the container (--u = 1 px at 1392 px wide)
+   Full-width card, 16 px in from the page edge (user's call, 2026-10-07; Figma 2169:996 draws it as a 1158 px card).
+   The whole composition scales with the container (--u = 1 px at 1392 px wide)
    ========================================================================== */
-.cta { container-type: inline-size; margin: calc(56 * var(--sp)) var(--frame) 0; }
+.cta { container-type: inline-size; margin: calc(100 * var(--sp)) var(--frame) 0; }
 .cta__band {
   --u: min(calc(100cqw / 1392), 1.08px);
   --nx: 0; --ny: 0;
@@ -392,7 +428,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: flex-start; gap: calc(24 * var(--u));
   width: calc(424 * var(--u)); padding-block: 48px;
-  margin-left: max(0px, 50cqw - var(--content) / 2 - var(--gutter));   /* lands the copy on --col */
+  margin-left: max(0px, 50cqw - var(--content) / 2 - var(--gutter));   /* lands the copy on --col, like every other section */
 }
 .h-cta { font-size: max(2.25rem, calc(52 * var(--u))); line-height: 1.02; }
 .lead--cta { font-size: max(15px, calc(18 * var(--u))); color: var(--darkgrey); }
@@ -410,7 +446,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 
 
 /* ==========================================================================
-   Surface texture: 4 × 4 px squares on a 24 px pitch, white at 10 % (used by the navy blog tile)
+   Surface texture: 4 × 4 px squares on a 24 px pitch, white at 10 % 
    ========================================================================== */
 :root {
   --dots-10: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect x='10' y='10' width='4' height='4' fill='%23fff' fill-opacity='.1'/%3E%3C/svg%3E");
@@ -439,31 +475,29 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .ing.is-pinned { height: calc(var(--stage-h) + (var(--count) - 1) * var(--run)); }
 .ing__stage {
   position: relative; isolation: isolate; overflow: clip;
-  min-height: 942px; padding: 124px 24px 120px;
+  min-height: 942px; padding: 178px 24px 120px;
   background-color: var(--darkgrey);
 }
 .ing.is-pinned .ing__stage {
   position: sticky; top: var(--nav-h);
   height: var(--stage-h); min-height: 0;
-  padding: calc(var(--stage-h) * .1316) 24px 0;     /* 124 of 942 */
+  padding: calc(var(--stage-h) * .1894) 24px 0;     /* 178.5 of 942 */
 }
 .ing__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
-.h-ing { max-width: 11em; text-align: center; color: var(--yellow); }   /* wraps after "voor" */
+.h-ing { width: min(100%, 512px); text-align: left; color: var(--yellow); }   /* a 506 px box centred on the page, wraps after "voor" */
 
-/* The steps: stacked in a column, or (pinned) laid over each other in one grid cell and cross-faded */
-.ing__steps { display: flex; flex-direction: column; gap: 56px; width: min(442px, 100%); margin-top: calc(102 * var(--sp)); }
+/* The steps: stacked in a column, or (pinned) laid over each other in one grid cell and cross-faded.
+   Copy and graphic share one left edge, 541 px at 1440 (the copy box is 425 wide, centred 33.5 px right of centre). */
+.ing__steps { display: flex; flex-direction: column; gap: 56px; width: min(425px, 100%); margin-top: calc(80 * var(--sp)); position: relative; left: 33.5px; }
 .ing__no {
   display: block; margin-bottom: 12px;
   font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1.06; color: var(--yellow);
 }
-.ing__name {
-  font-family: var(--display); font-size: clamp(2rem, 1.2rem + 2.2vw, 3rem);   /* 48 px */
-  font-weight: 600; line-height: 1.06; letter-spacing: -.03em; color: var(--yellow);
-}
-.ing__text { margin-top: 16px; font-size: 18px; line-height: 1.6; color: var(--yellow); }
-.ing__art { width: auto; height: 190px; margin-top: calc(78 * var(--sp)); }
+.ing__name { font-family: var(--display); font-size: 25px; font-weight: 600; line-height: 1.3; color: #fff; }
+.ing__text { margin-top: 16px; font-size: 18px; line-height: 1.6; color: #fff; }
+.ing__art { width: auto; height: 190px; margin-top: calc(68 * var(--sp)); align-self: flex-start; margin-left: calc(50% - 179px); }
 
-.ing.is-pinned .ing__steps { display: grid; gap: 0; margin-top: min(calc(102 * var(--sp)), calc(var(--stage-h) * .108)); }
+.ing.is-pinned .ing__steps { display: grid; gap: 0; margin-top: min(calc(80 * var(--sp)), calc(var(--stage-h) * .085)); }
 .ing.is-pinned .ing__step {
   grid-area: 1 / 1;
   opacity: var(--o, 0);                             /* leaving steps rise, arriving steps come up from below */
@@ -472,7 +506,7 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .ing.is-pinned .ing__step:first-child { --o: 1; --d: 0; }
 .ing.is-pinned .ing__no { display: none; }          /* the dial carries the number */
 .ing.is-pinned .ing__art {                          /* gives way on short screens so the stage still pins */
-  height: min(190px, calc(var(--stage-h) * .2)); margin-top: min(calc(78 * var(--sp)), calc(var(--stage-h) * .083));
+  height: min(190px, calc(var(--stage-h) * .2)); margin-top: min(calc(68 * var(--sp)), calc(var(--stage-h) * .073));
 }
 
 .dial {
@@ -523,22 +557,22 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .motion .dial.is-in .dial__ring { rotate: 0deg; }
 
 /* ==========================================================================
-   Werkwijze: full-width light grey band straight under the dark Ingrediënten stage.
-   The ruler and the three columns run 1197 px wide (Figma x 121 → 1318), a little wider than --content;
-   the columns start on the ruler's yellow marks (0, 382, 828).
+   Werkwijze: full-width light grey band between "Wat we bouwen" and the dark Ingrediënten stage.
+   The ruler and the three columns run the 1158 px text column; the columns start on the ruler's blue marks
+   (0, 369.6, 800.7).
    ========================================================================== */
 @property --reveal { syntax: "<percentage>"; inherits: true; initial-value: 0%; }
 @keyframes sweep { to { --reveal: 112%; } }
 
 .way {
-  padding: calc(197 * var(--sp)) max(var(--frame) + var(--gutter), 50% - 598.5px) calc(245 * var(--sp));
+  padding: calc(197 * var(--sp)) var(--col);
   background: var(--paper); color: var(--darkblue);
 }
-.way__inner { max-width: 1197px; margin: 0 auto; }
-.way__title { max-width: 1048px; margin: 0 auto 44px; text-align: center; }
+.way__inner { margin: 0 auto; }
+.way__title { max-width: 640px; margin: 0 0 48px; }
 
 .ruler { position: relative; height: 32px; }
-.ruler__img { display: block; width: 100.175%; max-width: none; height: 32px; }   /* asset is 1199 px in a 1197 px track */
+.ruler__img { display: block; width: 100.17%; max-width: none; height: 32px; }   /* asset is 1160 px in a 1158 px track */
 .motion .ruler__img {
   --reveal: 0%;
   -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--reveal) - 12%), transparent var(--reveal));
@@ -547,15 +581,15 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .motion .ruler.is-in .ruler__img { animation: sweep 2.2s var(--ease-in-out) .1s forwards; }
 
 .steps {
-  display: grid; grid-template-columns: 382fr 446fr 369fr; margin-top: 11px;
+  display: grid; grid-template-columns: 369.6fr 431.2fr 357.2fr; margin-top: 11px;
 }
 .step { position: relative; padding-right: 32px; }
-.step__when { font-size: 13px; font-weight: 700; line-height: 1.5; letter-spacing: .04em; color: var(--yellow-ink); }   /* Figma: #fcb523, darkened to read on the grey */
+.step__when { font-size: 13px; font-weight: 700; line-height: 1.5; letter-spacing: .04em; color: var(--lightblue); }
 .step__title {
   max-width: 310px; margin-top: 28px;
   font-size: 25px; font-weight: 600; line-height: 1.3;
 }
-.step__text { max-width: 261px; margin-top: 6px; font-size: 16px; line-height: 1.5; }
+.step__text { max-width: 253px; margin-top: 8px; font-size: 18px; line-height: 1.6; color: var(--darkgrey); }
 
 /* ==========================================================================
    Ons team: white. Statement + copy, then the "co-Troopers" heading, then the portraits.
@@ -563,21 +597,21 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
    text column, as drawn.
    ========================================================================== */
 .team {
-  margin-top: calc(144 * var(--sp)); padding: 96px var(--col) 70px;
+  padding: 96px var(--col) 70px;                       /* straight under the dark Ingrediënten stage: the 96 px is the white gap */
   color: var(--darkgrey);
 }
-.team__inner { display: flex; flex-direction: column; gap: 81px; }
+.team__inner { display: flex; flex-direction: column; gap: 80px; }
 
-.team__intro { display: grid; grid-template-columns: 1fr 481px; column-gap: 27px; align-items: start; padding-top: 7px; }
-.team__copy { font-size: 17px; line-height: 1.65; letter-spacing: -.02em; }
-.team__copy p + p { margin-top: 1.65em; }
-.team__copy b { font-weight: 700; }
-
-.team__crew { display: flex; flex-direction: column; gap: 27px; }
-.team__crew-title { color: var(--lightblue); }
-.team__crew-text { font-family: var(--display); font-size: 20px; line-height: 1.5; color: var(--ink); }
+/* Heading left (560 px), copy right (553 px), 27 px between the halves; the same pattern again for Co-Troopers */
+.team__intro, .team__crew { display: grid; grid-template-columns: 1fr 1fr; column-gap: 27px; align-items: start; }
+.team__intro .h-display, .team__crew-title { max-width: 560px; }
+.team__copy, .team__crew-text { max-width: 553px; font-size: 18px; line-height: 1.6; color: var(--darkgrey); }
+.team__crew-title { color: var(--darkblue); }
 
 .people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 86px; width: calc(100% + 74px); }
+.people--founders { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 86px; width: 100%; }
+.people--founders .person__photo { width: 100%; aspect-ratio: 1; }
+.people--crew { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; width: 100%; }
 .person { display: flex; flex-direction: column; align-items: flex-start; }
 .person__photo {
   width: min(256px, 100%); aspect-ratio: 1; margin-bottom: 24px;
@@ -591,57 +625,74 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 /* ==========================================================================
    Placeholders (temporary – replaced once the real designs exist)
    ========================================================================== */
-.ph {
-  position: relative; display: grid; place-items: center;
-  margin: 0 var(--frame); aspect-ratio: 1392 / 599; border-radius: 8px;
-  background: radial-gradient(ellipse 78.5% 78.5% at 50% 50%, #737373 27.4%, #737373 70.3%, #5c5c5c 85.2%, #454444 100%);
-}
-.ph--testimonials { margin-top: 0; }                 /* straight under the team's 70 px bottom padding */
-.ph__x { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
-.ph__label {
-  position: relative; text-align: center; white-space: nowrap;
-  font-size: clamp(1.75rem, 1.1rem + 2vw, 3.125rem); font-weight: 500; line-height: 1.15; letter-spacing: -.01em; color: #fff;
-}
+/* Four 1392 × 596 cards, 23 px apart, 192 px under the team's text (122 + its 70 px bottom padding) */
+.cases { display: grid; gap: calc(23 * var(--sp)); margin: calc(122 * var(--sp)) var(--frame) 0; }
+.case { aspect-ratio: 1392 / 596; border-radius: 24px; background: #d9d9d9; }
 
 /* ==========================================================================
    Veelgestelde vragen
    ========================================================================== */
-.faq { margin-top: calc(115 * var(--sp)); padding: calc(173 * var(--sp)) var(--col); background: var(--lightgrey); }
-.faq__title { max-width: none; margin: 0 0 56px; color: var(--lightblue); }
-
+.faq {
+  display: grid; align-content: center; min-height: calc(939 * var(--sp));     /* Figma: a fixed 939 px band, the content centred */
+  margin-top: calc(79 * var(--sp)); padding: calc(114 * var(--sp)) calc(73.5 * var(--sp)); background: var(--darkblue); color: var(--paper);
+}
+.faq__title {
+  margin: 0 0 56px; font-family: var(--display); font-size: clamp(2rem, 1.2rem + 2.6vw, 3.125rem); font-weight: 800; line-height: 1.15; letter-spacing: -.01em;
+  color: var(--lightblue);                           /* 3.05:1 on the navy: fine at this size */
+}
+/* Figma 2169:1213: questions 722 px, a 70 px gap, the 500 px article card, vertically centred */
+.faq__grid { display: grid; grid-template-columns: minmax(0, 722px) minmax(0, 500px); justify-content: center; gap: 70px; align-items: center; }
 .faq__list { position: relative; }
-.faq__list::before, .faq__item::before {    /* hairlines in the FAQ blue, as in Figma */
-  content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--lightblue);
+.faq__list::before, .faq__item::before {    /* hairlines #f2f2f2 */
+  content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--paper);
 }
 .faq__list::before { top: 0; }
 .faq__item { position: relative; }
 .faq__item::before { bottom: 0; }
-.faq__item::after {                         /* line that sweeps across on hover / open */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: var(--darkblue); transform: scaleX(0); transform-origin: 0 50%;
-  transition: transform .8s var(--ease-out);
-}
-.faq__item.is-open::after { transform: none; }
-@media (hover: hover) { .faq__item:hover::after { transform: none; } }
 
 .faq__q { font: inherit; }
 .faq__btn {
   display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%;
-  padding: 23.75px 16px; border: 0; background: none; cursor: pointer; text-align: left;
-  font-size: clamp(1.1875rem, .95rem + .8vw, 1.5625rem); font-weight: 600; line-height: 1.3; color: var(--lightblue);   /* ≥ 19 px semibold: large text, so the Figma blue on #ccc (3.4:1) clears 3:1 */
+  padding: 24px 16px; border: 0; background: none; cursor: pointer; text-align: left;
+  font-family: var(--display); font-size: clamp(1.1875rem, .95rem + .8vw, 1.5625rem); font-weight: 600; line-height: 1.3; color: var(--paper);
 }
-.faq__btn:focus-visible { outline-offset: -3px; border-radius: 8px; }
+.faq__btn:focus-visible { outline: 2px solid var(--lightblue); outline-offset: -3px; border-radius: 8px; }
 .faq__label { transition: transform .6s var(--ease-out); }
 @media (hover: hover) { .faq__btn:hover .faq__label { transform: translateX(6px); } }
 
 .faq__icon { position: relative; flex: none; display: grid; place-items: center; width: 23px; height: 23px; }
 .faq__icon::before {
-  content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--yellow);
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(242, 242, 242, .14);
   transform: scale(0); transition: transform .5s var(--ease-out);
 }
 .faq__icon img { position: relative; width: 23px; height: 23px; transition: transform .7s var(--ease-out); }
 .faq__item.is-open .faq__icon::before { transform: scale(1); }
+@media (hover: hover) { .faq__btn:hover .faq__icon::before { transform: scale(1); } }
 .faq__item.is-open .faq__icon img { transform: rotate(135deg); }
+
+/* Article card (Figma 2170:2211): white, #ccc border, 280 px striped image, text block 28 / 32 px padding;
+   type is the Figma scale: eyebrow 13, heading 35 medium, body 16, caption 12 */
+.feature {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--lightgrey); border-radius: 16px; background: #fff; color: var(--darkblue);
+  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease-out);
+}
+.feature__art { height: 280px; overflow: hidden; }
+.feature__art img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease-out); }
+.feature__body { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 28px 32px 32px; font-family: var(--display); }
+.feature__eyebrow { font-size: 13px; font-weight: 400; letter-spacing: .04em; line-height: 1.5; text-transform: uppercase; color: var(--darkgrey); }
+.feature__title { font-size: 35px; font-weight: 500; line-height: 1.2; }
+.feature__link { color: inherit; text-decoration: none; }
+.feature__link::after { content: ""; position: absolute; inset: 0; }
+.feature__link:focus-visible { outline: none; }
+.feature:has(.feature__link:focus-visible) { outline: 2px solid var(--lightblue); outline-offset: 3px; }
+.feature__text { font-size: 16px; line-height: 1.6; color: var(--darkgrey); }
+.feature__by { font-size: 12px; line-height: 1.4; color: var(--darkgrey); }
+.feature__cta { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; line-height: 1.3; color: var(--lightblue); }
+@media (hover: hover) {
+  .feature:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, .28); }
+  .feature:hover .feature__art img { transform: scale(1.05); }
+}
 
 /* Height animates via grid rows; closed content is hidden from focus and screen readers */
 .faq__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease-out); }
@@ -650,74 +701,17 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 .faq__item.is-open .faq__a-in { visibility: visible; transition-delay: 0s; }
 .faq__a-in p {
   max-width: 796px; padding: 0 64px 32px 16px;
-  font-size: 18px; line-height: 1.6; color: var(--ink);
+  font-size: 18px; line-height: 1.6; color: var(--paper);
   opacity: 0; translate: 0 -10px; transition: opacity .35s ease, translate .6s var(--ease-out);
 }
 .faq__item.is-open .faq__a-in p { opacity: 1; translate: 0 0; transition-delay: .12s; }
-
-/* ==========================================================================
-   Blog: three outlined tiles (image on top, tag / title / author + date below) and a "more" button.
-   The whole tile is the link (the title's ::after covers it); author and date always sit on the bottom edge.
-   ========================================================================== */
-.blog {
-  display: grid; grid-template-columns: 1fr auto; grid-template-areas: "title more" "posts posts";
-  align-items: end; gap: 56px 24px;
-  padding: calc(114 * var(--sp)) var(--col) 0;
-}
-.blog__title { grid-area: title; max-width: none; }
-.blog__more { grid-area: more; }
-
-.posts { grid-area: posts; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 33px; }
-.post {
-  position: relative; display: flex; flex-direction: column; overflow: hidden;
-  border: 1px solid #c5c4ca; border-radius: 16px;
-  transition: border-color .4s ease;
-}
-/* No photos: a solid colour with a faint pattern (navy + dots, yellow + the CTA grid, steel blue + fine diagonals) */
-.post__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid #c5c4ca; }
-.post__media::before {
-  content: ""; position: absolute; inset: 0;
-  transition: transform .9s var(--ease-out);
-}
-.post__media--navy { background: var(--darkblue); }
-.post__media--navy::before { background: var(--dots-10) 12px 12px / 24px 24px; }
-.post__media--yellow { background: var(--yellow); }
-.post__media--yellow::before {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 .5H40M.5 0V40' stroke='%2304026f' stroke-opacity='.12' fill='none'/%3E%3Cpath d='M0 20.5H40M20.5 0V40' stroke='%2304026f' stroke-opacity='.12' stroke-dasharray='2 3' fill='none'/%3E%3C/svg%3E") 0 0 / 40px 40px;
-}
-.post__media--blue { background: #78a0b0; }
-.post__media--blue::before {
-  background: repeating-linear-gradient(-45deg, rgba(4, 2, 111, .1) 0 1px, transparent 1px 10px);
-}
-.post__body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; padding: 24px; }
-.post__tag {
-  padding: 5px 11px; border: 1px solid rgba(4, 2, 111, .2); border-radius: 100px;
-  font-size: 13px; line-height: 1.3; letter-spacing: .04em; color: var(--darkblue);
-}
-.post__title {
-  margin-top: 16px; text-wrap: balance;
-  font-size: clamp(1.25rem, 1.05rem + .55vw, 1.5rem); font-weight: 500; line-height: 1.3; letter-spacing: -.01em; color: var(--darkblue);
-}
-.post__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
-.post__link:focus-visible { outline: none; }
-.post:has(.post__link:focus-visible) { outline: 2px solid var(--darkblue); outline-offset: 3px; }
-.post__meta {
-  display: flex; justify-content: space-between; gap: 12px; width: 100%;
-  margin-top: auto; padding-top: 32px;
-  font-size: 14px; line-height: 1.5; color: #6b6b6b;
-}
-.post__meta span { font-weight: 500; color: var(--darkblue); }
-@media (hover: hover) {
-  .post:hover { border-color: rgba(4, 2, 111, .45); }
-  .post:hover .post__media::before { transform: scale(1.06); }
-}
 
 /* ==========================================================================
    Footer
    ========================================================================== */
 .footer {
   --col: max(calc(var(--frame) + var(--gutter)), calc(50% - 585px));   /* the footer keeps its own 1170 px frame (x 135) */
-  margin-top: calc(57 * var(--sp)); padding: 120px var(--col) 138px; background: var(--darkgrey); color: #fff;
+  margin-top: calc(66 * var(--sp)); padding: 120px var(--col) 138px; background: var(--darkgrey); color: #fff;
 }
 .footer__inner { display: flex; justify-content: space-between; gap: 48px; min-height: 388px; }
 .footer__intro { display: flex; flex-direction: column; align-items: flex-start; max-width: 474px; }
@@ -758,12 +752,15 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
 @media (max-width: 1280px) { .ing { --ds: .86; } }
 @media (max-width: 1100px) {
   .ing { --ds: .72; }
+  .faq__grid { grid-template-columns: minmax(0, 1fr) 340px; gap: 36px; align-items: start; }
+  .feature__art { height: 200px; }
   .people { width: auto; }                           /* the 74 px overhang only fits on the wide column */
 }
 
 /* Team: the 3-column grid needs 256 px portraits; below this it goes to two columns */
 @media (max-width: 980px) {
-  .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 32px; width: auto; }
+  .people--crew { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 32px; }
+  .people--founders { gap: 40px; }
 }
 
 @media (max-width: 900px) {
@@ -791,12 +788,12 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .nav__panel {
     position: absolute; left: 0; right: 0; top: 100%;
     display: flex; flex-direction: column; padding: 8px var(--gutter) 24px;
-    background: var(--white); box-shadow: 0 24px 40px -24px rgba(4, 2, 111, .25), 0 1px 0 rgba(4, 2, 111, .09);
+    background: var(--white); box-shadow: 0 24px 40px -24px rgba(4, 2, 111, .25), 0 1px 0 var(--hairline);
     opacity: 0; translate: 0 -8px; transition: opacity .3s ease, translate .4s var(--ease-out);
   }
   .nav__panel[hidden] { display: none !important; }
   .nav__panel.is-open { opacity: 1; translate: 0 0; }
-  .nav__panel a { padding: 14px 0; border-bottom: 1px solid rgba(4, 2, 111, .08); font-size: 22px; font-weight: 500; letter-spacing: -.02em; color: var(--darkblue); }
+  .nav__panel a { padding: 14px 0; border-bottom: 1px solid var(--hairline); font-size: 22px; font-weight: 500; letter-spacing: -.02em; color: var(--darkblue); }
   .nav__panel a:nth-last-child(2) { border-bottom: 0; }
   .nav__panel .nav__panel-cta { align-self: flex-start; margin-top: 16px; padding: 14px 18px; border: 0; font-size: 15px; letter-spacing: 0; color: #fff; }
   .nav__panel .nav__panel-cta .btn__label { color: inherit; }
@@ -808,11 +805,25 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .hero__plane { top: auto; bottom: 0; right: calc(var(--pw) * -.3); }
   .pill { border-radius: 22px; }
 
+  /* client bar → two rows of three */
+  .clients { --s: .52px; }
+  .clients__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-items: center; align-items: center; gap: 20px 16px; padding-block: 20px; }
+
   /* sections */
-  .cards { grid-template-columns: 1fr; gap: 20px; }
-  .card__num { padding: 0 16px; font-size: clamp(88px, 24vw, 128px); }
-  .card__title { min-height: 72px; padding: 20px; }
-  .card__text { padding: 20px; }
+  .statement { margin-top: 72px; }
+  .build { margin-top: 56px; margin-bottom: 72px; gap: 72px; }
+  .build__row { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .build__h { margin-top: 0; }
+  .build__tiles { grid-template-columns: minmax(0, 1fr); }
+  .tile { aspect-ratio: auto; min-height: 168px; }
+  .tile__no { font-size: 48px; }
+  .h-ing { text-align: center; }
+  .ing__steps, .ing__art { left: 0; margin-left: 0; align-self: center; }
+  .people--founders { grid-template-columns: minmax(0, 1fr); }
+  .faq__grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .feature__art { height: 220px; }
+  .feature__body { padding: 24px 24px 28px; }
+  .feature__title { font-size: 24px; }
 
   /* no room for the dial beside the copy: it goes, and each step shows its own number */
   .ing .dial { display: none; }
@@ -841,28 +852,21 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .step { padding-right: 0; }
   .step::before {
     content: ""; display: block; height: 32px; margin-bottom: 11px;
-    background: url("../assets/svg/ruler.svg") no-repeat calc(-1 * var(--at, 0px)) 0 / 1199.09px 32px;
+    background: url("../assets/svg/ruler.svg") no-repeat calc(-1 * var(--at, 0px)) 0 / 1160px 32px;
   }
-  .step:nth-child(2) { --at: 382.05px; }
-  .step:nth-child(3) { --at: 827.8px; }
+  .step:nth-child(2) { --at: 369.58px; }
+  .step:nth-child(3) { --at: 800.75px; }
   .step__title { margin-top: 24px; }
 
   /* Team / placeholders / FAQ */
   .team { padding: 72px var(--col) 56px; }
   .team__inner { gap: 56px; }
-  .team__intro { grid-template-columns: 1fr; row-gap: 24px; }
-  .ph { aspect-ratio: auto; height: clamp(200px, 52vw, 420px); }
-  .faq { padding: 72px var(--col) 96px; }
+  .team__intro, .team__crew { grid-template-columns: 1fr; row-gap: 24px; }
+  .cases { margin-top: 56px; gap: 16px; }
+  .case { aspect-ratio: auto; height: clamp(200px, 52vw, 420px); border-radius: 16px; }
+  .faq { min-height: 0; padding: 72px var(--col) 96px; }
   .faq__title { margin-bottom: 36px; }
   .faq__a-in p { padding-right: 0; }
-
-  /* blog → one column, the button under the tiles */
-  .blog { grid-template-columns: 1fr; grid-template-areas: "title" "posts" "more"; gap: 36px; padding-top: 72px; }
-  .blog__more { justify-self: start; }
-  .posts { grid-template-columns: 1fr; gap: 20px; }
-  .post__media { aspect-ratio: 16 / 9; }
-  .post__body { padding: 20px; }
-  .post__meta { padding-top: 24px; }
 
   /* footer */
   .footer { padding: 72px var(--col) 80px; }
@@ -876,6 +880,8 @@ a:hover .arrow--up svg:nth-child(2), a:focus-visible .arrow--up svg:nth-child(2)
   .nav__cta { display: none; }
   .nav__brand { padding: 0 20px; }
   .people { gap: 40px 16px; }
+  .clients__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clients { --s: .5px; }
   .hero__actions .btn { flex: 1 1 auto; justify-content: center; }
   .totop { font-size: 22px; }
 }
