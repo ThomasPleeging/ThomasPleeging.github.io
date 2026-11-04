@@ -145,7 +145,10 @@
         <h2 class="build__h">Upgrade je <em>proces</em> met AI en automatisering</h2>
         <ol class="build__tiles">
           <li class="tile tile--dark"><svg class="tile__dial" viewBox="0 0 300 400" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" data-dial="300,0,200,95,175,9"></svg><span class="tile__no" aria-hidden="true">1</span><span class="tile__label">Rapportage en dashboards</span></li>
-          <li class="tile tile--grey"><span class="tile__no" aria-hidden="true">2</span><span class="tile__label">AI-processen en workflows</span></li>
+          <li class="tile tile--grey tile--link"><span class="tile__no" aria-hidden="true">2</span><span class="tile__label"><a class="tile__link" href="ai.html">AI-processen en workflows <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span></a></span></li>
           <li class="tile tile--paper"><span class="tile__no" aria-hidden="true">3</span><span class="tile__label">Koppelingen en tools</span></li>
         </ol>
       </div>
@@ -157,7 +160,7 @@
         <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
 
         <div class="ruler" data-reveal aria-hidden="true">
-          <img class="ruler__img" src="assets/svg/ruler.svg" width="1160" height="32" alt="" decoding="async">
+          <img class="ruler__img" src="assets/svg/ruler.svg" width="1158" height="33" alt="" decoding="async">
         </div>
 
         <ol class="steps">
@@ -302,14 +305,80 @@
       </div>
     </section>
 
-    <!-- ═══════════ PLACEHOLDER ═══════════
-         Layout placeholder: the Figma holds four unlabelled grey cards here. They are assumed to be the "Werk"
-         cases (the nav links to #werk). Replace the <section class="cases"> as a whole when the design arrives. -->
-    <section class="cases" id="werk" aria-label="Werk (placeholder)">
-      <div class="case" data-reveal aria-hidden="true"></div>
-      <div class="case" data-reveal aria-hidden="true"></div>
-      <div class="case" data-reveal aria-hidden="true"></div>
-      <div class="case" data-reveal aria-hidden="true"></div>
+    <!-- ─────────── Werk ───────────
+         Doorwissel (2026-11-03): one fixed frame while scrolling; each next image wipes up over the last, the text
+         changes and the numbers count up (main.js §3c). Without js, with reduced motion, on phones or on a window
+         too short for a card, the cases simply stack. SAMPLE CONTENT: clients, copy and figures are examples and
+         "Beeld" marks the image: put the real <img> in .case__fill. The hrefs are placeholders until the case pages exist. -->
+    <section class="cases" id="werk" aria-labelledby="werk-title" style="--n:4" data-cases>
+      <h2 class="sr-only" id="werk-title">Werk</h2>
+      <div class="cases__stage"><div class="cases__frame">
+        <div class="cases__rail" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <a class="case" href="#case-klantportaal" data-reveal>
+          <div class="case__img"><div class="case__fill tile--sun" data-sun></div><i class="case__tag">Beeld</i></div>
+          <div class="case__body">
+            <span class="case__eyebrow">Voorbeeldklant · Logistiek</span>
+            <h3 class="case__title">Een klantportaal dat de helft van de supportvragen opvangt</h3>
+            <p class="case__text">Klanten vroegen hun orderstatus op via mail en telefoon. In zes weken bouwden we een portaal waarin ze alles zelf zien.</p>
+            <dl class="case__kpis">
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>−48%</span><span class="sr-only">−48%</span></dt><dd>supportvragen per week</dd></div>
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>6 wk</span><span class="sr-only">6 wk</span></dt><dd>van workshop tot live</dd></div>
+            </dl>
+            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span></span>
+          </div>
+        </a>
+        <a class="case" href="#case-rapportages" data-reveal>
+          <div class="case__img"><div class="case__fill tile--grid"></div><i class="case__tag">Beeld</i></div>
+          <div class="case__body">
+            <span class="case__eyebrow">Voorbeeldklant · Zorg</span>
+            <h3 class="case__title">Rapportages die zichzelf maken</h3>
+            <p class="case__text">Teamleiders verzamelden elke maandag cijfers uit vijf systemen. Nu staat het dashboard om acht uur klaar.</p>
+            <dl class="case__kpis">
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>12 u</span><span class="sr-only">12 u</span></dt><dd>bespaard per week</dd></div>
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>1</span><span class="sr-only">1</span></dt><dd>overzicht in plaats van vijf systemen</dd></div>
+            </dl>
+            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span></span>
+          </div>
+        </a>
+        <a class="case" href="#case-offertes" data-reveal>
+          <div class="case__img"><div class="case__fill tile--dark"><svg class="tile__dial" viewBox="0 0 600 450" preserveAspectRatio="xMaxYMin slice" aria-hidden="true" data-dial="600,0,340,100,180,15"></svg></div><i class="case__tag">Beeld</i></div>
+          <div class="case__body">
+            <span class="case__eyebrow">Voorbeeldklant · Installatie</span>
+            <h3 class="case__title">Offertes in minuten in plaats van dagen</h3>
+            <p class="case__text">Elke offerte ging langs drie mensen en een spreadsheet. Een AI-workflow maakt nu het concept; de adviseur controleert en verstuurt.</p>
+            <dl class="case__kpis">
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>−70%</span><span class="sr-only">−70%</span></dt><dd>doorlooptijd per offerte</dd></div>
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>3 wk</span><span class="sr-only">3 wk</span></dt><dd>tot de eerste werkende versie</dd></div>
+            </dl>
+            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span></span>
+          </div>
+        </a>
+        <a class="case" href="#case-onboarding" data-reveal>
+          <div class="case__img"><div class="case__fill tile--grey"></div><i class="case__tag">Beeld</i></div>
+          <div class="case__body">
+            <span class="case__eyebrow">Voorbeeldklant · Financieel</span>
+            <h3 class="case__title">Onboarding zonder papierwerk</h3>
+            <p class="case__text">Nieuwe klanten haakten af bij lange formulieren. We brachten de aanvraag terug tot één digitale flow, gekoppeld aan de backoffice.</p>
+            <dl class="case__kpis">
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>+35%</span><span class="sr-only">+35%</span></dt><dd>afgeronde aanvragen</dd></div>
+            <div class="case__kpi"><dt><span aria-hidden="true" data-count>4 wk</span><span class="sr-only">4 wk</span></dt><dd>van idee tot in gebruik</dd></div>
+            </dl>
+            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
+            </span></span>
+          </div>
+        </a>
+      </div></div>
     </section>
 
     <!-- ─────────── Veelgestelde vragen ───────────
@@ -470,7 +539,7 @@
           <h3 class="fcol__title" id="f-prod">producten</h3>
           <ul>
             <li><a href="#software">Software</a></li>
-            <li><a href="#ai">AI</a></li>
+            <li><a href="ai.html">AI</a></li>
             <li><a href="#webapplicaties">Webapplicaties</a></li>
             <li><a href="#agencies">Agencies</a></li>
           </ul>

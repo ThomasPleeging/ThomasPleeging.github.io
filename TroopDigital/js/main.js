@@ -187,6 +187,122 @@
   }
 
   /* ---------------------------------------------------------------------
+     3c. Werk (Doorwissel): the frame pins, each next image wipes up over the
+         last, the text changes and its numbers count up. Writes --t / --drift
+         / --a / --y on each case (see the CSS). Only pins on a wide window
+         where every card fits; otherwise the cases stack.
+     --------------------------------------------------------------------- */
+  const cases = $('[data-cases]');
+  if (cases && motion) {
+    const stage = $('.cases__stage', cases);
+    const cards = $$('.case', cases).map(el => ({
+      el,
+      img: $('.case__img', el),
+      body: $('.case__body', el),
+      nums: $$('[data-count]', el).map(node => ({ node, full: node.textContent, n: parseInt(node.textContent.replace(/\D/g, ''), 10) }))
+    }));
+    const ticks = $$('.cases__rail span', cases);
+    const count = cards.length;
+    const EASE_MS = 110;       // same follow as the dial
+    const WIPE = [0.2, 0.8];   // share of each stretch in which the image actually wipes
+
+    let pinned = false;
+    let run = 1;
+    let navH = 0;
+    let target = 0;
+    let shown = 0;
+    let raf = 0;
+    let lastT = 0;
+    let lastW = 0;
+    let lastH = 0;
+
+    const wipe = (s, i) => i === 0 ? 1 : smoothstep(clamp((s - (i - 1) - WIPE[0]) / (WIPE[1] - WIPE[0]), 0, 1));
+
+    const paint = s => {
+      const on = Math.round(s);
+      cards.forEach(({ el, img, nums }, i) => {
+        const t = wipe(s, i);
+        const covered = i < count - 1 ? wipe(s, i + 1) : 0;
+        const textIn = clamp((t - 0.5) / 0.5, 0, 1);
+        const textOut = clamp(covered / 0.45, 0, 1);
+        el.style.setProperty('--t', t.toFixed(4));
+        el.style.setProperty('--drift', `${(-covered * 8).toFixed(2)}%`);
+        el.style.setProperty('--a', (textIn * (1 - textOut)).toFixed(3));
+        el.style.setProperty('--y', `${((1 - textIn) * 24 - textOut * 24).toFixed(1)}px`);
+        img.style.visibility = covered >= 1 ? 'hidden' : '';  // fully covered: no hairline of it at the edges
+        el.classList.toggle('is-on', i === on);
+        const e = smoothstep(textIn);
+        nums.forEach(({ node, full, n }) => {
+          const text = full.replace(/\d+/, Math.round(n * e));
+          if (node.textContent !== text) node.textContent = text;
+        });
+      });
+      ticks.forEach((tick, i) => tick.classList.toggle('is-on', i === on));
+    };
+
+    const readTarget = () => {
+      target = clamp((navH - cases.getBoundingClientRect().top) / run, 0, count - 1);
+    };
+
+    const tick = now => {
+      raf = 0;
+      const dt = lastT ? Math.min(now - lastT, 64) : 16;
+      lastT = now;
+      shown += (target - shown) * (1 - Math.exp(-dt / EASE_MS));
+      if (Math.abs(target - shown) < 0.0008) shown = target;
+      paint(shown);
+      if (shown !== target) raf = requestAnimationFrame(tick);
+      else lastT = 0;
+    };
+    const follow = () => {
+      if (!pinned) return;
+      readTarget();
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+
+    const reset = () => cards.forEach(({ el, img, nums }) => {
+      ['--t', '--drift', '--a', '--y'].forEach(p => el.style.removeProperty(p));
+      img.style.visibility = '';
+      el.classList.remove('is-on');
+      nums.forEach(({ node, full }) => { node.textContent = full; });
+    });
+
+    // Measured with the pinned layout switched on and all numbers at full width, then switched back off if a card doesn't fit
+    const layout = () => {
+      lastW = window.innerWidth;
+      lastH = window.innerHeight;
+      navH = nav.offsetHeight;
+      reset();
+      cancelAnimationFrame(raf);
+      raf = 0;
+      lastT = 0;
+      cases.classList.add('is-pinned');
+      pinned = lastW > 900 && stage.offsetHeight <= lastH - navH + 1 && cards.every(({ body }) => body.scrollHeight <= body.clientHeight + 1);
+      cases.classList.toggle('is-pinned', pinned);
+      if (!pinned) return;
+      run = (cases.offsetHeight - stage.offsetHeight) / (count - 1);
+      readTarget();
+      shown = target;
+      paint(shown);
+    };
+
+    layout();
+    fontsReady.then(layout);
+    window.addEventListener('scroll', follow, { passive: true });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth !== lastW || Math.abs(window.innerHeight - lastH) > 120) layout();
+    }, { passive: true });
+
+    // Keyboard: tabbing to a case scrolls the track to it (a mouse click on one must not move the page)
+    cases.addEventListener('focusin', e => {
+      if (!pinned || !e.target.matches(':focus-visible')) return;
+      const i = cards.findIndex(({ el }) => el === e.target.closest('.case'));
+      if (i < 0) return;
+      window.scrollTo({ top: window.scrollY + cases.getBoundingClientRect().top - navH + run * i, behavior: 'auto' });
+    });
+  }
+
+  /* ---------------------------------------------------------------------
      4. Pointer-follow grid highlight (hero + CTA) and CTA portrait parallax
      --------------------------------------------------------------------- */
   const followPointer = (host, layer, { parallax = false } = {}) => {
@@ -230,7 +346,7 @@
   };
 
   if (motion && finePointer.matches) {
-    followPointer(hero, $('.hero__bg', hero));
+    if (hero) followPointer(hero, $('.hero__bg', hero));   // the product pages have no pointer-follow hero
     const band = cta && $('.cta__band', cta);
     if (band) followPointer(band, band, { parallax: true });
   }
@@ -298,6 +414,23 @@
       btn.setAttribute('aria-expanded', String(open));
       btn.closest('.faq__item').classList.toggle('is-open', open);
     });
+  }
+
+  /* ---------------------------------------------------------------------
+     5b2. Product page: services accordion – one open at a time, the picture beside it follows
+     --------------------------------------------------------------------- */
+  const acc = $('[data-acc]');
+  if (acc) {
+    const items = $$('.aiw__item', acc);
+    const slides = $$('[data-acc-slide]');
+    items.forEach((item, i) => $('.aiw__btn', item).addEventListener('click', () => {
+      items.forEach((it, k) => {
+        const on = k === i;
+        it.classList.toggle('is-open', on);
+        $('.aiw__btn', it).setAttribute('aria-expanded', String(on));
+        if (slides[k]) slides[k].classList.toggle('is-active', on);
+      });
+    }));
   }
 
   /* ---------------------------------------------------------------------
