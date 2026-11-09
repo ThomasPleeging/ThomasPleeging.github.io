@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Troop Digital – De radicaal efficiënte digitale ontwikkelpartner</title>
+  <title>Troop Digital – De radicaal efficiënte digitale ontwikkelpartner (variant)</title>
   <meta name="description" content="Een team van ervaren ontwikkelaars, productmanagers en designers. Strategie, design en development in één hand. We helpen bedrijven vooruit met simpele, toekomstbestendige oplossingen.">
-  <meta name="theme-color" content="#fcb523">
+  <meta name="theme-color" content="#04026f">
   <!-- Private site: keep out of search engines, archives and AI training/answer engines -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
@@ -25,13 +25,13 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body id="top">
+<body id="top" class="page-alt">
   <a class="skip" href="#main">Ga naar inhoud</a>
 
-  <!-- ─────────── Navigatie ─────────── -->
-  <header class="nav" data-nav>
+  <!-- ─────────── Navigatie: floating 1158 px bar over the hero ─────────── -->
+  <header class="nav nav--float nav--bar" data-nav>
     <a class="nav__brand" href="#top" aria-label="Troop Digital – naar boven">
-      <img src="assets/svg/logo-dark.svg" width="145.268" height="14.36" alt="Troop Digital">
+      <img src="assets/svg/logo-darkblue.svg" width="145.268" height="14.36" alt="Troop Digital">
     </a>
 
     <nav class="menu" aria-label="Hoofdmenu" data-menu>
@@ -73,7 +73,7 @@
 
   <main id="main">
 
-    <!-- ─────────── Hero ─────────── -->
+    <!-- ─────────── Hero (same as index.html) ─────────── -->
     <section class="hero" data-hero aria-labelledby="hero-title">
       <div class="hero__bg" aria-hidden="true">
         <span class="hero__grid"></span>
@@ -110,76 +110,51 @@
     </section>
 
     <!-- ─────────── Klanten ───────────
-         The logo files are white (for dark surfaces); css turns them dark grey. Each sits on a 303 × 103 canvas,
-         so --x / --y / --w / --h give the artwork's own bounds on it: css crops to those and spreads the six evenly. -->
-    <section class="clients" aria-label="Klanten">
+         Logo files are white (css turns them dark grey); --x/--y/--w/--h crop each 303 × 103 canvas to its artwork.
+         Figma order: Erasmus, HvA, Lifeguard, Lighthouse, Multinal, NXT GEN. -->
+    <section class="clients clients--alt" aria-label="Klanten">
       <ul class="clients__list">
-        <li class="clients__item" data-reveal style="--i:0; --x:23.5; --y:21.2; --w:257.8; --h:63.3"><img src="assets/svg/clientlogos/Erasmus.svg" width="303" height="103" alt="Erasmus Universiteit Rotterdam" decoding="async"></li>
-        <li class="clients__item" data-reveal style="--i:1; --x:26; --y:25; --w:250; --h:41"><img src="assets/svg/clientlogos/Lighthouse.svg" width="303" height="103" alt="Lighthouse" decoding="async"></li>
-        <li class="clients__item" data-reveal style="--i:2; --x:54; --y:24; --w:196; --h:56.84"><img src="assets/svg/clientlogos/Multinal.svg" width="303" height="103" alt="Multinal Group" decoding="async"></li>
-        <li class="clients__item" data-reveal style="--i:3; --x:37; --y:27; --w:228; --h:49.9"><img src="assets/svg/clientlogos/hva.svg" width="303" height="103" alt="Hogeschool van Amsterdam" decoding="async"></li>
-        <li class="clients__item" data-reveal style="--i:4; --x:57; --y:19; --w:188.1; --h:64"><img src="assets/svg/clientlogos/lifeguard.svg" width="303" height="103" alt="Lifeguard" decoding="async"></li>
-        <li class="clients__item" data-reveal style="--i:5; --x:101; --y:1; --w:101; --h:101"><img src="assets/svg/clientlogos/nxtgenlogo.svg" width="303" height="103" alt="NXT GEN hightech" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:0.90s; --x:23.5; --y:21.2; --w:257.8; --h:63.3"><img src="assets/svg/clientlogos/Erasmus.svg" width="303" height="103" alt="Erasmus Universiteit Rotterdam" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:0.96s; --x:37; --y:27; --w:228; --h:49.9"><img src="assets/svg/clientlogos/hva.svg" width="303" height="103" alt="Hogeschool van Amsterdam" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:1.02s; --x:57; --y:19; --w:188.1; --h:64"><img src="assets/svg/clientlogos/lifeguard.svg" width="303" height="103" alt="Lifeguard" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:1.08s; --x:26; --y:25; --w:250; --h:41"><img src="assets/svg/clientlogos/Lighthouse.svg" width="303" height="103" alt="Lighthouse" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:1.14s; --x:54; --y:24; --w:196; --h:56.84"><img src="assets/svg/clientlogos/Multinal.svg" width="303" height="103" alt="Multinal Group" decoding="async"></li>
+        <li class="clients__item" data-anim style="--d:1.20s; --x:101; --y:1; --w:101; --h:101"><img src="assets/svg/clientlogos/nxtgenlogo.svg" width="303" height="103" alt="NXT GEN hightech" decoding="async"></li>
       </ul>
     </section>
 
-    <!-- ─────────── Statement ───────────
-         Big positioning line between the client bar and "Wat we bouwen" (user copy, 2026-11-03). -->
-    <section class="statement" aria-label="Wat we doen">
-      <p class="statement__text" data-reveal>Troop Digital unlockt de <em>volle potentie</em> van jouw bedrijf, door je digitaal te transformeren en versnellen.</p>
+    <!-- ─────────── Statement + Wat we bouwen ───────────
+         Paper page with a hairline grid: a vertical rule 16 px left of the column and a horizontal rule under the
+         statement and under the first row (Figma x 125, y 1363 / 1938). -->
+    <section class="railed stmt" aria-label="Wat we doen">
+      <p class="stmt__text" data-reveal>Troop Digital unlockt de volle potentie van jouw bedrijf, door je digitaal te transformeren en versnellen.</p>
     </section>
 
-    <!-- ─────────── Wat we bouwen ───────────
-         Option C (2026-11-03): heading left, the three points as flush identity tiles right (navy, sunburst,
-         yellow grid / dark dial, grey, paper grid). The sunburst and dial are drawn by main.js §5c. -->
-    <section class="build" id="wat-we-bouwen" aria-label="Wat we bouwen">
-      <div class="build__row" data-reveal style="--i:0">
-        <h2 class="build__h">Upgrade je <em>dienstverlening</em> met eigen software</h2>
-        <ol class="build__tiles">
-          <li class="tile tile--navy"><span class="tile__no" aria-hidden="true">1</span><span class="tile__label">Maatwerk software</span></li>
-          <li class="tile tile--sun" data-sun><span class="tile__no" aria-hidden="true">2</span><span class="tile__label"><span>Klantportalen</span></span></li>
-          <li class="tile tile--grid"><span class="tile__no" aria-hidden="true">3</span><span class="tile__label">Websites en apps</span></li>
-        </ol>
-      </div>
-      <div class="build__row" data-reveal style="--i:1">
-        <h2 class="build__h">Upgrade je <em>proces</em> met AI en automatisering</h2>
-        <ol class="build__tiles">
-          <li class="tile tile--dark"><svg class="tile__dial" viewBox="0 0 300 400" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" data-dial="300,0,200,95,175,9"></svg><span class="tile__no" aria-hidden="true">1</span><span class="tile__label">Rapportage en dashboards</span></li>
-          <li class="tile tile--grey tile--link"><span class="tile__no" aria-hidden="true">2</span><span class="tile__label"><a class="tile__link" href="ai.html">AI-processen en workflows <span class="arrow arrow--ne" aria-hidden="true">
-              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-            </span></a></span></li>
-          <li class="tile tile--paper"><span class="tile__no" aria-hidden="true">3</span><span class="tile__label">Koppelingen en tools</span></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ─────────── Werkwijze ─────────── -->
-    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
-      <div class="way__inner">
-        <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
-
-        <div class="ruler" data-reveal aria-hidden="true">
-          <img class="ruler__img" src="assets/svg/ruler.svg" width="1158" height="33" alt="" decoding="async">
+    <section class="railed up up--a" id="wat-we-bouwen" aria-labelledby="up-a">
+      <div class="up__in" data-reveal>
+        <h2 class="up__h" id="up-a">Upgrade je <em>dienstverlening</em> met eigen software</h2>
+        <div class="up__body">
+          <ol class="up__list">
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">1</span><span class="up__label">Maatwerk software</span></a></li>
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">2</span><span class="up__label">Klantportalen</span></a></li>
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">3</span><span class="up__label">Websites en apps</span></a></li>
+          </ol>
+          <figure class="up__img"><img src="assets/img/home2/row-software.webp" width="1000" height="730" alt="Een ontwikkelaar aan het werk op kantoor" loading="lazy" decoding="async"></figure>
         </div>
+      </div>
+    </section>
 
-        <ol class="steps">
-          <li class="step" data-reveal style="--d:.35s">
-            <p class="step__when">Dag 1</p>
-            <h3 class="step__title">Start: workshop</h3>
-            <p class="step__text">Doel scherp, scope strak, grenzen helder. Je weet wat nodig is en wat niet.</p>
-          </li>
-          <li class="step" data-reveal style="--d:.75s">
-            <p class="step__when">2 tot 3 weken</p>
-            <h3 class="step__title">Bewijs: proof of concept</h3>
-            <p class="step__text">Vaste prijs. Gebouwd en getest. We bouwen een eerste versie om te valideren.</p>
-          </li>
-          <li class="step" data-reveal style="--d:1.2s">
-            <p class="step__when">4 tot 6 weken</p>
-            <h3 class="step__title">Live: in gebruik</h3>
-            <p class="step__text">Een werkende versie die je team echt gebruikt. Daarna opschalen, of stoppen.</p>
-          </li>
-        </ol>
+    <section class="railed up up--b" aria-labelledby="up-b">
+      <div class="up__in" data-reveal>
+        <h2 class="up__h" id="up-b">Upgrade je <em>proces</em> met AI en automatisering</h2>
+        <div class="up__body">
+          <figure class="up__img"><img src="assets/img/home2/row-ai.webp" width="1000" height="563" alt="Een ontwikkelaar achter twee schermen" loading="lazy" decoding="async"></figure>
+          <ol class="up__list">
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">1</span><span class="up__label">Rapportage en dashboards</span></a></li>
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">2</span><span class="up__label">AI-processen en workflows</span></a></li>
+            <li><a class="up__item" href="ai.html"><span class="up__no" aria-hidden="true">3</span><span class="up__label">Koppelingen en tools</span></a></li>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -188,7 +163,7 @@
          put while the dial turns 18° per step, carrying 01 / 02 / 03 round to 3 o'clock, where each number's
          tick turns into the triangle marker. Without js, with
          reduced motion or on a viewport too short for the stage, the three steps simply stack and nothing is pinned. -->
-    <section class="ing" id="ingredienten" aria-labelledby="ing-title" data-ing>
+    <section class="ing ing--blue" id="ingredienten" aria-labelledby="ing-title" data-ing>
       <div class="ing__stage">
         <div class="dial" aria-hidden="true" data-reveal>
           <span class="dial__ring">
@@ -248,131 +223,168 @@
             </li>
           </ol>
           <!-- Figma draws this one graphic (for 01); it stays put through all three steps -->
-          <img class="ing__art" src="assets/svg/ing-blocks.svg" width="329" height="190" alt="" aria-hidden="true" data-reveal style="--d:.3s">
+          <img class="ing__art" src="assets/svg/ing-blocks-solid.svg" width="329" height="190" alt="" aria-hidden="true" data-reveal style="--d:.3s">
         </div>
+      </div>
+    </section>
+
+    <!-- ─────────── Werkwijze ─────────── -->
+    <section class="way" id="werkwijze" aria-labelledby="way-title" data-way>
+      <div class="way__inner">
+        <h2 class="h-display way__title" id="way-title" data-split>Hoe? Start klein. Valideer. Schaal dan op.</h2>
+
+        <div class="ruler" data-reveal aria-hidden="true">
+          <img class="ruler__img" src="assets/svg/ruler.svg" width="1158" height="33" alt="" decoding="async">
+        </div>
+
+        <ol class="steps">
+          <li class="step" data-reveal style="--d:.35s">
+            <p class="step__when">Dag 1</p>
+            <h3 class="step__title">Start: workshop</h3>
+            <p class="step__text">Doel scherp, scope strak, grenzen helder. Je weet wat nodig is en wat niet.</p>
+          </li>
+          <li class="step" data-reveal style="--d:.75s">
+            <p class="step__when">2 tot 3 weken</p>
+            <h3 class="step__title">Bewijs: proof of concept</h3>
+            <p class="step__text">Vaste prijs. Gebouwd en getest. We bouwen een eerste versie om te valideren.</p>
+          </li>
+          <li class="step" data-reveal style="--d:1.2s">
+            <p class="step__when">4 tot 6 weken</p>
+            <h3 class="step__title">Live: in gebruik</h3>
+            <p class="step__text">Een werkende versie die je team echt gebruikt. Daarna opschalen, of stoppen.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- ─────────── Ons team ───────────
-         Portraits are the Figma placeholder (the same photo six times): swap each <img> for the real portrait. -->
-    <section class="team" id="team" aria-labelledby="team-title">
-      <div class="team__inner">
-        <div class="team__intro">
-          <h2 class="h-display" id="team-title" data-split>Door ervaren specialisten die jouw business snappen.</h2>
-          <p class="team__copy" data-reveal>Troop Digital heeft geen accountmanagers en geen overdracht naar een projectteam. Jan en Jesse leiden elk project zelf, van de eerste strategiesessie tot de livegang.</p>
-        </div>
-
-        <ul class="people people--founders" data-reveal-group aria-label="Founders">
-          <li class="person person--founder" data-reveal style="--i:0">
-            <div class="person__photo"><img src="assets/img/team-jan.webp" width="1024" height="1024" alt="Jan Kranendonk" loading="lazy" decoding="async"></div>
-            <p class="person__name">Jan Kranendonk</p>
-            <p class="person__role">Product en digitale strategie</p>
-          </li>
-          <li class="person person--founder" data-reveal style="--i:1">
-            <div class="person__photo"><img src="assets/img/team-jesse.webp" width="960" height="960" alt="Jesse van Thijn" loading="lazy" decoding="async"></div>
-            <p class="person__name">Jesse van Thijn</p>
-            <p class="person__role">Techniek en architectuur</p>
-          </li>
-        </ul>
-
-        <div class="team__crew">
-          <h3 class="h-display team__crew-title" data-split>Co-Troopers</h3>
-          <p class="team__crew-text" data-reveal>De vaste ring van senior specialisten waarmee we werken.</p>
-        </div>
-
-        <ul class="people people--crew" data-reveal-group>
-          <li class="person" data-reveal style="--i:2">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Mike van Laar" loading="lazy" decoding="async"></div>
-            <p class="person__name">Mike van Laar</p>
-            <p class="person__role">SEO &amp; Growth</p>
-          </li>
-          <li class="person" data-reveal style="--i:0">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Rogier Bisschop" loading="lazy" decoding="async"></div>
-            <p class="person__name">Rogier Bisschop</p>
-            <p class="person__role">Brand Designer</p>
-          </li>
-          <li class="person" data-reveal style="--i:1">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Erik Schuur" loading="lazy" decoding="async"></div>
-            <p class="person__name">Erik Schuur</p>
-            <p class="person__role">Brand Designer</p>
-          </li>
-          <li class="person" data-reveal style="--i:2">
-            <div class="person__photo"><img src="assets/img/team-portrait.webp" width="256" height="256" alt="Ruud Kooiman" loading="lazy" decoding="async"></div>
-            <p class="person__name">Ruud Kooiman</p>
-            <p class="person__role">AI &amp; Data expert</p>
-          </li>
-        </ul>
+         Figma 2275:5479. Co-Troopers: the design shows six cards with repeated names and one placeholder cut-out;
+         built as drawn, to be replaced with the real people. -->
+    <section class="railed tm" id="team" aria-labelledby="team-title">
+      <div class="tm__intro">
+        <h2 class="h-display" id="team-title" data-split>Gemaakt door ervaren specialisten die jouw business snappen.</h2>
+        <p class="tm__lead" data-reveal>Troop Digital heeft geen accountmanagers en geen overdracht naar een projectteam. Jan en Jesse leiden elk project zelf, van de eerste strategiesessie tot de livegang.</p>
       </div>
+
+      <ul class="tm__founders" data-reveal-group aria-label="Founders">
+        <li class="tm__person" data-reveal style="--i:0">
+          <div class="tm__photo tm__photo--blue"><img src="assets/img/home2/jesse.webp" width="1024" height="1024" alt="Jesse van Thijn" loading="lazy" decoding="async"></div>
+          <div class="tm__meta">
+            <p class="tm__name">Jesse van Thijn</p>
+            <p class="tm__role">Techniek en architectuur</p>
+            <p class="tm__bio">Bouwt het. Het technisch geweten en de architect achter elk project.</p>
+          </div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:1">
+          <div class="tm__photo tm__photo--yellow"><img src="assets/img/home2/jan.webp" width="960" height="960" alt="Jan Kranendonk" loading="lazy" decoding="async"></div>
+          <div class="tm__meta">
+            <p class="tm__name">Jan Kranendonk</p>
+            <p class="tm__role">Product en digitale strategie</p>
+            <p class="tm__bio">Snapt je business. Strategie en het commerciële brein achter elk project.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tm__crew-intro">
+        <h3 class="h-display" data-split>Co-Troopers</h3>
+        <p class="tm__lead" data-reveal>De vaste ring van senior specialisten waarmee we werken.</p>
+      </div>
+
+      <ul class="tm__crew" data-reveal-group>
+        <li class="tm__person" data-reveal style="--i:0">
+          <div class="tm__photo"><img src="assets/img/home2/mike.webp" width="800" height="800" alt="Mike van Laar" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Mike van Laar</p><p class="tm__role">SEO en groei</p></div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:1">
+          <div class="tm__photo"><img src="assets/img/home2/erik.webp" width="1024" height="768" alt="Erik Schuur" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Erik Schuur</p><p class="tm__role">Merkontwerp</p></div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:2">
+          <div class="tm__photo tm__photo--cut"><img src="assets/img/home2/jesse.webp" width="1024" height="1024" alt="" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Rogier Bisschop</p><p class="tm__role">Merkontwerp</p></div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:0">
+          <div class="tm__photo tm__photo--cut"><img src="assets/img/home2/jesse.webp" width="1024" height="1024" alt="" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Ruud Kooiman</p><p class="tm__role">AI en data</p></div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:1">
+          <div class="tm__photo tm__photo--cut"><img src="assets/img/home2/jesse.webp" width="1024" height="1024" alt="" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Erik Schuur</p><p class="tm__role">Brand Designer</p></div>
+        </li>
+        <li class="tm__person" data-reveal style="--i:2">
+          <div class="tm__photo tm__photo--cut"><img src="assets/img/home2/jesse.webp" width="1024" height="1024" alt="" loading="lazy" decoding="async"></div>
+          <div class="tm__meta"><p class="tm__name">Ruud Kooiman</p><p class="tm__role">AI &amp; Data expert</p></div>
+        </li>
+      </ul>
     </section>
 
     <!-- ─────────── Werk ───────────
          Doorwissel (2026-11-03): one fixed frame while scrolling; each next image wipes up over the last, the text
-         changes and the numbers count up (main.js §3c). Without js, with reduced motion, on phones or on a window
+         changes and the figures appear with it (main.js §3c). Without js, with reduced motion, on phones or on a window
          too short for a card, the cases simply stack. SAMPLE CONTENT: clients, copy and figures are examples and
          "Beeld" marks the image: put the real <img> in .case__fill. The hrefs are placeholders until the case pages exist. -->
     <section class="cases" id="werk" aria-labelledby="werk-title" style="--n:4" data-cases>
       <h2 class="sr-only" id="werk-title">Werk</h2>
       <div class="cases__stage"><div class="cases__frame">
-        <div class="cases__rail" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
         <a class="case" href="#case-klantportaal" data-reveal>
-          <div class="case__img"><div class="case__fill tile--sun" data-sun></div><i class="case__tag">Beeld</i></div>
+          <div class="case__img"><div class="case__fill"><img src="assets/img/cases/lifeguard.webp" width="1920" height="1080" alt="Website van Lifeguard: Effect bereiken staat voorop" loading="lazy" decoding="async"></div></div>
           <div class="case__body">
             <span class="case__eyebrow">Voorbeeldklant · Logistiek</span>
             <h3 class="case__title">Een klantportaal dat de helft van de supportvragen opvangt</h3>
             <p class="case__text">Klanten vroegen hun orderstatus op via mail en telefoon. In zes weken bouwden we een portaal waarin ze alles zelf zien.</p>
             <dl class="case__kpis">
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>−48%</span><span class="sr-only">−48%</span></dt><dd>supportvragen per week</dd></div>
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>6 wk</span><span class="sr-only">6 wk</span></dt><dd>van workshop tot live</dd></div>
+            <div class="case__kpi"><dt>−48%</dt><dd>supportvragen per week</dd></div>
+            <div class="case__kpi"><dt>6 wk</dt><dd>van workshop tot live</dd></div>
             </dl>
-            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+            <span class="case__go btn btn--ghost">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
             </span></span>
           </div>
         </a>
         <a class="case" href="#case-rapportages" data-reveal>
-          <div class="case__img"><div class="case__fill tile--grid"></div><i class="case__tag">Beeld</i></div>
+          <div class="case__img"><div class="case__fill"><img src="assets/img/cases/nxtgen.webp" width="1920" height="1080" alt="NXT GEN hightech: zoeken in een composites-AI" loading="lazy" decoding="async"></div></div>
           <div class="case__body">
             <span class="case__eyebrow">Voorbeeldklant · Zorg</span>
             <h3 class="case__title">Rapportages die zichzelf maken</h3>
             <p class="case__text">Teamleiders verzamelden elke maandag cijfers uit vijf systemen. Nu staat het dashboard om acht uur klaar.</p>
             <dl class="case__kpis">
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>12 u</span><span class="sr-only">12 u</span></dt><dd>bespaard per week</dd></div>
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>1</span><span class="sr-only">1</span></dt><dd>overzicht in plaats van vijf systemen</dd></div>
+            <div class="case__kpi"><dt>12 u</dt><dd>bespaard per week</dd></div>
+            <div class="case__kpi"><dt>1</dt><dd>overzicht in plaats van vijf systemen</dd></div>
             </dl>
-            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+            <span class="case__go btn btn--ghost">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
             </span></span>
           </div>
         </a>
         <a class="case" href="#case-offertes" data-reveal>
-          <div class="case__img"><div class="case__fill tile--dark"><svg class="tile__dial" viewBox="0 0 600 450" preserveAspectRatio="xMaxYMin slice" aria-hidden="true" data-dial="600,0,340,100,180,15"></svg></div><i class="case__tag">Beeld</i></div>
+          <div class="case__img"><div class="case__fill"><img src="assets/img/cases/ojah.webp" width="1920" height="1080" alt="Website van Ojah: Unleash plant-based potential" loading="lazy" decoding="async"></div></div>
           <div class="case__body">
             <span class="case__eyebrow">Voorbeeldklant · Installatie</span>
             <h3 class="case__title">Offertes in minuten in plaats van dagen</h3>
             <p class="case__text">Elke offerte ging langs drie mensen en een spreadsheet. Een AI-workflow maakt nu het concept; de adviseur controleert en verstuurt.</p>
             <dl class="case__kpis">
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>−70%</span><span class="sr-only">−70%</span></dt><dd>doorlooptijd per offerte</dd></div>
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>3 wk</span><span class="sr-only">3 wk</span></dt><dd>tot de eerste werkende versie</dd></div>
+            <div class="case__kpi"><dt>−70%</dt><dd>doorlooptijd per offerte</dd></div>
+            <div class="case__kpi"><dt>3 wk</dt><dd>tot de eerste werkende versie</dd></div>
             </dl>
-            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+            <span class="case__go btn btn--ghost">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
             </span></span>
           </div>
         </a>
         <a class="case" href="#case-onboarding" data-reveal>
-          <div class="case__img"><div class="case__fill tile--grey"></div><i class="case__tag">Beeld</i></div>
+          <div class="case__img"><div class="case__fill"><img src="assets/img/cases/lifeguard-dashboard.webp" width="1481" height="824" alt="Lifeguard-dashboard met energiescore, werkbetrokkenheid en burn-outpercentage" loading="lazy" decoding="async"></div></div>
           <div class="case__body">
             <span class="case__eyebrow">Voorbeeldklant · Financieel</span>
             <h3 class="case__title">Onboarding zonder papierwerk</h3>
             <p class="case__text">Nieuwe klanten haakten af bij lange formulieren. We brachten de aanvraag terug tot één digitale flow, gekoppeld aan de backoffice.</p>
             <dl class="case__kpis">
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>+35%</span><span class="sr-only">+35%</span></dt><dd>afgeronde aanvragen</dd></div>
-            <div class="case__kpi"><dt><span aria-hidden="true" data-count>4 wk</span><span class="sr-only">4 wk</span></dt><dd>van idee tot in gebruik</dd></div>
+            <div class="case__kpi"><dt>+35%</dt><dd>afgeronde aanvragen</dd></div>
+            <div class="case__kpi"><dt>4 wk</dt><dd>van idee tot in gebruik</dd></div>
             </dl>
-            <span class="case__go">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
+            <span class="case__go btn btn--ghost">Bekijk de case <span class="arrow arrow--ne" aria-hidden="true">
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
               <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
             </span></span>
@@ -382,8 +394,7 @@
     </section>
 
     <!-- ─────────── Veelgestelde vragen ───────────
-         NOTE: the Figma only contains the questions. The answers below are DRAFT copy built from claims
-         already made elsewhere on the page. Have them reviewed (pricing, scope changes, ownership). -->
+         The Figma holds the questions; the answers are the same DRAFT copy as on index.html. -->
     <section class="faq" id="faq" aria-labelledby="faq-title">
       <div class="faq__inner">
         <div class="faq__grid">
@@ -451,27 +462,21 @@
           </div>
         </div>
         </div>
-        <aside class="feature" data-reveal aria-label="Uitgelicht artikel">
+        <aside class="feature feature--alt" data-reveal aria-label="Uitgelicht artikel">
           <div class="feature__art" aria-hidden="true"><img src="assets/svg/article-art.svg" width="498" height="280" alt="" loading="lazy" decoding="async"></div>
           <div class="feature__body">
-          <p class="feature__eyebrow">Lees verder · AI</p>
-          <h3 class="feature__title"><a class="feature__link" href="#kennisbank">AI voor bedrijven, van strategie tot implementatie</a></h3>
-          <p class="feature__text">AI is geen toekomstmuziek meer. Hoe je begint bij je business in plaats van bij de tool, en wat het in de praktijk oplevert.</p>
-          <p class="feature__by">Jesse van Thijn</p>
-          <span class="feature__cta">Lees het artikel
-            <span class="arrow arrow--ne" aria-hidden="true">
-              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-              <svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M3.6 2.4h6v6"/></svg>
-            </span>
-          </span>
+            <span class="feature__tag">Platform</span>
+            <h3 class="feature__title"><a class="feature__link" href="#kennisbank">Het marketplace-model: waar stuur je echt op?</a></h3>
+            <p class="feature__text">AI is geen toekomstmuziek meer. Hoe je begint bij je business in plaats van bij de tool, en wat het in de praktijk oplevert.</p>
+            <p class="feature__meta"><span class="feature__by">Jan Kranendonk</span><time datetime="2026-10-07">7 okt 2026</time></p>
           </div>
         </aside>
         </div>
       </div>
     </section>
 
-    <!-- ─────────── Call to action ─────────── -->
-    <section class="cta" id="contact" aria-labelledby="cta-title" data-cta>
+    <!-- ─────────── Call to action: 1158 px card, both founders ─────────── -->
+    <section class="cta cta--card cta--duo" id="contact" aria-labelledby="cta-title" data-cta>
       <div class="cta__band" data-reveal>
         <div class="cta__copy">
           <h2 class="h-cta" id="cta-title" data-split>Begin met een gesprek</h2>
@@ -486,11 +491,11 @@
         </div>
 
         <div class="cta__people">
-          <div class="cta__person cta__person--right">
-            <img src="assets/img/cta-right.webp" width="1350" height="1350" alt="Twee collega’s van Troop Digital" loading="lazy" decoding="async">
+          <div class="cta__person cta__person--jesse">
+            <img src="assets/img/home2/cta-jesse.webp" width="1400" height="1400" alt="Jesse van Thijn" loading="lazy" decoding="async">
           </div>
-          <div class="cta__person cta__person--left">
-            <img src="assets/img/cta-left.webp" width="960" height="960" alt="" loading="lazy" decoding="async">
+          <div class="cta__person cta__person--jan">
+            <img src="assets/img/home2/cta-jan.webp" width="1000" height="1000" alt="Jan Kranendonk" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
